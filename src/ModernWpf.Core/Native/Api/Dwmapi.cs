@@ -9,7 +9,7 @@ namespace ModernWpf.Native.Api
     {
         #region real hook
 
-        class NativeMethods
+        static class NativeMethods
         {
             //[DllImport("dwmapi.dll", CharSet = CharSet.Unicode)]
             //[return: MarshalAs(UnmanagedType.Bool)]

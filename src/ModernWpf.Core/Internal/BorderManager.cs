@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -281,10 +282,10 @@ namespace ModernWpf.Internal
                         handled = true;
                         break;
                     case WindowMessage.WM_NCRBUTTONDOWN:
-                        switch ((NcHitTest)wParam.ToInt32())
+                        switch ((ChromeHitTest)wParam.ToInt32())
                         {
-                            case NcHitTest.Caption:
-                            case NcHitTest.SystemMenu:
+                            case ChromeHitTest.Caption:
+                            case ChromeHitTest.SystemMenu:
                                 // display sys menu
                                 User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
                                 handled = true;
@@ -316,6 +317,27 @@ namespace ModernWpf.Internal
                     case WindowMessage.WM_DPICHANGED:
                         HandleDpiChanged(hwnd, wParam, lParam);
                         //handled = true;
+                        break;
+                    case WindowMessage.WM_MOUSEHWHEEL:
+                        // do our own horizontal wheel event
+                        var element = Mouse.DirectlyOver;
+                        if (element != null)
+                        {
+                            var delta = wParam.ToInt32() >> 16;
+                            var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
+                            {
+                                RoutedEvent = MouseEvents.PreviewMouseHWheelEvent
+                            };
+                            element.RaiseEvent(arg);
+                            if (!arg.Handled)
+                            {
+                                arg.RoutedEvent = MouseEvents.MouseHWheelEvent;
+                                arg.Handled = false;
+                                element.RaiseEvent(arg);
+
+                                handled = arg.Handled;
+                            }
+                        }
                         break;
                 }
             }
@@ -360,12 +382,12 @@ namespace ModernWpf.Internal
             DpiInfo.SetWindowDpiScale(ContentWindow, dpiArgs.Scale);
         }
 
-        private NcHitTest HandleNcHitTest(IntPtr lParam)
+        private ChromeHitTest HandleNcHitTest(IntPtr lParam)
         {
             Point screenPoint = lParam.ToPoint();
             Point windowPoint = ContentWindow.PointFromScreen(screenPoint);
 
-            NcHitTest location = NcHitTest.Client;
+            ChromeHitTest location = ChromeHitTest.Client;
             var element = ContentWindow.InputHitTest(windowPoint);
 
             if (element != null)
@@ -377,7 +399,7 @@ namespace ModernWpf.Internal
                 VisualTreeHelper.HitTest(_resizeGrip, _resizeGrip.PointFromScreen(screenPoint)) != null)
             {
                 location = _resizeGrip.FlowDirection == System.Windows.FlowDirection.LeftToRight ?
-                    NcHitTest.BottomRight : NcHitTest.BottomLeft;
+                    ChromeHitTest.BottomRight : ChromeHitTest.BottomLeft;
             }
 
             //Debug.WriteLine(location);

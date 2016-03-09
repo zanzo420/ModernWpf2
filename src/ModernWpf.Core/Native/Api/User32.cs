@@ -10,17 +10,19 @@ namespace ModernWpf.Native.Api
     static class User32
     {
         [SuppressUnmanagedCodeSecurity]
-        class NativeMethods
+        static class NativeMethods
         {
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern uint GetWindowLong(IntPtr hWnd, WindowLong nIndex);
-            
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern IntPtr GetWindowLongPtr(IntPtr hWnd, WindowLong nIndex);
             
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern uint SetWindowLong(IntPtr hWnd, WindowLong nIndex, uint dwNewLong);
-            
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, WindowLong nIndex, IntPtr dwNewLong);
 

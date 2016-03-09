@@ -8,7 +8,7 @@ namespace ModernWpf.Native.Api
     /// </summary>
     static class Shell32
     {
-        internal class NativeMethods
+        static class NativeMethods
         {
             [DllImport("shell32.dll")]
             public static extern UIntPtr SHAppBarMessage(AppBarMessage dwMessage, ref APPBARDATA pData);

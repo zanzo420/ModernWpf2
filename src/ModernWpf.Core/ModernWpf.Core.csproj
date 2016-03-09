@@ -97,6 +97,7 @@
     <Compile Include="Native\WINDOWPOS.cs" />
     <Compile Include="Native\WindowStyles.cs" />
     <Compile Include="Native\WindowStylesEx.cs" />
+    <Compile Include="ChromeHitTest.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

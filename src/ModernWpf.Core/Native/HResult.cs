@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -168,7 +169,7 @@ namespace ModernWpf.Native
             System.Reflection.FieldInfo fi;
             if (!__dirCodes.TryGetValue(_value, out fi))
             {
-                return _value.ToString();
+                return _value.ToString(CultureInfo.InvariantCulture);
             }
             object[] o = fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
             DescriptionAttribute descr = null;

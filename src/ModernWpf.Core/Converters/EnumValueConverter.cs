@@ -18,6 +18,7 @@ namespace ModernWpf.Converters
         /// <value>
         /// The instance.
         /// </value>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public static EnumValueConverter Instance { get { return _instance; } }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace ModernWpf.Converters
         {
             if (value == null) { return value; }
             var type = value.GetType();
-            return System.Convert.ChangeType(value, Type.GetTypeCode(type));
+            return System.Convert.ChangeType(value, Type.GetTypeCode(type), CultureInfo.InvariantCulture);
         }
 
         /// <summary>

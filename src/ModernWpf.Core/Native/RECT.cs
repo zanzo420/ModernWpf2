@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -52,7 +53,7 @@ namespace ModernWpf.Native
         /// </returns>
         public override string ToString()
         {
-            return string.Format("Left = {0}, Top = {1}, Width = {2}, Height = {3}.", left, top, Width, Height);
+            return string.Format(CultureInfo.InvariantCulture, "Left = {0}, Top = {1}, Width = {2}, Height = {3}.", left, top, Width, Height);
         }
 
         #region implicits

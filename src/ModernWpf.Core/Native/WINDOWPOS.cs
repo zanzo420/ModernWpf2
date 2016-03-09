@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace ModernWpf.Native
@@ -48,7 +49,7 @@ namespace ModernWpf.Native
         /// </returns>
         public override string ToString()
         {
-            return string.Format("x={0}, y={1}, cx={2}, cy={3}, flags={4}", x, y, cx, cy, flags);
+            return string.Format(CultureInfo.InvariantCulture, "x={0}, y={1}, cx={2}, cy={3}, flags={4}", x, y, cx, cy, flags);
         }
     }
 }

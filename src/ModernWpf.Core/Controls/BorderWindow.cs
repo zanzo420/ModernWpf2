@@ -250,7 +250,7 @@ namespace ModernWpf.Controls
                         handled = true;
                         break;
                     case WindowMessage.WM_NCHITTEST:
-                        NcHitTest res = HandleHcHitTest(lParam);
+                        ChromeHitTest res = HandleHcHitTest(lParam);
                         retVal = new IntPtr((int)res);
                         handled = true;
                         break;
@@ -273,10 +273,10 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_MOUSEACTIVATE:
                         var lowword = 0xffff & lParam.ToInt32();
-                        var hchit = (NcHitTest)lowword;
+                        var hchit = (ChromeHitTest)lowword;
 
                         // in case of non-resizable window eat this msg
-                        if (hchit == NcHitTest.Client)
+                        if (hchit == ChromeHitTest.Client)
                         {
                             retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
                         }
@@ -302,9 +302,9 @@ namespace ModernWpf.Controls
             return retVal;
         }
 
-        private NcHitTest HandleHcHitTest(IntPtr lParam)
+        private ChromeHitTest HandleHcHitTest(IntPtr lParam)
         {
-            NcHitTest res = NcHitTest.Border;
+            ChromeHitTest res = ChromeHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||
                 _manager.ContentWindow.ResizeMode == ResizeMode.CanResize)
             {
@@ -313,24 +313,24 @@ namespace ModernWpf.Controls
                 switch (Side)
                 {
                     case BorderSide.Left:
-                        if (pt.Y <= diagSize) { res = NcHitTest.TopLeft; }
-                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.BottomLeft; }
-                        else { res = NcHitTest.Left; }
+                        if (pt.Y <= diagSize) { res = ChromeHitTest.TopLeft; }
+                        else if (pt.Y >= Height - diagSize) { res = ChromeHitTest.BottomLeft; }
+                        else { res = ChromeHitTest.Left; }
                         break;
                     case BorderSide.Top:
-                        if (pt.X <= diagSize) { res = NcHitTest.TopLeft; }
-                        else if (pt.X >= Width - diagSize) { res = NcHitTest.BottomRight; }
-                        else { res = NcHitTest.Top; }
+                        if (pt.X <= diagSize) { res = ChromeHitTest.TopLeft; }
+                        else if (pt.X >= Width - diagSize) { res = ChromeHitTest.BottomRight; }
+                        else { res = ChromeHitTest.Top; }
                         break;
                     case BorderSide.Right:
-                        if (pt.Y <= diagSize) { res = NcHitTest.TopRight; }
-                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.BottomRight; }
-                        else { res = NcHitTest.Right; }
+                        if (pt.Y <= diagSize) { res = ChromeHitTest.TopRight; }
+                        else if (pt.Y >= Height - diagSize) { res = ChromeHitTest.BottomRight; }
+                        else { res = ChromeHitTest.Right; }
                         break;
                     case BorderSide.Bottom:
-                        if (pt.X <= diagSize) { res = NcHitTest.BottomLeft; }
-                        else if (pt.X >= Width - diagSize) { res = NcHitTest.BottomRight; }
-                        else { res = NcHitTest.Bottom; }
+                        if (pt.X <= diagSize) { res = ChromeHitTest.BottomLeft; }
+                        else if (pt.X >= Width - diagSize) { res = ChromeHitTest.BottomRight; }
+                        else { res = ChromeHitTest.Bottom; }
                         break;
                 }
             }

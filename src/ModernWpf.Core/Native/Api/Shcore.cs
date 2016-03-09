@@ -10,13 +10,13 @@ namespace ModernWpf.Native.Api
     {
         #region real hook
 
-        class NativeMethods
+        static class NativeMethods
         {
             [DllImport("Shcore.dll", SetLastError = true)]
             public static extern HRESULT GetDpiForMonitor(IntPtr hmonitor, MONITOR_DPI_TYPE dpiType, ref uint dpiX, ref uint dpiY);
 
-            [DllImport("Shcore.dll", SetLastError = true)]
-            public static extern HRESULT SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value);
+            //[DllImport("Shcore.dll", SetLastError = true)]
+            //public static extern HRESULT SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value);
 
             [DllImport("Shcore.dll", SetLastError = true)]
             public static extern HRESULT GetProcessDpiAwareness(IntPtr hprocess, ref PROCESS_DPI_AWARENESS value);
@@ -31,19 +31,19 @@ namespace ModernWpf.Native.Api
         /// </summary>
         public static bool IsPlatformSupported { get { return PlatformInfo.IsWin81Up; } }
         
-        /// <summary>
-        /// Sets the current process to a specified dots per inch (dpi) awareness level. 
-        /// </summary>
-        /// <param name="value">The DPI awareness value to set.</param>
-        /// <returns></returns>
-        public static bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value)
-        {
-            if (IsPlatformSupported)
-            {
-                return NativeMethods.SetProcessDpiAwareness(value).Succeeded;
-            }
-            return false;
-        }
+        ///// <summary>
+        ///// Sets the current process to a specified dots per inch (dpi) awareness level. 
+        ///// </summary>
+        ///// <param name="value">The DPI awareness value to set.</param>
+        ///// <returns></returns>
+        //public static bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value)
+        //{
+        //    if (IsPlatformSupported)
+        //    {
+        //        return NativeMethods.SetProcessDpiAwareness(value).Succeeded;
+        //    }
+        //    return false;
+        //}
 
 
         /// <summary>

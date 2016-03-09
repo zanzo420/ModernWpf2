@@ -5,7 +5,7 @@ namespace ModernWpf.Native.Api
 {
     static class Ntdll
     {
-        class NativeMethods
+        static class NativeMethods
         {
             [DllImport("ntdll.dll", CharSet = CharSet.Unicode)]
             public static extern int RtlGetVersion([In, Out]ref OSVERSIONINFOEX version);
