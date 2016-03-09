@@ -1,25 +1,13 @@
-﻿using CommonWin32;
-using CommonWin32.API;
-using CommonWin32.MouseInput;
-using CommonWin32.Rectangles;
-using CommonWin32.WindowClasses;
-using CommonWin32.Windows;
-using ModernWpf.Converters;
+﻿using ModernWpf.Converters;
+using ModernWpf.Internal;
+using ModernWpf.Native;
+using ModernWpf.Native.Api;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Shapes;
-using System.Globalization;
-using ModernWpf.Internal;
 
 namespace ModernWpf.Controls
 {
@@ -288,7 +276,7 @@ namespace ModernWpf.Controls
                         var hchit = (NcHitTest)lowword;
 
                         // in case of non-resizable window eat this msg
-                        if (hchit == NcHitTest.HTCLIENT)
+                        if (hchit == NcHitTest.Client)
                         {
                             retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
                         }
@@ -316,7 +304,7 @@ namespace ModernWpf.Controls
 
         private NcHitTest HandleHcHitTest(IntPtr lParam)
         {
-            NcHitTest res = NcHitTest.HTBORDER;
+            NcHitTest res = NcHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||
                 _manager.ContentWindow.ResizeMode == ResizeMode.CanResize)
             {
@@ -325,24 +313,24 @@ namespace ModernWpf.Controls
                 switch (Side)
                 {
                     case BorderSide.Left:
-                        if (pt.Y <= diagSize) { res = NcHitTest.HTTOPLEFT; }
-                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.HTBOTTOMLEFT; }
-                        else { res = NcHitTest.HTLEFT; }
+                        if (pt.Y <= diagSize) { res = NcHitTest.TopLeft; }
+                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.BottomLeft; }
+                        else { res = NcHitTest.Left; }
                         break;
                     case BorderSide.Top:
-                        if (pt.X <= diagSize) { res = NcHitTest.HTTOPLEFT; }
-                        else if (pt.X >= Width - diagSize) { res = NcHitTest.HTTOPRIGHT; }
-                        else { res = NcHitTest.HTTOP; }
+                        if (pt.X <= diagSize) { res = NcHitTest.TopLeft; }
+                        else if (pt.X >= Width - diagSize) { res = NcHitTest.BottomRight; }
+                        else { res = NcHitTest.Top; }
                         break;
                     case BorderSide.Right:
-                        if (pt.Y <= diagSize) { res = NcHitTest.HTTOPRIGHT; }
-                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.HTBOTTOMRIGHT; }
-                        else { res = NcHitTest.HTRIGHT; }
+                        if (pt.Y <= diagSize) { res = NcHitTest.TopRight; }
+                        else if (pt.Y >= Height - diagSize) { res = NcHitTest.BottomRight; }
+                        else { res = NcHitTest.Right; }
                         break;
                     case BorderSide.Bottom:
-                        if (pt.X <= diagSize) { res = NcHitTest.HTBOTTOMLEFT; }
-                        else if (pt.X >= Width - diagSize) { res = NcHitTest.HTBOTTOMRIGHT; }
-                        else { res = NcHitTest.HTBOTTOM; }
+                        if (pt.X <= diagSize) { res = NcHitTest.BottomLeft; }
+                        else if (pt.X >= Width - diagSize) { res = NcHitTest.BottomRight; }
+                        else { res = NcHitTest.Bottom; }
                         break;
                 }
             }

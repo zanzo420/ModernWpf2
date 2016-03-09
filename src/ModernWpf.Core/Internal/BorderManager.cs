@@ -1,19 +1,10 @@
-﻿using CommonWin32;
-using CommonWin32.API;
-using CommonWin32.Monitors;
-using CommonWin32.Rectangles;
-using CommonWin32.Windows;
-using ModernWpf.Controls;
+﻿using ModernWpf.Controls;
 using ModernWpf.Native;
+using ModernWpf.Native.Api;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
@@ -292,8 +283,8 @@ namespace ModernWpf.Internal
                     case WindowMessage.WM_NCRBUTTONDOWN:
                         switch ((NcHitTest)wParam.ToInt32())
                         {
-                            case NcHitTest.HTCAPTION:
-                            case NcHitTest.HTSYSMENU:
+                            case NcHitTest.Caption:
+                            case NcHitTest.SystemMenu:
                                 // display sys menu
                                 User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
                                 handled = true;
@@ -353,8 +344,8 @@ namespace ModernWpf.Internal
 
         private void RescaleForDpi()
         {
-            var test = Shcore.ProcessDpiAwareness;
-            if (test == CommonWin32.HighDPI.PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE)
+            var test = Shcore.GetProcessDpiAwareness(IntPtr.Zero);
+            if (test == ModernWpf.Native.PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE)
             {
                 var child = VisualTreeHelper.GetChild(ContentWindow, 0) as FrameworkElement;
                 if (child != null)
@@ -374,7 +365,7 @@ namespace ModernWpf.Internal
             Point screenPoint = lParam.ToPoint();
             Point windowPoint = ContentWindow.PointFromScreen(screenPoint);
 
-            NcHitTest location = NcHitTest.HTCLIENT;
+            NcHitTest location = NcHitTest.Client;
             var element = ContentWindow.InputHitTest(windowPoint);
 
             if (element != null)
@@ -386,7 +377,7 @@ namespace ModernWpf.Internal
                 VisualTreeHelper.HitTest(_resizeGrip, _resizeGrip.PointFromScreen(screenPoint)) != null)
             {
                 location = _resizeGrip.FlowDirection == System.Windows.FlowDirection.LeftToRight ?
-                    NcHitTest.HTBOTTOMRIGHT : NcHitTest.HTBOTTOMLEFT;
+                    NcHitTest.BottomRight : NcHitTest.BottomLeft;
             }
 
             //Debug.WriteLine(location);
@@ -421,7 +412,7 @@ namespace ModernWpf.Internal
                             if (User32.GetMonitorInfo(hMonitor, ref lpmi))
                             {
                                 var workArea = lpmi.rcWork;
-                                User32Ex.AdjustForAutoHideTaskbar(hMonitor, ref workArea);
+                                User32.AdjustForAutoHideTaskbar(hMonitor, ref workArea);
                                 //Debug.WriteLine("NCCalc original = {0}x{1} @ {2}x{3}, new ={4}x{5} @ {6}x{7}",
                                 //para.rectProposed.Width, para.rectProposed.Height,
                                 //para.rectProposed.left, para.rectProposed.top,

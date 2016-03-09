@@ -42,10 +42,6 @@
     <AssemblyOriginatorKeyFile>Sign.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonWin32.2.1.0.3\lib\net35-Client\CommonWin32.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -63,12 +59,44 @@
     <Compile Include="Controls\BorderSide.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Converters\BorderBrushConverter.cs" />
+    <Compile Include="Converters\EnumValueConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="DpiInfo.cs" />
     <Compile Include="Internal\BorderManager.cs" />
     <Compile Include="Internal\EventUtil.cs" />
     <Compile Include="MouseEvents.cs" />
-    <Compile Include="Native\User32Ex.cs" />
+    <Compile Include="Native\Api\Gdi32.cs" />
+    <Compile Include="Native\Api\Shell32.cs" />
+    <Compile Include="Native\APPBARDATA.cs" />
+    <Compile Include="Native\AppBarEdge.cs" />
+    <Compile Include="Native\AppBarMessage.cs" />
+    <Compile Include="Native\BasicValues.cs" />
+    <Compile Include="Native\Api\Dwmapi.cs" />
+    <Compile Include="Native\HResult.cs" />
+    <Compile Include="Native\IntPtrExtensions.cs" />
+    <Compile Include="Native\MINMAXINFO.cs" />
+    <Compile Include="Native\MONITORINFO.cs" />
+    <Compile Include="Native\MonitorOption.cs" />
+    <Compile Include="Native\MONITOR_DPI_TYPE.cs" />
+    <Compile Include="Native\MouseActivate.cs" />
+    <Compile Include="Native\NCCALCSIZE_PARAMS.cs" />
+    <Compile Include="Native\Api\Ntdll.cs" />
+    <Compile Include="Native\OSVERSIONINFOEX.cs" />
+    <Compile Include="Native\PlatformInfo.cs" />
+    <Compile Include="Native\POINT.cs" />
+    <Compile Include="Native\PROCESS_DPI_AWARENESS.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SetWindowPosOptions.cs" />
+    <Compile Include="Native\Api\Shcore.cs" />
+    <Compile Include="Native\ShowWindowOption.cs" />
+    <Compile Include="Native\Api\User32.cs" />
+    <Compile Include="Native\WindowLong.cs" />
+    <Compile Include="Native\WindowMessage.cs" />
+    <Compile Include="Native\WINDOWPLACEMENT.cs" />
+    <Compile Include="Native\WindowPlacementFlags.cs" />
+    <Compile Include="Native\WINDOWPOS.cs" />
+    <Compile Include="Native\WindowStyles.cs" />
+    <Compile Include="Native\WindowStylesEx.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -76,10 +104,14 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <None Include="ModernWpf.Core.nuspec" />
-    <None Include="packages.config" />
     <None Include="Sign.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
