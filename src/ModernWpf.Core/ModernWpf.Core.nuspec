@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>$id$-alpha</id>
+		<version>$version$</version>
+		<title>$title$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<projectUrl>https://github.com/soukoku/ModernWpf2</projectUrl>
+		<licenseUrl>https://github.com/soukoku/ModernWpf2/blob/master/LICENSE.txt</licenseUrl>    
+		<iconUrl>http://i.imgur.com/WAYKszr.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>$description$</description>
+		<!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+		<copyright>$copyright$</copyright>
+		<tags>metro modern wpf</tags>
+	</metadata>
+	<files>
+		<file src="bin\$configuration$\$id$.pdb" target="lib\net40-Client"/>
+    <!--<file src="bin\$configuration$\zh-Hant\$id$.resources.dll" target="lib\net40-Client\zh-Hant"/>
+    <file src="bin\$configuration$\zh-Hans\$id$.resources.dll" target="lib\net40-Client\zh-Hans"/>-->
+    <file src="bin\$configuration$\ja\$id$.resources.dll" target="lib\net40-Client\ja"/>
+	</files>
+</package>
