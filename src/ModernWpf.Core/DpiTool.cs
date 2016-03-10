@@ -65,7 +65,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void AddDpiChangeHandler(DependencyObject element, EventHandler<DpiChangeEventArgs> handler)
         {
-            element.AddHandler(DpiTool.DpiChangeEvent, (Delegate)handler);
+            element.AddHandler(DpiChangeEvent, handler);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void RemoveDpiChangeHandler(DependencyObject element, EventHandler<DpiChangeEventArgs> handler)
         {
-            element.RemoveHandler(DpiTool.DpiChangeEvent, (Delegate)handler);
+            element.RemoveHandler(DpiChangeEvent, handler);
         }
 
 
@@ -100,7 +100,7 @@ namespace ModernWpf
             return (double)obj.GetValue(WindowDpiScaleProperty);
         }
 
-        internal static void SetWindowDpiScale(DependencyObject obj, double dpiScale)
+        static void SetWindowDpiScale(DependencyObject obj, double dpiScale)
         {
             obj.SetValue(WindowDpiScaleProperty, dpiScale);
         }
@@ -113,7 +113,7 @@ namespace ModernWpf
             new FrameworkPropertyMetadata(96, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
-        /// Gets the dpi value for the object contained in a window using <see cref="Chrome" />.
+        /// Gets the dpi value for the object contained in a window using this tool.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns></returns>
@@ -124,25 +124,21 @@ namespace ModernWpf
             return (int)obj.GetValue(WindowDpiProperty);
         }
 
-        internal static void SetWindowDpi(DependencyObject obj, int dpi)
+        static void SetWindowDpi(DependencyObject obj, int dpi)
         {
             obj.SetValue(WindowDpiProperty, dpi);
         }
 
 
-
-
-        internal static bool GetIsDpiTransform(DependencyObject obj)
+        // marker on a transform to indicate it's created by the DpiTool
+        static bool GetIsDpiTransform(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsDpiTransformProperty);
         }
-
-        internal static void SetIsDpiTransform(DependencyObject obj, bool value)
+        static void SetIsDpiTransform(DependencyObject obj, bool value)
         {
             obj.SetValue(IsDpiTransformProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for IsDpiTransform.  This enables animation, styling, binding, etc...
         static readonly DependencyProperty IsDpiTransformProperty =
             DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(DpiTool), new PropertyMetadata(false));
 

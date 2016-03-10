@@ -4,15 +4,14 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Markup;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ModernWpf.Core")]
-[assembly: AssemblyDescription("Contains the classes for making blank bordered window, per-monitor dpi handling, and extra properties/events for Framework 4.0+.")]
+[assembly: AssemblyTitle("ModernWpf")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("ModernWpf.Core")]
+[assembly: AssemblyProduct("ModernWpf")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
@@ -32,13 +31,11 @@ using System.Windows.Markup;
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
 
-[assembly: ThemeInfo(
+[assembly:ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
-                                     //(used if a resource is not found in the page, 
-                                     // or application resource dictionaries)
+                             //(used if a resource is not found in the page, 
+                             // or application resource dictionaries)
     ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
-                                              //(used if a resource is not found in the page, 
-                                              // app, or any theme specific resource dictionaries)
+                                      //(used if a resource is not found in the page, 
+                                      // app, or any theme specific resource dictionaries)
 )]
-
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf")]

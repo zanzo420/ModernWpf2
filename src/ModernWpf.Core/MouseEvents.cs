@@ -24,7 +24,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void AddPreviewMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            element.AddHandler(MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
+            element.AddHandler(PreviewMouseHWheelEvent, handler);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void RemovePreviewMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            element.RemoveHandler(MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
+            element.RemoveHandler(PreviewMouseHWheelEvent, handler);
         }
 
 
@@ -51,7 +51,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void AddMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            element.AddHandler(MouseEvents.MouseHWheelEvent, (Delegate)handler);
+            element.AddHandler(MouseHWheelEvent, handler);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace ModernWpf
         /// <param name="handler">The handler.</param>
         public static void RemoveMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            element.RemoveHandler(MouseEvents.MouseHWheelEvent, (Delegate)handler);
+            element.RemoveHandler(MouseHWheelEvent, handler);
         }
     }
 }

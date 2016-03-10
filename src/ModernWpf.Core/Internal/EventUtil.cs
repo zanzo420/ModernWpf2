@@ -10,53 +10,32 @@ namespace ModernWpf.Internal
         {
             if (element == null) { throw new ArgumentNullException("element"); }
 
-            var uie = element as UIElement;
-            if (uie != null)
+            if (!DoSomethingAs(element as UIElement, uie => uie.AddHandler(routedEvent, handler)) &&
+                !DoSomethingAs(element as ContentElement, ce => ce.AddHandler(routedEvent, handler)) &&
+                !DoSomethingAs(element as UIElement3D, u3d => u3d.AddHandler(routedEvent, handler)))
             {
-                uie.AddHandler(routedEvent, handler);
-            }
-            else
-            {
-                var ce = element as ContentElement;
-                if (ce != null)
-                {
-                    ce.AddHandler(routedEvent, handler);
-                }
-                else
-                {
-                    var u3d = element as UIElement3D;
-                    if (u3d != null)
-                        u3d.AddHandler(routedEvent, handler);
-                    else
-                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
-                }
+                throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
             }
         }
+
         public static void RemoveHandler(this DependencyObject element, RoutedEvent routedEvent, Delegate handler)
         {
             if (element == null) { throw new ArgumentNullException("element"); }
 
-            var uie = element as UIElement;
-            if (uie != null)
+            if (!DoSomethingAs(element as UIElement, uie => uie.RemoveHandler(routedEvent, handler)) &&
+                !DoSomethingAs(element as ContentElement, ce => ce.RemoveHandler(routedEvent, handler)) &&
+                !DoSomethingAs(element as UIElement3D, u3d => u3d.RemoveHandler(routedEvent, handler)))
             {
-                uie.RemoveHandler(routedEvent, handler);
+                throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
             }
-            else
-            {
-                var ce = element as ContentElement;
-                if (ce != null)
-                {
-                    ce.RemoveHandler(routedEvent, handler);
-                }
-                else
-                {
-                    var u3d = element as UIElement3D;
-                    if (u3d != null)
-                        u3d.RemoveHandler(routedEvent, handler);
-                    else
-                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
-                }
-            }
+        }
+
+
+        static bool DoSomethingAs<T>(T something, Action<T> callback) where T : class
+        {
+            if (something == null) { return false; }
+            callback(something);
+            return true;
         }
     }
 }
