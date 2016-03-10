@@ -1,0 +1,38 @@
+﻿<Window x:Class="BasicRunner.ChromeOnlyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BasicRunner"
+        xmlns:modern="http://modernwpf"
+        mc:Ignorable="d"
+        Title="Basic Chrome Window" Height="300" Width="300"
+        ResizeMode="CanResizeWithGrip"
+        modern:DpiTool.AutoDpiScale="True"
+        modern:DpiTool.DpiChange="Window_DpiChange">
+    <modern:Chrome.Chrome>
+        <modern:Chrome></modern:Chrome>
+    </modern:Chrome.Chrome>
+    <Grid>
+        <StackPanel Margin="8">
+            <TextBlock Text="This window only has the custom chrome set. No standard title bar here and anything goes."
+                       TextWrapping="Wrap"></TextBlock>
+
+            <Border Height="50" Background="Green" modern:Chrome.HitTestType="Caption"
+                    Margin="0 8">
+                <TextBlock Text="This area behaves like the caption"
+                           Foreground="White"
+                           TextWrapping="Wrap"></TextBlock>
+            </Border>
+
+            
+            
+            <Border Height="50" Background="Blue" modern:Chrome.HitTestType="SystemMenu"
+                    Margin="0 8">
+                <TextBlock Text="This area behaves like the system menu"
+                           Foreground="White"
+                           TextWrapping="Wrap"></TextBlock>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

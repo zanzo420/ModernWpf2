@@ -12,18 +12,22 @@ namespace ModernWpf.Native.Api
         [SuppressUnmanagedCodeSecurity]
         static class NativeMethods
         {
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool SetProcessDPIAware();
+
+            [DllImport("user32.dll", SetLastError = true)]
             public static extern uint GetWindowLong(IntPtr hWnd, WindowLong nIndex);
 
             [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport("user32.dll", SetLastError = true)]
             public static extern IntPtr GetWindowLongPtr(IntPtr hWnd, WindowLong nIndex);
             
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport("user32.dll", SetLastError = true)]
             public static extern uint SetWindowLong(IntPtr hWnd, WindowLong nIndex, uint dwNewLong);
 
             [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport("user32.dll", SetLastError = true)]
             public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, WindowLong nIndex, IntPtr dwNewLong);
 
 
@@ -230,6 +234,15 @@ namespace ModernWpf.Native.Api
                 return AppBarEdge.ABE_RIGHT;
         }
         #endregion
+
+        public static bool SetProcessDPIAware()
+        {
+            if (PlatformInfo.IsWinVistaUp)
+            {
+                return NativeMethods.SetProcessDPIAware();
+            }
+            return true;
+        }
 
         /// <summary>
         /// Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.

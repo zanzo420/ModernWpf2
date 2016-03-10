@@ -28,16 +28,16 @@
         SystemMenu = 3,
         /// <summary>In a size box.</summary>
         SizeBox = 4,
-        /// <summary>In a menu.</summary>
-        Menu = 5,
+        ///// <summary>In a menu.</summary>
+        //Menu = 5,
         /// <summary>In a horizontal scroll bar.</summary>
         HScroll = 6,
         /// <summary>In a vertical scroll bar.</summary>
         VScroll = 7,
-        /// <summary>In a Minimize button.</summary>
-        MinimizeButton = 8,
-        /// <summary>In a Maximize button.</summary>
-        MaximizeButton = 9,
+        ///// <summary>In a Minimize button.</summary>
+        //MinimizeButton = 8,
+        ///// <summary>In a Maximize button.</summary>
+        //MaximizeButton = 9,
         /// <summary>In the left border of a resizable window 
         /// (the user can click the mouse to resize the window horizontally).</summary>
         Left = 10,
@@ -65,9 +65,9 @@
         /// <summary>In the border of a window that does not have a sizing border.</summary>
         Border = 18,
         //Object = 19,
-        /// <summary>In a Close button.</summary>
-        CloseButton = 20,
-        /// <summary>In a Help button.</summary>
-        HelpButton = 21,
+        ///// <summary>In a Close button.</summary>
+        //CloseButton = 20,
+        ///// <summary>In a Help button.</summary>
+        //HelpButton = 21,
     }
 }

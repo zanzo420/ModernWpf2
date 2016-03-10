@@ -61,7 +61,7 @@
     <Compile Include="Converters\BorderBrushConverter.cs" />
     <Compile Include="Converters\EnumValueConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
-    <Compile Include="DpiInfo.cs" />
+    <Compile Include="DpiTool.cs" />
     <Compile Include="Internal\BorderManager.cs" />
     <Compile Include="Internal\EventUtil.cs" />
     <Compile Include="MouseEvents.cs" />

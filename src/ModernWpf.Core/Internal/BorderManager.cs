@@ -60,12 +60,7 @@ namespace ModernWpf.Internal
         internal Window ContentWindow { get; private set; }
         internal IntPtr hWndContent { get; private set; }
 
-        // dpi used by wpf
-        double _wpfDPI = 96.0;
-        int _monitorDPI = 96;
-        double _dpiScaleFactor = 1;
-
-
+        
         ResizeGrip _resizeGrip;
 
         BorderWindow _left;
@@ -161,12 +156,7 @@ namespace ModernWpf.Internal
             ContentWindow = contentWindow;
             ContentWindow.Closed += ContentWindow_Closed;
             ContentWindow.ContentRendered += ContentWindow_ContentRendered;
-            var dpd = DependencyPropertyDescriptor.FromProperty(FrameworkElement.FlowDirectionProperty, typeof(Window));
-            if (dpd != null)
-            {
-                dpd.AddValueChanged(ContentWindow, HandleFlowDirChange);
-            }
-
+            
             hWndContent = new WindowInteropHelper(contentWindow).Handle;
             if (hWndContent == IntPtr.Zero)
             {
@@ -177,22 +167,17 @@ namespace ModernWpf.Internal
                 InitBorders();
             }
         }
-
-        private void HandleFlowDirChange(object sender, EventArgs e)
-        {
-            RescaleForDpi();
-        }
-
+        
         void DetatchWindow()
         {
             if (ContentWindow != null)
             {
                 ContentWindow.Closed -= ContentWindow_Closed;
                 ContentWindow.ContentRendered -= ContentWindow_ContentRendered;
-                var dpd = DependencyPropertyDescriptor.FromProperty(FrameworkElement.FlowDirectionProperty, typeof(Window));
-                if (dpd != null)
+                var hSrc = HwndSource.FromHwnd(hWndContent);
+                if (hSrc != null)
                 {
-                    dpd.RemoveValueChanged(ContentWindow, HandleFlowDirChange);
+                    hSrc.RemoveHook(WndProc);
                 }
                 ContentWindow = null;
             }
@@ -234,18 +219,7 @@ namespace ModernWpf.Internal
 
             var hSrc = HwndSource.FromHwnd(hWndContent);
             hSrc.AddHook(WndProc);
-
-
-            //Calculate the effective DPI used by WPF;
-            _wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
-            //Get the Current DPI of the monitor of the window. 
-            _monitorDPI = Shcore.GetDpiForWindow(hSrc.Handle);
-            //Calculate the scale factor used to modify window size, graphics and text
-            _dpiScaleFactor = _monitorDPI / _wpfDPI;
-            ContentWindow.Width *= _dpiScaleFactor;
-            ContentWindow.Height *= _dpiScaleFactor;
-            RescaleForDpi();
-
+            
             // SWP_DRAWFRAME makes window bg really transparent (visible during resize) and not black
             User32.SetWindowPos(hWndContent, IntPtr.Zero, 0, 0, 0, 0,
                 SetWindowPosOptions.SWP_NOOWNERZORDER |
@@ -281,6 +255,14 @@ namespace ModernWpf.Internal
                         retVal = new IntPtr((int)HandleNcHitTest(lParam));
                         handled = true;
                         break;
+                    //case WindowMessage.WM_NCLBUTTONDOWN:
+                    //    if ((ChromeHitTest)wParam.ToInt32() == ChromeHitTest.SystemMenu)
+                    //    {
+                    //        // display sys menu
+                    //        User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
+                    //        //handled = true;
+                    //    }
+                    //    break;
                     case WindowMessage.WM_NCRBUTTONDOWN:
                         switch ((ChromeHitTest)wParam.ToInt32())
                         {
@@ -288,7 +270,7 @@ namespace ModernWpf.Internal
                             case ChromeHitTest.SystemMenu:
                                 // display sys menu
                                 User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
-                                handled = true;
+                                //handled = true;
                                 break;
                         }
                         break;
@@ -313,10 +295,6 @@ namespace ModernWpf.Internal
                     case WindowMessage.WM_ERASEBKGND:
                         // prevent more flickers?
                         handled = true;
-                        break;
-                    case WindowMessage.WM_DPICHANGED:
-                        HandleDpiChanged(hwnd, wParam, lParam);
-                        //handled = true;
                         break;
                     case WindowMessage.WM_MOUSEHWHEEL:
                         // do our own horizontal wheel event
@@ -343,45 +321,7 @@ namespace ModernWpf.Internal
             }
             return retVal;
         }
-
-        private void HandleDpiChanged(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
-        {
-            var newMonDpi = wParam.ToInt32() & 0xffff;
-            if (_monitorDPI != newMonDpi)
-            {
-                _monitorDPI = newMonDpi;
-                _dpiScaleFactor = _monitorDPI / _wpfDPI;
-                // update window size as well
-                RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
-                User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
-                     SetWindowPosOptions.SWP_NOZORDER |
-                     SetWindowPosOptions.SWP_NOOWNERZORDER |
-                     SetWindowPosOptions.SWP_NOACTIVATE);
-
-
-                RescaleForDpi();
-            }
-
-        }
-
-        private void RescaleForDpi()
-        {
-            var test = Shcore.GetProcessDpiAwareness(IntPtr.Zero);
-            if (test == ModernWpf.Native.PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE)
-            {
-                var child = VisualTreeHelper.GetChild(ContentWindow, 0) as FrameworkElement;
-                if (child != null)
-                {
-                    DpiInfo.ScaleElement(child, _dpiScaleFactor, true);
-                }
-            }
-
-            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI, _dpiScaleFactor);
-            ContentWindow.RaiseEvent(dpiArgs);
-            DpiInfo.SetWindowDpi(ContentWindow, dpiArgs.NewDpi);
-            DpiInfo.SetWindowDpiScale(ContentWindow, dpiArgs.Scale);
-        }
-
+        
         private ChromeHitTest HandleNcHitTest(IntPtr lParam)
         {
             Point screenPoint = lParam.ToPoint();

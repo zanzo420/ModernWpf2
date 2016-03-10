@@ -142,7 +142,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="ActiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.DimGray));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.Gray));
 
         /// <summary>
         /// Gets or sets the active border brush.
@@ -162,7 +162,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="InactiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.DarkGray));
 
         /// <summary>
         /// Gets or sets the inactive border brush.

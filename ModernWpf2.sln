@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{80E47E
 		build\nuget.cmd = build\nuget.cmd
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{97193AC7-4E80-45FC-9C54-6FBD384E4423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicRunner", "samples\BasicRunner\BasicRunner.csproj", "{EF1209F0-EFED-4AE8-9A31-0422F6866694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{A06362A2-99A7-48C9-BB26-8CE1BD0EACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06362A2-99A7-48C9-BB26-8CE1BD0EACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06362A2-99A7-48C9-BB26-8CE1BD0EACD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1209F0-EFED-4AE8-9A31-0422F6866694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1209F0-EFED-4AE8-9A31-0422F6866694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1209F0-EFED-4AE8-9A31-0422F6866694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1209F0-EFED-4AE8-9A31-0422F6866694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF1209F0-EFED-4AE8-9A31-0422F6866694} = {97193AC7-4E80-45FC-9C54-6FBD384E4423}
 	EndGlobalSection
 EndGlobal
