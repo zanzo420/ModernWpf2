@@ -106,17 +106,16 @@
 
     <Style TargetType="{x:Type ctrl:TitleBar}">
         <Setter Property="local:Chrome.HitTestType" Value="Caption"></Setter>
-        <!--<Setter Property="Height" Value="28"></Setter>-->
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"></Setter>
         <Setter Property="Margin" Value="0 0 0 0"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:TitleBar}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Border Background="#01000000"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
+                        <Grid UseLayoutRounding="True" x:Name="layout"
+                              Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -127,7 +126,8 @@
                             <!--icon-->
                             <ctrl:AppIconImage x:Name="Part_Icon" Margin="6 0 0 0"
                                                LargeIcon="{TemplateBinding LargeIcon}"
-                                               local:Chrome.HitTestType="SystemMenu"></ctrl:AppIconImage>
+                                               local:Chrome.HitTestType="SystemMenu"
+                                               RenderOptions.BitmapScalingMode="NearestNeighbor"></ctrl:AppIconImage>
 
                             <!--title-->
                             <TextBlock Grid.Column="1" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RootWindow.Title}"
@@ -135,7 +135,7 @@
                                        Foreground="{TemplateBinding Foreground}"
                                        TextTrimming="CharacterEllipsis"
                                        x:Name="Part_Title"
-                                       Margin="8 0"></TextBlock>
+                                       Margin="6 5"></TextBlock>
                             
                             <!--custom content-->
                             <ContentPresenter Grid.Column="2"
@@ -194,5 +194,15 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsActive" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveBackground}"></Setter>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=AtiveForeground}"></Setter>
+            </Trigger>
+            <Trigger Property="IsActive" Value="False">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=InativeBackground}"></Setter>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=InativeForeground}"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

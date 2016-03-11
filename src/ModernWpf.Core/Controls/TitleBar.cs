@@ -88,15 +88,81 @@ namespace ModernWpf.Controls
             if (old != null)
             {
                 old.StateChanged -= WindowStateChanged;
+                BindingOperations.ClearAllBindings(d);
             }
 
             var newWin = e.NewValue as Window;
             if (newWin != null)
             {
+                ((TitleBar)d).CreateBinding(Window.IsActiveProperty.Name, newWin, IsActiveProperty);
                 newWin.StateChanged += WindowStateChanged;
             }
         }
+
+
+        private Binding CreateBinding(string sourcePath, object source, DependencyProperty bindToProperty, IValueConverter converter = null, object converterParameter = null)
+        {
+            var bind = new Binding(sourcePath);
+            bind.Source = source;
+            bind.NotifyOnSourceUpdated = true;
+            bind.Mode = BindingMode.OneWay;
+            bind.Converter = converter;
+            bind.ConverterParameter = converterParameter;
+            BindingOperations.SetBinding(this, bindToProperty, bind);
+            return bind;
+        }
+
+
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+        }
+
+        static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
+
+
+
+
+
+        public Brush InactiveBackground
+        {
+            get { return (Brush)GetValue(InactiveBackgroundProperty); }
+            set { SetValue(InactiveBackgroundProperty, value); }
+        }
+        public static readonly DependencyProperty InactiveBackgroundProperty =
+            DependencyProperty.Register("InactiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionBrush));
         
+
+        public Brush InactiveForeground
+        {
+            get { return (Brush)GetValue(InactiveForegroundProperty); }
+            set { SetValue(InactiveForegroundProperty, value); }
+        }
+        public static readonly DependencyProperty InactiveForegroundProperty =
+            DependencyProperty.Register("InactiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionTextBrush));
+
+
+
+        public Brush ActiveBackground
+        {
+            get { return (Brush)GetValue(ActiveBackgroundProperty); }
+            set { SetValue(ActiveBackgroundProperty, value); }
+        }
+        public static readonly DependencyProperty ActiveBackgroundProperty =
+            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ActiveCaptionBrush));
+
+
+        public Brush ActiveForeground
+        {
+            get { return (Brush)GetValue(ActiveForegroundProperty); }
+            set { SetValue(ActiveForegroundProperty, value); }
+        }
+        public static readonly DependencyProperty ActiveForegroundProperty =
+            DependencyProperty.Register("ActiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ActiveCaptionTextBrush));
+
+
         /// <summary>
         /// Gets or sets a value indicating whether app icon is shown.
         /// </summary>
@@ -110,7 +176,7 @@ namespace ModernWpf.Controls
         }
         public static readonly DependencyProperty ShowIconProperty =
             DependencyProperty.Register("ShowIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
-        
+
 
         public bool ShowTitle
         {
