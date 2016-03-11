@@ -17,5 +17,9 @@ namespace ModernWpf.Native
 		/// Represents the FALSE value as <see cref="IntPtr"/>.
 		/// </summary>
 		public static readonly IntPtr FALSE = IntPtr.Zero;
-	}
+        /// <summary>
+        /// The max file path length.
+        /// </summary>
+        public const int MAX_PATH = 260;
+    }
 }

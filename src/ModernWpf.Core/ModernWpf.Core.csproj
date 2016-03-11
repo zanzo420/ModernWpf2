@@ -56,22 +56,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chrome.cs" />
+    <Compile Include="Controls\AppIconImage.cs" />
     <Compile Include="Controls\BorderSide.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
+    <Compile Include="Controls\TitleBar.cs" />
     <Compile Include="Converters\BorderBrushConverter.cs" />
     <Compile Include="Converters\EnumValueConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="DpiTool.cs" />
     <Compile Include="Internal\BorderManager.cs" />
     <Compile Include="Internal\EventUtil.cs" />
+    <Compile Include="Internal\RelayCommand.cs" />
     <Compile Include="MouseEvents.cs" />
     <Compile Include="Native\Api\Gdi32.cs" />
+    <Compile Include="Native\Api\IconReader.cs" />
     <Compile Include="Native\Api\Shell32.cs" />
     <Compile Include="Native\APPBARDATA.cs" />
     <Compile Include="Native\AppBarEdge.cs" />
     <Compile Include="Native\AppBarMessage.cs" />
     <Compile Include="Native\BasicValues.cs" />
     <Compile Include="Native\Api\Dwmapi.cs" />
+    <Compile Include="Native\FileAttributes.cs" />
     <Compile Include="Native\HResult.cs" />
     <Compile Include="Native\IntPtrExtensions.cs" />
     <Compile Include="Native\MINMAXINFO.cs" />
@@ -88,6 +93,8 @@
     <Compile Include="Native\RECT.cs" />
     <Compile Include="Native\SetWindowPosOptions.cs" />
     <Compile Include="Native\Api\Shcore.cs" />
+    <Compile Include="Native\ShellFileFlags.cs" />
+    <Compile Include="Native\SHFILEINFO.cs" />
     <Compile Include="Native\ShowWindowOption.cs" />
     <Compile Include="Native\Api\User32.cs" />
     <Compile Include="Native\WindowLong.cs" />

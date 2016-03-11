@@ -42,3 +42,4 @@ using System.Windows.Markup;
 )]
 
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWpf")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Controls")]

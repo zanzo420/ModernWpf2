@@ -33,20 +33,20 @@ namespace ModernWpf.Native.Api
 
             //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             //public static extern uint GetClassLong(IntPtr hWnd, ClassLong nIndex);
-            
+
             //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             //public static extern IntPtr GetClassLongPtr(IntPtr hWnd, ClassLong nIndex);
-            
+
             //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             //public static extern uint SetClassLong(IntPtr hWnd, ClassLong nIndex, uint dwNewLong);
-            
+
             //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             //public static extern IntPtr SetClassLongPtr(IntPtr hWnd, ClassLong nIndex, IntPtr dwNewLong);
 
 
-            //[DllImport("user32.dll", SetLastError = true)]
-            //[return: MarshalAs(UnmanagedType.Bool)]
-            //public static extern bool DestroyIcon(IntPtr hIcon);
+            [DllImport("user32.dll", SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool DestroyIcon(IntPtr hIcon);
 
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
@@ -253,16 +253,16 @@ namespace ModernWpf.Native.Api
         {
             return NativeMethods.SetForegroundWindow(hWnd);
         }
-        
-        ///// <summary>
-        ///// Destroys an icon and frees any memory the icon occupied.
-        ///// </summary>
-        ///// <param name="hIcon">A handle to the icon to be destroyed. The icon must not be in use.</param>
-        ///// <returns></returns>
-        //public static bool DestroyIcon(IntPtr hIcon)
-        //{
-        //    return NativeMethods.DestroyIcon(hIcon);
-        //}
+
+        /// <summary>
+        /// Destroys an icon and frees any memory the icon occupied.
+        /// </summary>
+        /// <param name="hIcon">A handle to the icon to be destroyed. The icon must not be in use.</param>
+        /// <returns></returns>
+        public static bool DestroyIcon(IntPtr hIcon)
+        {
+            return NativeMethods.DestroyIcon(hIcon);
+        }
 
         /// <summary>
         /// Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message.

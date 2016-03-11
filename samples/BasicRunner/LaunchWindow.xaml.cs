@@ -20,9 +20,9 @@ namespace BasicRunner
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LaunchWindow : Window
     {
-        public MainWindow()
+        public LaunchWindow()
         {
             InitializeComponent();
         }
@@ -35,6 +35,11 @@ namespace BasicRunner
         private void Window_DpiChange(object sender, ModernWpf.DpiChangeEventArgs e)
         {
             Debug.WriteLine("DPI changed to " + e.NewDpi);
+        }
+
+        private void btnChromeTitle_Click(object sender, RoutedEventArgs e)
+        {
+            new ChromeWithTitleBarWindow { Owner = this }.Show();
         }
     }
 }

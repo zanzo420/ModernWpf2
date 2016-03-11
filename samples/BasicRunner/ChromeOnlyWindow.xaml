@@ -33,6 +33,8 @@
                            Foreground="White"
                            TextWrapping="Wrap"></TextBlock>
             </Border>
+
+            <ToggleButton x:Name="btnRtl" Content="Toggle RTL" Checked="btnRtl_Checked" Unchecked="btnRtl_Unchecked"></ToggleButton>
         </StackPanel>
     </Grid>
 </Window>

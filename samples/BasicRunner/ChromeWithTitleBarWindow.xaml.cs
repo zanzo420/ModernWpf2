@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace BasicRunner
 {
     /// <summary>
-    /// Interaction logic for ChromeOnlyWindow.xaml
+    /// Interaction logic for ChromeWithTitleBarWindow.xaml
     /// </summary>
-    public partial class ChromeOnlyWindow : Window
+    public partial class ChromeWithTitleBarWindow : Window
     {
-        public ChromeOnlyWindow()
+        public ChromeWithTitleBarWindow()
         {
             InitializeComponent();
         }

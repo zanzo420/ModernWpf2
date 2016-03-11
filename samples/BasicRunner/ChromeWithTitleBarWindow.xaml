@@ -1,0 +1,47 @@
+﻿<Window x:Class="BasicRunner.ChromeWithTitleBarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BasicRunner"
+        xmlns:modern="http://modernwpf"
+        mc:Ignorable="d"
+        x:Name="theWindow"
+        Title="Chrome With TitleBar" Height="300" Width="300"
+        ResizeMode="CanResizeWithGrip"
+        modern:DpiTool.AutoDpiScale="True"
+        modern:DpiTool.DpiChange="Window_DpiChange">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="8 4"></Setter>
+        </Style>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Padding" Value="8 4"></Setter>
+        </Style>
+    </Window.Resources>
+    <modern:Chrome.Chrome>
+        <modern:Chrome></modern:Chrome>
+    </modern:Chrome.Chrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <modern:TitleBar x:Name="titleBar"></modern:TitleBar>
+        
+        <StackPanel Grid.Row="1" Margin="8">
+            <TextBlock Text="This window has the custom chrome set + the TitleBar control. Should behave like a normal window."
+                       TextWrapping="Wrap"></TextBlock>
+
+            <ToggleButton x:Name="btnRtl" Content="Toggle RTL" Checked="btnRtl_Checked" Unchecked="btnRtl_Unchecked"></ToggleButton>
+
+            <StackPanel Margin="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                <ToggleButton Content="Large Icon" IsChecked="{Binding ElementName=titleBar, Path=LargeIcon}"></ToggleButton>
+                <ToggleButton Content="Icon" IsChecked="{Binding ElementName=titleBar, Path=ShowIcon}"></ToggleButton>
+                <ToggleButton Content="Title" IsChecked="{Binding ElementName=titleBar, Path=ShowTitle}"></ToggleButton>
+                <ToggleButton Content="Controls" IsChecked="{Binding ElementName=titleBar, Path=ShowControlBox}"></ToggleButton>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
