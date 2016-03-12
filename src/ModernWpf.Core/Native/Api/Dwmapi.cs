@@ -1,4 +1,6 @@
 ﻿using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Media;
 
 namespace ModernWpf.Native.Api
 {
@@ -11,19 +13,23 @@ namespace ModernWpf.Native.Api
 
         static class NativeMethods
         {
-            //[DllImport("dwmapi.dll", CharSet = CharSet.Unicode)]
+            //[DllImport("dwmapi.dll")]
             //[return: MarshalAs(UnmanagedType.Bool)]
             //public static extern bool DwmDefWindowProc(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam, ref IntPtr plResult);
 
-            [DllImport("dwmapi.dll", CharSet = CharSet.Unicode)]
+            [DllImport("dwmapi.dll")]
             public static extern void DwmIsCompositionEnabled([MarshalAs(UnmanagedType.Bool)]ref bool isEnabled);
 
-            //[DllImport("dwmapi.dll", CharSet = CharSet.Unicode)]
+            //[DllImport("dwmapi.dll")]
             //public static extern HRESULT DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
 
-            //[DllImport("dwmapi.dll", CharSet = CharSet.Unicode)]
+            //[DllImport("dwmapi.dll")]
             //public static extern HRESULT DwmSetWindowAttribute(IntPtr hwnd, DwmWindowAttribute dwAttribute,
             //    ref int attribute, uint cbAttribute);
+
+            [DllImport("dwmapi.dll")]
+            public static extern HRESULT DwmGetColorizationColor(out uint pcrColorization, [Out, MarshalAs(UnmanagedType.Bool)] out bool pfOpaqueBlend);
+
         }
         #endregion
 
@@ -49,6 +55,24 @@ namespace ModernWpf.Native.Api
                 }
                 return val;
             }
+        }
+
+        public static Color GetWindowColor()
+        {
+            if (IsPlatformSupported)
+            {
+                bool isOpaque;
+                uint color;
+                if(NativeMethods.DwmGetColorizationColor(out color, out isOpaque).Succeeded)
+                {
+                    return Color.FromArgb(
+                        (byte)((color & 0xFF000000) >> 24),
+                        (byte)((color & 0x00FF0000) >> 16),
+                        (byte)((color & 0x0000FF00) >> 8),
+                        (byte)((color & 0x000000FF) >> 0));
+                }
+            }
+            return SystemColors.ActiveCaptionColor;
         }
 
         #endregion

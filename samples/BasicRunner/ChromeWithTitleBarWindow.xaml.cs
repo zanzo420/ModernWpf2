@@ -40,5 +40,11 @@ namespace BasicRunner
         {
             this.FlowDirection = FlowDirection.LeftToRight;
         }
+
+        private void leftBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (leftBtn.IsChecked.GetValueOrDefault()) { leftContent.Visibility = Visibility; }
+            else { leftContent.Visibility = Visibility.Collapsed; }
+        }
     }
 }

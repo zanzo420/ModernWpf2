@@ -52,11 +52,11 @@
         </Setter>
     </Style>
 
-
-
+    
+    
     <Style x:Key="MarlettGlyph" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Marlett"/>
-        <Setter Property="FontSize" Value="14"/>
+        <!--<Setter Property="FontSize" Value="14"/>-->
     </Style>
 
     <Style x:Key="ControlButton" TargetType="Button">
@@ -70,8 +70,9 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Margin" Value="0 0 0 0" />
-        <Setter Property="Padding" Value="9 5 9 6" />
+        <Setter Property="Padding" Value="12 0" />
         <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="FontSize" Value="14"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -104,19 +105,38 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource ControlButton}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#e00000" />
+                <Setter Property="Foreground" Value="#ffffff" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#c00000" />
+                <Setter Property="Foreground" Value="#dddddd" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type ctrl:TitleBar}">
-        <Setter Property="local:Chrome.HitTestType" Value="Caption"></Setter>
-        <Setter Property="Margin" Value="0 0 0 0"></Setter>
-        <Setter Property="FontSize" Value="12"></Setter>
+        <Setter Property="ControlButtonStyle" Value="{StaticResource ControlButton}"></Setter>
+        <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButton}"></Setter>
+        <Setter Property="ActiveBackground" Value="#0078D7"></Setter>
+        <Setter Property="ActiveForeground" Value="#f0f0f0"></Setter>
+        <Setter Property="InactiveBackground" Value="#69A5D3"></Setter>
+        <Setter Property="InactiveForeground" Value="#eeeeee"></Setter>
+        <Setter Property="MinHeight" Value="28"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:TitleBar}">
                     <Border Background="#01000000"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            local:Chrome.HitTestType="Caption">
                         <Grid UseLayoutRounding="True" x:Name="layout"
                               Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -124,57 +144,48 @@
                             </Grid.ColumnDefinitions>
 
                             <!--icon-->
-                            <ctrl:AppIconImage x:Name="Part_Icon" Margin="6 0 0 0"
+                            <ctrl:AppIconImage x:Name="Part_Icon" Margin="6 0 6 0"
                                                LargeIcon="{TemplateBinding LargeIcon}"
                                                local:Chrome.HitTestType="SystemMenu"
                                                RenderOptions.BitmapScalingMode="NearestNeighbor"></ctrl:AppIconImage>
 
+                            <!--custom content-->
+                            <ContentPresenter Grid.Column="1"
+                                              Content="{TemplateBinding BeforeTitleContent}"
+                                              local:Chrome.HitTestType="Client"></ContentPresenter>
+
                             <!--title-->
-                            <TextBlock Grid.Column="1" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RootWindow.Title}"
+                            <TextBlock Grid.Column="2" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RootWindow.Title}"
                                        VerticalAlignment="Center"
-                                       Foreground="{TemplateBinding Foreground}"
                                        TextTrimming="CharacterEllipsis"
                                        x:Name="Part_Title"
-                                       Margin="6 5"></TextBlock>
-                            
+                                       Margin="6 0"></TextBlock>
+
                             <!--custom content-->
-                            <ContentPresenter Grid.Column="2"
-                                              Content="{TemplateBinding Content}"
+                            <ContentPresenter Grid.Column="3"
+                                              Content="{TemplateBinding AfterTitleContent}"
                                               local:Chrome.HitTestType="Client"></ContentPresenter>
 
                             <!--control boxes-->
                             <StackPanel Orientation="Horizontal"
-                                        Grid.Column="3"
+                                        Grid.Column="4"
                                         x:Name="Part_ControlBox"
                                         VerticalAlignment="Stretch"
                                         local:Chrome.HitTestType="Client">
                                 <Button x:Name="PART_MinButton"
-                                        Style="{StaticResource ControlButton}">
+                                        Style="{TemplateBinding ControlButtonStyle}">
                                     <TextBlock Text="0" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
                                 <Button x:Name="PART_MaxButton"
-                                        Style="{StaticResource ControlButton}">
+                                        Style="{TemplateBinding ControlButtonStyle}">
                                     <TextBlock Text="1" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
                                 <Button x:Name="PART_RestoreButton"
-                                        Style="{StaticResource ControlButton}">
+                                        Style="{TemplateBinding ControlButtonStyle}">
                                     <TextBlock Text="2" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
-                                <Button x:Name="PART_CloseButton">
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource ControlButton}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#e00000" />
-                                                    <Setter Property="Foreground" Value="#ffffff" />
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#c00000" />
-                                                    <Setter Property="Foreground" Value="#dddddd" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
+                                <Button x:Name="PART_CloseButton"
+                                        Style="{TemplateBinding CloseButtonStyle}">
                                     <TextBlock Text="r" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
                             </StackPanel>
@@ -195,13 +206,13 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <Trigger Property="IsActive" Value="False">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveBackground}"></Setter>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveForeground}"></Setter>
+            </Trigger>
             <Trigger Property="IsActive" Value="True">
                 <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveBackground}"></Setter>
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=AtiveForeground}"></Setter>
-            </Trigger>
-            <Trigger Property="IsActive" Value="False">
-                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=InativeBackground}"></Setter>
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=InativeForeground}"></Setter>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveForeground}"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

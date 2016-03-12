@@ -1,4 +1,5 @@
 ﻿using ModernWpf.Internal;
+using ModernWpf.Native.Api;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace ModernWpf.Controls
     [TemplatePart(Name = PART_MinButton, Type = typeof(TitleBar))]
     [TemplatePart(Name = PART_MaxButton, Type = typeof(TitleBar))]
     [TemplatePart(Name = PART_RestoreButton, Type = typeof(TitleBar))]
-    public class TitleBar : ContentControl
+    public class TitleBar : Control
     {
         /// <summary>
         /// Name of the close button in template.
@@ -52,19 +53,56 @@ namespace ModernWpf.Controls
 
         #region properties
 
-        ///// <summary>
-        ///// Gets or sets the control button style.
-        ///// </summary>
-        ///// <value>
-        ///// The control button style.
-        ///// </value>
-        //public Style ControlButtonStyle
-        //{
-        //    get { return (Style)GetValue(ControlButtonStyleProperty); }
-        //    set { SetValue(ControlButtonStyleProperty, value); }
-        //}
-        //public static readonly DependencyProperty ControlButtonStyleProperty =
-        //    DependencyProperty.Register("ControlButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+
+
+        public object BeforeTitleContent
+        {
+            get { return (object)GetValue(BeforeTitleContentProperty); }
+            set { SetValue(BeforeTitleContentProperty, value); }
+        }
+        public static readonly DependencyProperty BeforeTitleContentProperty =
+            DependencyProperty.Register("BeforeTitleContent", typeof(object), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+
+
+
+
+        public object AfterTitleContent
+        {
+            get { return (object)GetValue(AfterTitleContentProperty); }
+            set { SetValue(AfterTitleContentProperty, value); }
+        }
+        public static readonly DependencyProperty AfterTitleContentProperty =
+            DependencyProperty.Register("AfterTitleContent", typeof(object), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+
+
+
+        /// <summary>
+        /// Gets or sets the control button style.
+        /// </summary>
+        /// <value>
+        /// The control button style.
+        /// </value>
+        public Style ControlButtonStyle
+        {
+            get { return (Style)GetValue(ControlButtonStyleProperty); }
+            set { SetValue(ControlButtonStyleProperty, value); }
+        }
+        public static readonly DependencyProperty ControlButtonStyleProperty =
+            DependencyProperty.Register("ControlButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// Gets or sets the close button style.
+        /// </summary>
+        /// <value>
+        /// The control button style.
+        /// </value>
+        public Style CloseButtonStyle
+        {
+            get { return (Style)GetValue(CloseButtonStyleProperty); }
+            set { SetValue(CloseButtonStyleProperty, value); }
+        }
+        public static readonly DependencyProperty CloseButtonStyleProperty =
+            DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
 
 
         /// <summary>
@@ -76,9 +114,9 @@ namespace ModernWpf.Controls
         public Window RootWindow
         {
             get { return (Window)GetValue(RootWindowProperty); }
-            set { SetValue(RootWindowProperty, value); }
+            private set { SetValue(RootWindowProperty, value); }
         }
-        public static readonly DependencyProperty RootWindowProperty =
+        static readonly DependencyProperty RootWindowProperty =
             DependencyProperty.Register("RootWindow", typeof(Window), typeof(TitleBar), new FrameworkPropertyMetadata(null, WindowChanged));
 
 
@@ -133,7 +171,7 @@ namespace ModernWpf.Controls
         }
         public static readonly DependencyProperty InactiveBackgroundProperty =
             DependencyProperty.Register("InactiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionBrush));
-        
+
 
         public Brush InactiveForeground
         {
@@ -151,7 +189,7 @@ namespace ModernWpf.Controls
             set { SetValue(ActiveBackgroundProperty, value); }
         }
         public static readonly DependencyProperty ActiveBackgroundProperty =
-            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ActiveCaptionBrush));
+            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(new SolidColorBrush(Dwmapi.GetWindowColor())));
 
 
         public Brush ActiveForeground
