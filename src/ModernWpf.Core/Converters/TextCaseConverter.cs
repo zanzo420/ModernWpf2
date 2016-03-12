@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ModernWpf.Converters
 {
     /// <summary>
-    /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
+    /// Provides conversion of text to upper (default), lower, or title cases.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(double))]
-    public class ThicknessToDoubleConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(string))]
+    public class TextCaseConverter : IValueConverter
     {
-        static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
+        static readonly TextCaseConverter _instance = new TextCaseConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,12 +18,12 @@ namespace ModernWpf.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessToDoubleConverter Instance { get { return _instance; } }
+        public static TextCaseConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
         /// <summary>
-        /// Converts a value.
+        /// Converts a value to the string representation.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
@@ -38,27 +34,23 @@ namespace ModernWpf.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Thickness)
+            if (value != null)
             {
-                var t = ((Thickness)value);
-
-                string para = parameter == null ? string.Empty : parameter.ToString().ToUpperInvariant();
-                switch (para)
+                if (culture == null) { culture = System.Globalization.CultureInfo.CurrentCulture; }
+                if (parameter != null)
                 {
-                    case "LEFT":
-                        return t.Left;
-                    case "TOP":
-                        return t.Top;
-                    case "RIGHT":
-                        return t.Right;
-                    case "BOTTOM":
-                        return t.Bottom;
-                    default:
-                        // default is avg
-                        return (t.Left + t.Right + t.Bottom + t.Top) / 4;
+                    if (string.Equals("lower", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        return culture.TextInfo.ToLower(value.ToString());
+                    }
+                    if (string.Equals("title", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        return culture.TextInfo.ToTitleCase(value.ToString());
+                    }
                 }
+                return culture.TextInfo.ToUpper(value.ToString());
             }
-            return 0;
+            return value;
         }
 
         /// <summary>
@@ -71,7 +63,6 @@ namespace ModernWpf.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;

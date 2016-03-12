@@ -1,47 +1,40 @@
-﻿using ModernWpf.Internal;
-using ModernWpf.Native.Api;
+﻿using ModernWpf.Native.Api;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ModernWpf.Controls
 {
     /// <summary>
     /// A UI piece for window title bar (icon, title, min/max/restore buttons).
     /// </summary>
-    [TemplatePart(Name = PartCloseButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PartMinButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PartMaxButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PartRestoreButton, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartCloseButtonName, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartMinButtonName, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartMaxButtonName, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartRestoreButtonName, Type = typeof(TitleBar))]
     public class TitleBar : Control
     {
         /// <summary>
         /// Name of the close button in template.
         /// </summary>
-        protected const string PartCloseButton = "PART_CloseButton";
+        protected const string PartCloseButtonName = "PART_CloseButton";
         /// <summary>
         /// Name of the minimize button in template.
         /// </summary>
-        protected const string PartMinButton = "PART_MinButton";
+        protected const string PartMinButtonName = "PART_MinButton";
         /// <summary>
         /// Name of the maximize button in template.
         /// </summary>
-        protected const string PartMaxButton = "PART_MaxButton";
+        protected const string PartMaxButtonName = "PART_MaxButton";
         /// <summary>
         /// Name of the restore button in template.
         /// </summary>
-        protected const string PartRestoreButton = "PART_RestoreButton";
+        protected const string PartRestoreButtonName = "PART_RestoreButton";
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
@@ -258,114 +251,25 @@ namespace ModernWpf.Controls
 
             RootWindow = this.FindParentInVisualTree<Window>();
 
-            AttachCommand(PartCloseButton, CloseCommand);
-            AttachCommand(PartMinButton, MinimizeCommand);
-            AttachCommand(PartRestoreButton, RestoreCommand);
-            AttachCommand(PartMaxButton, MaximizeCommand);
+            BindCommand(PartCloseButtonName, WindowCommands.CloseCommand);
+            BindCommand(PartMinButtonName, WindowCommands.MinimizeCommand);
+            BindCommand(PartRestoreButtonName, WindowCommands.RestoreCommand);
+            BindCommand(PartMaxButtonName, WindowCommands.MaximizeCommand);
         }
 
-        private void AttachCommand(string partName, ICommand command)
+        private void BindCommand(string partName, ICommand command)
         {
             var btn = GetTemplateChild(partName) as Button;
             if (btn != null)
             {
-                btn.Command = command;
-            }
-        }
-
-        private RelayCommand _closeCommand;
-        /// <summary>
-        /// Gets the command that closes the window.
-        /// </summary>
-        /// <value>
-        /// The close command.
-        /// </value>
-        public ICommand CloseCommand
-        {
-            get
-            {
-                return _closeCommand ?? (
-                    _closeCommand = new RelayCommand(() =>
-                    {
-                        if (RootWindow != null) { RootWindow.Close(); }
-                    }, () => RootWindow != null)
-                );
-            }
-        }
-
-        private RelayCommand _maximizeCommand;
-        /// <summary>
-        /// Gets the command that maximizes the window.
-        /// </summary>
-        /// <value>
-        /// The maximize command.
-        /// </value>
-        public ICommand MaximizeCommand
-        {
-            get
-            {
-                return _maximizeCommand ?? (
-                    _maximizeCommand = new RelayCommand(() =>
-                    {
-                        if (RootWindow != null) { RootWindow.WindowState = WindowState.Maximized; }
-                    }, () =>
-                    {
-                        return RootWindow != null &&
-                            RootWindow.ResizeMode != ResizeMode.NoResize &&
-                            RootWindow.ResizeMode != ResizeMode.CanMinimize &&
-                            RootWindow.WindowState != WindowState.Maximized;
-                    })
-                );
-            }
-        }
-
-        private RelayCommand _restoreCommand;
-        /// <summary>
-        /// Gets the command that restores the window.
-        /// </summary>
-        /// <value>
-        /// The restore command.
-        /// </value>
-        public ICommand RestoreCommand
-        {
-            get
-            {
-                return _restoreCommand ?? (
-                    _restoreCommand = new RelayCommand(() =>
-                    {
-                        if (RootWindow != null) { RootWindow.WindowState = WindowState.Normal; }
-                    }, () =>
-                    {
-                        return RootWindow != null &&
-                            RootWindow.ResizeMode != ResizeMode.NoResize &&
-                            RootWindow.ResizeMode != ResizeMode.CanMinimize &&
-                            RootWindow.WindowState == WindowState.Maximized;
-                    })
-                );
-            }
-        }
-
-        private RelayCommand _minimizeCommand;
-        /// <summary>
-        /// Gets the command that minimizes the window.
-        /// </summary>
-        /// <value>
-        /// The minimize command.
-        /// </value>
-        public ICommand MinimizeCommand
-        {
-            get
-            {
-                return _minimizeCommand ?? (
-                    _minimizeCommand = new RelayCommand(() =>
-                    {
-                        if (RootWindow != null) { RootWindow.WindowState = WindowState.Minimized; }
-                    }, () =>
-                    {
-                        return RootWindow != null &&
-                            RootWindow.ResizeMode != ResizeMode.NoResize;
-                    })
-                );
+                btn.SetBinding(ButtonBase.CommandProperty, new Binding
+                {
+                    Source = command
+                });
+                btn.SetBinding(ButtonBase.CommandParameterProperty, new Binding(RootWindowProperty.Name)
+                {
+                    Source = this,
+                });
             }
         }
     }

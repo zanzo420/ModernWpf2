@@ -10,7 +10,7 @@ using System.Windows.Markup;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ModernWpf.Core")]
-[assembly: AssemblyDescription("Contains the classes for making blank bordered window, per-monitor dpi handling, and extra attached properties/events for WPF 4.0+.")]
+[assembly: AssemblyDescription(@"Contains the classes for making blank bordered window, per-monitor dpi handling, extra attached properties/events, and other utility converters for WPF 4.0+.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ModernWpf.Core")]
 [assembly: AssemblyTrademark("")]
@@ -43,3 +43,5 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWpf")]
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Controls")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Converters")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Resources")]

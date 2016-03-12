@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ModernWpf.Native.Api;
+using System;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ModernWpf.Converters
 {
     /// <summary>
-    /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
+    /// Parse databound value as file path and converts to file icon image.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(double))]
-    public class ThicknessToDoubleConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(ImageSource))]
+    public class FileIconConverter : IValueConverter
     {
-        static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
+        static readonly FileIconConverter _instance = new FileIconConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,7 +20,7 @@ namespace ModernWpf.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessToDoubleConverter Instance { get { return _instance; } }
+        public static FileIconConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
@@ -38,27 +36,10 @@ namespace ModernWpf.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Thickness)
-            {
-                var t = ((Thickness)value);
+            var para = parameter == null ? string.Empty : parameter.ToString();
+            bool large = para.IndexOf("large", StringComparison.OrdinalIgnoreCase) > -1;
 
-                string para = parameter == null ? string.Empty : parameter.ToString().ToUpperInvariant();
-                switch (para)
-                {
-                    case "LEFT":
-                        return t.Left;
-                    case "TOP":
-                        return t.Top;
-                    case "RIGHT":
-                        return t.Right;
-                    case "BOTTOM":
-                        return t.Bottom;
-                    default:
-                        // default is avg
-                        return (t.Left + t.Right + t.Bottom + t.Top) / 4;
-                }
-            }
-            return 0;
+            return GetFileIconCore(value, large);
         }
 
         /// <summary>
@@ -71,12 +52,23 @@ namespace ModernWpf.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;
         }
 
         #endregion
+
+        /// <summary>
+        /// Real method to get the file icon after parsing the parameter.
+        /// </summary>
+        /// <param name="value">The databound value.</param>
+        /// <param name="large">if set to <c>true</c> return large icon.</param>
+        /// <returns></returns>
+        protected virtual ImageSource GetFileIconCore(object value, bool large)
+        {
+            if (value == null) { return null; }
+            return IconReader.GetFileIcon(value.ToString(), large ? IconReader.IconSize.Large : IconReader.IconSize.Small, false);
+        }
     }
 }

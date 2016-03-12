@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ModernWpf.Converters
 {
     /// <summary>
-    /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
+    /// Provides conversion of bool values to visibility.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(double))]
-    public class ThicknessToDoubleConverter : IValueConverter
+    [ValueConversion(typeof(bool), typeof(Visibility))]
+    public class BoolVisibleConverter : IValueConverter
     {
-        static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
+        static readonly BoolVisibleConverter _instance = new BoolVisibleConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,12 +18,12 @@ namespace ModernWpf.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessToDoubleConverter Instance { get { return _instance; } }
-
+        public static BoolVisibleConverter Instance { get { return _instance; } }
+        
         #region IValueConverter Members
 
         /// <summary>
-        /// Converts a value.
+        /// Converts a value to the string representation.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
@@ -38,27 +34,13 @@ namespace ModernWpf.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Thickness)
-            {
-                var t = ((Thickness)value);
+            var visible = value as bool?;
 
-                string para = parameter == null ? string.Empty : parameter.ToString().ToUpperInvariant();
-                switch (para)
-                {
-                    case "LEFT":
-                        return t.Left;
-                    case "TOP":
-                        return t.Top;
-                    case "RIGHT":
-                        return t.Right;
-                    case "BOTTOM":
-                        return t.Bottom;
-                    default:
-                        // default is avg
-                        return (t.Left + t.Right + t.Bottom + t.Top) / 4;
-                }
+            if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                visible = !visible.GetValueOrDefault();
             }
-            return 0;
+            return visible.GetValueOrDefault() ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
@@ -71,7 +53,6 @@ namespace ModernWpf.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;

@@ -1,5 +1,4 @@
-﻿using ModernWpf.Internal;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -21,7 +20,7 @@ namespace ModernWpf
         public static readonly DependencyProperty HitTestTypeProperty =
             DependencyProperty.RegisterAttached("HitTestType", typeof(ChromeHitTest), typeof(Chrome),
             new FrameworkPropertyMetadata(ChromeHitTest.Client, FrameworkPropertyMetadataOptions.Inherits));
-
+        
         /// <summary>
         /// Gets the HitTestType property for an UI element.
         /// </summary>

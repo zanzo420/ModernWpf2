@@ -1,4 +1,4 @@
-﻿using ModernWpf;
+﻿using ModernWpf.Metro;
 using System.Reflection;
 
 [assembly: AssemblyCompany("Yin-Chun Wang")]
@@ -8,7 +8,7 @@ using System.Reflection;
 [assembly: AssemblyFileVersion(VersionInfo.BuildVersion)]
 [assembly: AssemblyInformationalVersion(VersionInfo.BuildVersion)]
 
-namespace ModernWpf
+namespace ModernWpf.Metro
 {
     static class VersionInfo
     {

@@ -9,10 +9,10 @@ using System.Windows.Markup;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ModernWpf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ModernWpf.Metro")]
+[assembly: AssemblyDescription("Contains the \"metro\" styles and controls for the ModernWpf lib.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("ModernWpf")]
+[assembly: AssemblyProduct("ModernWpf.Metro")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]

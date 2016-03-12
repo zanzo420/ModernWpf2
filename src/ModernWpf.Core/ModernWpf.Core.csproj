@@ -57,15 +57,26 @@
   <ItemGroup>
     <Compile Include="Chrome.cs" />
     <Compile Include="Controls\AppIconImage.cs" />
-    <Compile Include="Controls\BorderSide.cs" />
-    <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\TitleBar.cs" />
-    <Compile Include="Converters\BorderBrushConverter.cs" />
-    <Compile Include="Converters\EnumValueConverter.cs" />
-    <Compile Include="Converters\TextFormattingModeConverter.cs" />
+    <Compile Include="Converters\BoolNotConverter.cs" />
+    <Compile Include="Converters\BoolVisibleConverter.cs" />
+    <Compile Include="Converters\FileIconConverter.cs" />
+    <Compile Include="Converters\MultiBoolVisibleConverter.cs" />
+    <Compile Include="Converters\NullEmptyCollapsedConverter.cs" />
+    <Compile Include="Converters\SingleToEnumerableConverter.cs" />
+    <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
+    <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
+    <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
     <Compile Include="DpiTool.cs" />
+    <Compile Include="EditorCommands.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\BorderManager.cs" />
+    <Compile Include="Internal\Controls\BorderSide.cs" />
+    <Compile Include="Internal\Controls\BorderWindow.cs" />
+    <Compile Include="Internal\Converters\BorderBrushConverter.cs" />
+    <Compile Include="Internal\Converters\EnumValueConverter.cs" />
+    <Compile Include="Internal\Converters\TextFormattingModeConverter.cs" />
     <Compile Include="Internal\RelayCommand.cs" />
     <Compile Include="MouseTool.cs" />
     <Compile Include="Native\Api\Gdi32.cs" />
@@ -105,6 +116,12 @@
     <Compile Include="Native\WindowStyles.cs" />
     <Compile Include="Native\WindowStylesEx.cs" />
     <Compile Include="ChromeHitTest.cs" />
+    <Compile Include="Resources\CommandText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CommandTextBinder.cs" />
     <Compile Include="TextTool.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -112,6 +129,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="WindowCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Generic.xaml">
@@ -122,6 +140,15 @@
   <ItemGroup>
     <None Include="ModernWpf.Core.nuspec" />
     <None Include="Sign.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CommandText.ja.resx" />
+    <EmbeddedResource Include="Resources\CommandText.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CommandText.zh-Hans.resx" />
+    <EmbeddedResource Include="Resources\CommandText.zh-Hant.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -129,9 +129,9 @@
       <Project>{a06362a2-99a7-48c9-bb26-8ce1bd0eacd5}</Project>
       <Name>ModernWpf.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\ModernWpf\ModernWpf.csproj">
+    <ProjectReference Include="..\..\src\ModernWpf.Metro\ModernWpf.Metro.csproj">
       <Project>{de00d372-bd45-4fca-bffd-54d75067aac9}</Project>
-      <Name>ModernWpf</Name>
+      <Name>ModernWpf.Metro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

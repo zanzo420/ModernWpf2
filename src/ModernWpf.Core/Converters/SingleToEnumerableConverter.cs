@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ModernWpf.Converters
 {
     /// <summary>
-    /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
+    /// Converts a single object to an <see cref="IEnumerable"/> for list binding purposes when you only have one.
+    /// Useful for <see cref="TreeView"/>'s ItemsSources binding.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(double))]
-    public class ThicknessToDoubleConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(IEnumerable))]
+    public class SingleToEnumerableConverter : IValueConverter
     {
-        static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
+        static readonly SingleToEnumerableConverter _instance = new SingleToEnumerableConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,7 +23,7 @@ namespace ModernWpf.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessToDoubleConverter Instance { get { return _instance; } }
+        public static SingleToEnumerableConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
@@ -38,27 +39,11 @@ namespace ModernWpf.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Thickness)
+            if (value != null)
             {
-                var t = ((Thickness)value);
-
-                string para = parameter == null ? string.Empty : parameter.ToString().ToUpperInvariant();
-                switch (para)
-                {
-                    case "LEFT":
-                        return t.Left;
-                    case "TOP":
-                        return t.Top;
-                    case "RIGHT":
-                        return t.Right;
-                    case "BOTTOM":
-                        return t.Bottom;
-                    default:
-                        // default is avg
-                        return (t.Left + t.Right + t.Bottom + t.Top) / 4;
-                }
+                return AsEnumerable(value);
             }
-            return 0;
+            return value;
         }
 
         /// <summary>
@@ -71,12 +56,16 @@ namespace ModernWpf.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;
         }
 
         #endregion
+
+        private IEnumerable AsEnumerable(object value)
+        {
+            yield return value;
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ModernWpf.Converters;
-using ModernWpf.Internal;
 using ModernWpf.Native;
 using ModernWpf.Native.Api;
 using System;

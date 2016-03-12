@@ -12,7 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace ModernWpf.Internal
+namespace ModernWpf
 {
     sealed class BorderManager : DependencyObject
     {
