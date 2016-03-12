@@ -31,17 +31,19 @@ namespace ModernWpf.Native.Api
             public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, WindowLong nIndex, IntPtr dwNewLong);
 
 
-            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            //public static extern uint GetClassLong(IntPtr hWnd, ClassLong nIndex);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern uint GetClassLong(IntPtr hWnd, ClassLong nIndex);
 
-            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            //public static extern IntPtr GetClassLongPtr(IntPtr hWnd, ClassLong nIndex);
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr GetClassLongPtr(IntPtr hWnd, ClassLong nIndex);
 
-            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            //public static extern uint SetClassLong(IntPtr hWnd, ClassLong nIndex, uint dwNewLong);
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern uint SetClassLong(IntPtr hWnd, ClassLong nIndex, uint dwNewLong);
 
-            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            //public static extern IntPtr SetClassLongPtr(IntPtr hWnd, ClassLong nIndex, IntPtr dwNewLong);
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr SetClassLongPtr(IntPtr hWnd, ClassLong nIndex, IntPtr dwNewLong);
 
 
             [DllImport("user32.dll", SetLastError = true)]
@@ -52,8 +54,8 @@ namespace ModernWpf.Native.Api
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
             [DllImport("user32.dll")]
             public static extern IntPtr DefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -143,36 +145,36 @@ namespace ModernWpf.Native.Api
 
         #region class long
 
-        ///// <summary>
-        ///// Retrieves the specified value from the WNDCLASSEX structure associated with the specified window.
-        ///// </summary>
-        ///// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-        ///// <param name="nIndex">Index of the value.</param>
-        ///// <returns></returns>
-        //public static IntPtr GetClassLong(IntPtr hWnd, ClassLong nIndex)
-        //{
-        //    if (PlatformInfo.Is64BitProcess)
-        //    {
-        //        return NativeMethods.GetClassLongPtr(hWnd, nIndex);
-        //    }
-        //    return new IntPtr(NativeMethods.GetClassLong(hWnd, nIndex));
-        //}
+        /// <summary>
+        /// Retrieves the specified value from the WNDCLASSEX structure associated with the specified window.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="nIndex">Index of the value.</param>
+        /// <returns></returns>
+        public static IntPtr GetClassLong(IntPtr hWnd, ClassLong nIndex)
+        {
+            if (PlatformInfo.Is64BitProcess)
+            {
+                return NativeMethods.GetClassLongPtr(hWnd, nIndex);
+            }
+            return new IntPtr(NativeMethods.GetClassLong(hWnd, nIndex));
+        }
 
-        ///// <summary>
-        ///// Replaces the specified value at the specified offset in the extra class memory or the WNDCLASSEX structure for the class to which the specified window belongs.
-        ///// </summary>
-        ///// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-        ///// <param name="nIndex">The zero-based offset to the value to be set.</param>
-        ///// <param name="dwNewLong">The replacement value.</param>
-        ///// <returns>If the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.</returns>
-        //public static IntPtr SetClassLong(IntPtr hWnd, ClassLong nIndex, IntPtr dwNewLong)
-        //{
-        //    if (PlatformInfo.Is64BitProcess)
-        //    {
-        //        return NativeMethods.SetClassLongPtr(hWnd, nIndex, dwNewLong);
-        //    }
-        //    return new IntPtr(NativeMethods.SetClassLong(hWnd, nIndex, (uint)dwNewLong));
-        //}
+        /// <summary>
+        /// Replaces the specified value at the specified offset in the extra class memory or the WNDCLASSEX structure for the class to which the specified window belongs.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="nIndex">The zero-based offset to the value to be set.</param>
+        /// <param name="dwNewLong">The replacement value.</param>
+        /// <returns>If the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.</returns>
+        public static IntPtr SetClassLong(IntPtr hWnd, ClassLong nIndex, IntPtr dwNewLong)
+        {
+            if (PlatformInfo.Is64BitProcess)
+            {
+                return NativeMethods.SetClassLongPtr(hWnd, nIndex, dwNewLong);
+            }
+            return new IntPtr(NativeMethods.SetClassLong(hWnd, nIndex, (uint)dwNewLong));
+        }
 
         #endregion
 
@@ -276,18 +278,18 @@ namespace ModernWpf.Native.Api
             return NativeMethods.PostMessage(hWnd, msg, wParam, lParam);
         }
 
-        /// <summary>
-        /// Sends the specified message to a window or windows. 
-        /// </summary>
-        /// <param name="hWnd">A handle to the window whose window procedure will receive the message. </param>
-        /// <param name="msg">The message to be sent.</param>
-        /// <param name="wParam">Additional message-specific information.</param>
-        /// <param name="lParam">Additional message-specific information.</param>
-        /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
-        public static IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
-        {
-            return NativeMethods.SendMessage(hWnd, msg, wParam, lParam);
-        }
+        ///// <summary>
+        ///// Sends the specified message to a window or windows. 
+        ///// </summary>
+        ///// <param name="hWnd">A handle to the window whose window procedure will receive the message. </param>
+        ///// <param name="msg">The message to be sent.</param>
+        ///// <param name="wParam">Additional message-specific information.</param>
+        ///// <param name="lParam">Additional message-specific information.</param>
+        ///// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
+        //public static IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        //{
+        //    return NativeMethods.SendMessage(hWnd, msg, wParam, lParam);
+        //}
 
         /// <summary>
         /// Calls the default window procedure to provide default processing for any window messages that an application does not process. This function ensures that every message is processed. DefWindowProc is called with the same parameters received by the window procedure.

@@ -2,9 +2,11 @@
 using ModernWpf.Native;
 using ModernWpf.Native.Api;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
@@ -212,14 +214,19 @@ namespace ModernWpf.Controls
 
         static void ApplyWin32Stuff(IntPtr hwnd)
         {
+            var cs = User32.GetClassLong(hwnd, ClassLong.GCL_STYLE).ToInt32();
+            // set this to receive WM_LBUTTONDBLCLK
+            cs |= (int)ClassStyles.CS_DBLCLKS;
+            User32.SetClassLong(hwnd, ClassLong.GCL_STYLE, new IntPtr(cs));
+
+
             var wsEx = User32.GetWindowLong(hwnd, WindowLong.GWL_EXSTYLE).ToInt32();
             wsEx |= (int)(WindowStylesEx.WS_EX_TOOLWINDOW | WindowStylesEx.WS_EX_NOACTIVATE);
-
             User32.SetWindowLong(hwnd, WindowLong.GWL_EXSTYLE, new IntPtr(wsEx));
 
 
             var ws = (uint)User32.GetWindowLong(hwnd, WindowLong.GWL_STYLE);
-            // remove these to allow nchittest even when ResizeMode is NoResize
+            // remove these to allow nchittest when ResizeMode is NoResize
             ws &= ~(uint)(WindowStyles.WS_SYSMENU | WindowStyles.WS_OVERLAPPED);
             // todo: fix in 32bit world
             //ws |= (uint)(WindowStyles.WS_POPUP);
@@ -236,53 +243,75 @@ namespace ModernWpf.Controls
             //    SetWindowPosOptions.SWP_NOSIZE);
         }
 
+        // difference to translate between nc_msg & wm_msg
+        const int NC_TO_WM_DIFF = WindowMessage.WM_LBUTTONDOWN - WindowMessage.WM_NCLBUTTONDOWN;
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "hchit")]
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr retVal = IntPtr.Zero;
             if (!handled)
             {
                 var wmsg = (WindowMessage)msg;
-                //Debug.WriteLine(wmsg);
+                Debug.WriteLine(wmsg);
                 switch (wmsg)
                 {
                     case WindowMessage.WM_NCCALCSIZE:
                         handled = true;
                         break;
                     case WindowMessage.WM_NCHITTEST:
-                        ChromeHitTest res = HandleHcHitTest(lParam);
-                        retVal = new IntPtr((int)res);
-                        handled = true;
+                        ChromeHitTest test = HandleHcHitTest(lParam, true);
+                        // Don't actual report this window as NC anymore and just change cursor instead.
+                        // This allows content window to properly get IsMouseOver=false at edges
+                        ChangeCursor(test);
+
+                        //retVal = new IntPtr((int)test);
+                        //handled = true;
                         break;
-                    case WindowMessage.WM_NCRBUTTONDOWN:
-                    case WindowMessage.WM_NCMBUTTONDOWN:
-                    case WindowMessage.WM_NCRBUTTONDBLCLK:
-                    case WindowMessage.WM_NCMBUTTONDBLCLK:
+                    //case WindowMessage.WM_NCRBUTTONDOWN:
+                    //case WindowMessage.WM_NCMBUTTONDOWN:
+                    //case WindowMessage.WM_NCRBUTTONDBLCLK:
+                    //case WindowMessage.WM_NCMBUTTONDBLCLK:
+                    //case WindowMessage.WM_RBUTTONDBLCLK:
+                    //case WindowMessage.WM_MBUTTONDBLCLK:
+                    //case WindowMessage.WM_LBUTTONDBLCLK:
+                    //    handled = true;
+                    //    User32.SetForegroundWindow(_manager.hWndContent);
+                    //    break;
+                    //case WindowMessage.WM_NCLBUTTONDOWN:
+                    //case WindowMessage.WM_NCLBUTTONDBLCLK:
+                    //    handled = true;
+                    //    // pass resizer msg to the content window instead
+                    //    User32.SetForegroundWindow(_manager.hWndContent);
+                    //    User32.SendMessage(_manager.hWndContent, (uint)msg, wParam, lParam);
+                    //    break;
+                    case WindowMessage.WM_RBUTTONDOWN:
+                    case WindowMessage.WM_MBUTTONDOWN:
                     case WindowMessage.WM_RBUTTONDBLCLK:
                     case WindowMessage.WM_MBUTTONDBLCLK:
-                    case WindowMessage.WM_LBUTTONDBLCLK:
                         handled = true;
                         User32.SetForegroundWindow(_manager.hWndContent);
                         break;
-                    case WindowMessage.WM_NCLBUTTONDOWN:
-                    case WindowMessage.WM_NCLBUTTONDBLCLK:
+                    case WindowMessage.WM_LBUTTONDOWN:
+                    case WindowMessage.WM_LBUTTONDBLCLK:
+                        var hitTest = HandleHcHitTest(lParam, false);
+                        //Debug.WriteLine("Should send {0} to content window.", hitTest);
+                        User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
                         handled = true;
-                        // pass resizer msg to the content window instead
-                        User32.SetForegroundWindow(_manager.hWndContent);
-                        User32.SendMessage(_manager.hWndContent, (uint)msg, wParam, lParam);
                         break;
                     case WindowMessage.WM_MOUSEACTIVATE:
-                        var lowword = 0xffff & lParam.ToInt32();
-                        var hchit = (ChromeHitTest)lowword;
+                        //var lowword = 0xffff & lParam.ToInt32();
+                        //var hchit = (ChromeHitTest)lowword;
 
                         // in case of non-resizable window eat this msg
-                        if (hchit == ChromeHitTest.Client)
-                        {
-                            retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
-                        }
-                        else
-                        {
-                            retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATE);
-                        }
+                        //if (hchit == ChromeHitTest.Client)
+                        //{
+                        //    retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
+                        //}
+                        //else
+                        //{
+                        retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATE);
+                        //}
                         handled = true;
                         break;
                     case WindowMessage.WM_GETMINMAXINFO:
@@ -301,13 +330,39 @@ namespace ModernWpf.Controls
             return retVal;
         }
 
-        private ChromeHitTest HandleHcHitTest(IntPtr lParam)
+        private void ChangeCursor(ChromeHitTest test)
+        {
+            var cs = this.Cursor;
+            switch (test)
+            {
+                case ChromeHitTest.Left:
+                case ChromeHitTest.Right:
+                    cs = Cursors.SizeWE;
+                    break;
+                case ChromeHitTest.Top:
+                case ChromeHitTest.Bottom:
+                    cs = Cursors.SizeNS;
+                    break;
+                case ChromeHitTest.TopLeft:
+                case ChromeHitTest.BottomRight:
+                    cs = Cursors.SizeNWSE;
+                    break;
+                case ChromeHitTest.TopRight:
+                case ChromeHitTest.BottomLeft:
+                    cs = Cursors.SizeNESW;
+                    break;
+            }
+            if (cs != Cursor) { Cursor = cs; }
+        }
+
+        private ChromeHitTest HandleHcHitTest(IntPtr lParam, bool isPointNC)
         {
             ChromeHitTest res = ChromeHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||
                 _manager.ContentWindow.ResizeMode == ResizeMode.CanResize)
             {
-                var pt = PointFromScreen(lParam.ToPoint());
+                var pt = (Point)lParam.ToPoint();
+                if (isPointNC) { pt = PointFromScreen(pt); }
                 int diagSize = (int)(2 * PadSize);
                 switch (Side)
                 {
@@ -318,7 +373,7 @@ namespace ModernWpf.Controls
                         break;
                     case BorderSide.Top:
                         if (pt.X <= diagSize) { res = ChromeHitTest.TopLeft; }
-                        else if (pt.X >= Width - diagSize) { res = ChromeHitTest.BottomRight; }
+                        else if (pt.X >= Width - diagSize) { res = ChromeHitTest.TopRight; }
                         else { res = ChromeHitTest.Top; }
                         break;
                     case BorderSide.Right:

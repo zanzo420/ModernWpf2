@@ -72,6 +72,7 @@
     <Compile Include="EditorCommands.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\BorderManager.cs" />
+    <Compile Include="Native\ClassLong.cs" />
     <Compile Include="Internal\Controls\BorderSide.cs" />
     <Compile Include="Internal\Controls\BorderWindow.cs" />
     <Compile Include="Internal\Converters\BorderBrushConverter.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Native\AppBarMessage.cs" />
     <Compile Include="Native\BasicValues.cs" />
     <Compile Include="Native\Api\Dwmapi.cs" />
+    <Compile Include="Native\ClassStyles.cs" />
     <Compile Include="Native\FileAttributes.cs" />
     <Compile Include="Native\HResult.cs" />
     <Compile Include="Native\IntPtrExtensions.cs" />
