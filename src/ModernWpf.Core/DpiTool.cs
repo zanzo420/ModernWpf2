@@ -108,7 +108,7 @@ namespace ModernWpf
         /// <summary>
         /// Attached property on a window to store its current DPI value.
         /// </summary>
-        private static readonly DependencyProperty WindowDpiProperty =
+        internal static readonly DependencyProperty WindowDpiProperty =
             DependencyProperty.RegisterAttached("WindowDpi", typeof(int), typeof(DpiTool),
             new FrameworkPropertyMetadata(96, FrameworkPropertyMetadataOptions.Inherits));
 

@@ -62,12 +62,12 @@
     <Compile Include="Controls\TitleBar.cs" />
     <Compile Include="Converters\BorderBrushConverter.cs" />
     <Compile Include="Converters\EnumValueConverter.cs" />
+    <Compile Include="Converters\TextFormattingModeConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="DpiTool.cs" />
     <Compile Include="Internal\BorderManager.cs" />
-    <Compile Include="Internal\EventUtil.cs" />
     <Compile Include="Internal\RelayCommand.cs" />
-    <Compile Include="MouseEvents.cs" />
+    <Compile Include="MouseTool.cs" />
     <Compile Include="Native\Api\Gdi32.cs" />
     <Compile Include="Native\Api\IconReader.cs" />
     <Compile Include="Native\Api\Shell32.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Native\WindowStyles.cs" />
     <Compile Include="Native\WindowStylesEx.cs" />
     <Compile Include="ChromeHitTest.cs" />
+    <Compile Include="TextTool.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

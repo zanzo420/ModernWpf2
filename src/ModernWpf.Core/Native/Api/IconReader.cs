@@ -106,53 +106,53 @@ namespace ModernWpf.Native.Api
             return info;
         }
         
-        /// <summary>
-        /// Used to access system folder icons.
-        /// </summary>
-        /// <param name="size">Specify large or small icons.</param>
-        /// <param name="folderType">Specify open or closed FolderType.</param>
-        /// <returns>System.Drawing.Icon</returns>
-        public static ImageSource GetFolderIcon(IconSize size, FolderType folderType)
-        {
-            var info = GetFolderIconSHInfo(size, folderType);
+        ///// <summary>
+        ///// Used to access system folder icons.
+        ///// </summary>
+        ///// <param name="size">Specify large or small icons.</param>
+        ///// <param name="folderType">Specify open or closed FolderType.</param>
+        ///// <returns>System.Drawing.Icon</returns>
+        //public static ImageSource GetFolderIcon(IconSize size, FolderType folderType)
+        //{
+        //    var info = GetFolderIconSHInfo(size, folderType);
 
-            try
-            {
-                return GetImageSource(info.hIcon);
-            }
-            finally
-            {
-                if (info.hIcon != IntPtr.Zero)
-                {
-                    User32.DestroyIcon(info.hIcon);
-                }
-            }
-        }
+        //    try
+        //    {
+        //        return GetImageSource(info.hIcon);
+        //    }
+        //    finally
+        //    {
+        //        if (info.hIcon != IntPtr.Zero)
+        //        {
+        //            User32.DestroyIcon(info.hIcon);
+        //        }
+        //    }
+        //}
 
-        private static SHFILEINFO GetFolderIconSHInfo(IconSize size, FolderType folderType)
-        {
-            // Need to add size check, although errors generated at present!
-            var flags = ShellFileFlags.SHGFI_ICON | ShellFileFlags.SHGFI_USEFILEATTRIBUTES;
+        //private static SHFILEINFO GetFolderIconSHInfo(IconSize size, FolderType folderType)
+        //{
+        //    // Need to add size check, although errors generated at present!
+        //    var flags = ShellFileFlags.SHGFI_ICON | ShellFileFlags.SHGFI_USEFILEATTRIBUTES;
 
-            if (FolderType.Open == folderType)
-            {
-                flags |= ShellFileFlags.SHGFI_OPENICON;
-            }
+        //    if (FolderType.Open == folderType)
+        //    {
+        //        flags |= ShellFileFlags.SHGFI_OPENICON;
+        //    }
 
-            if (IconSize.Small == size)
-            {
-                flags |= ShellFileFlags.SHGFI_SMALLICON;
-            }
-            else
-            {
-                flags |= ShellFileFlags.SHGFI_LARGEICON;
-            }
+        //    if (IconSize.Small == size)
+        //    {
+        //        flags |= ShellFileFlags.SHGFI_SMALLICON;
+        //    }
+        //    else
+        //    {
+        //        flags |= ShellFileFlags.SHGFI_LARGEICON;
+        //    }
 
-            // Get the folder icon
-            var info = new SHFILEINFO();
-            Shell32.SHGetFileInfo(Environment.GetFolderPath(Environment.SpecialFolder.System), FileAttributes.FILE_ATTRIBUTE_DIRECTORY, ref info, (uint)Marshal.SizeOf(info), flags);
-            return info;
-        }
+        //    // Get the folder icon
+        //    var info = new SHFILEINFO();
+        //    Shell32.SHGetFileInfo(Environment.GetFolderPath(Environment.SpecialFolder.System), FileAttributes.FILE_ATTRIBUTE_DIRECTORY, ref info, (uint)Marshal.SizeOf(info), flags);
+        //    return info;
+        //}
 
         
         private static ImageSource GetImageSource(IntPtr hIcon)

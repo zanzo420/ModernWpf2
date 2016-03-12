@@ -10,7 +10,7 @@ using System.Windows.Markup;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ModernWpf.Core")]
-[assembly: AssemblyDescription("Contains the classes for making blank bordered window, per-monitor dpi handling, and extra properties/events for Framework 4.0+.")]
+[assembly: AssemblyDescription("Contains the classes for making blank bordered window, per-monitor dpi handling, and extra attached properties/events for WPF 4.0+.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ModernWpf.Core")]
 [assembly: AssemblyTrademark("")]

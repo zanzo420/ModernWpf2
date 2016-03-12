@@ -10,7 +10,7 @@ namespace ModernWpf.Native
     /// Contains information about a file object.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    public struct SHFILEINFO
+    struct SHFILEINFO
     {
         /// <summary>
         /// A handle to the icon that represents the file. 

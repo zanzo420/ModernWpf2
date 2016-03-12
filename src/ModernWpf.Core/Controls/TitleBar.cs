@@ -20,30 +20,31 @@ namespace ModernWpf.Controls
     /// <summary>
     /// A UI piece for window title bar (icon, title, min/max/restore buttons).
     /// </summary>
-    [TemplatePart(Name = PART_CloseButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PART_MinButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PART_MaxButton, Type = typeof(TitleBar))]
-    [TemplatePart(Name = PART_RestoreButton, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartCloseButton, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartMinButton, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartMaxButton, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartRestoreButton, Type = typeof(TitleBar))]
     public class TitleBar : Control
     {
         /// <summary>
         /// Name of the close button in template.
         /// </summary>
-        protected const string PART_CloseButton = "PART_CloseButton";
+        protected const string PartCloseButton = "PART_CloseButton";
         /// <summary>
         /// Name of the minimize button in template.
         /// </summary>
-        protected const string PART_MinButton = "PART_MinButton";
+        protected const string PartMinButton = "PART_MinButton";
         /// <summary>
         /// Name of the maximize button in template.
         /// </summary>
-        protected const string PART_MaxButton = "PART_MaxButton";
+        protected const string PartMaxButton = "PART_MaxButton";
         /// <summary>
         /// Name of the restore button in template.
         /// </summary>
-        protected const string PART_RestoreButton = "PART_RestoreButton";
+        protected const string PartRestoreButton = "PART_RestoreButton";
 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static TitleBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TitleBar), new FrameworkPropertyMetadata(typeof(TitleBar)));
@@ -257,10 +258,10 @@ namespace ModernWpf.Controls
 
             RootWindow = this.FindParentInVisualTree<Window>();
 
-            AttachCommand(PART_CloseButton, CloseCommand);
-            AttachCommand(PART_MinButton, MinimizeCommand);
-            AttachCommand(PART_RestoreButton, RestoreCommand);
-            AttachCommand(PART_MaxButton, MaximizeCommand);
+            AttachCommand(PartCloseButton, CloseCommand);
+            AttachCommand(PartMinButton, MinimizeCommand);
+            AttachCommand(PartRestoreButton, RestoreCommand);
+            AttachCommand(PartMaxButton, MaximizeCommand);
         }
 
         private void AttachCommand(string partName, ICommand command)

@@ -12,6 +12,7 @@ namespace ModernWpf.Controls
         static readonly ImageSource __smallIcon;
         static readonly ImageSource __largeIcon;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static AppIconImage()
         {
             StretchProperty.OverrideMetadata(typeof(AppIconImage), new FrameworkPropertyMetadata(Stretch.None));

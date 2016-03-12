@@ -8,13 +8,13 @@ namespace ModernWpf
     /// <summary>
     /// Contains extra mouse events when using the modern <see cref="Chrome"/> on a <see cref="Window"/>.
     /// </summary>
-    public static class MouseEvents
+    public static class MouseTool
     {
         /// <summary>
         /// Identifies the PreviewMouseHWheel event.
         /// </summary>
         public static readonly RoutedEvent PreviewMouseHWheelEvent =
-            EventManager.RegisterRoutedEvent("PreviewMouseHWheel", RoutingStrategy.Tunnel, typeof(MouseWheelEventHandler), typeof(MouseEvents));
+            EventManager.RegisterRoutedEvent("PreviewMouseHWheel", RoutingStrategy.Tunnel, typeof(MouseWheelEventHandler), typeof(MouseTool));
 
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace ModernWpf
         /// Identifies the MouseHWheel event.
         /// </summary>
         public static readonly RoutedEvent MouseHWheelEvent =
-            EventManager.RegisterRoutedEvent("MouseHWheel", RoutingStrategy.Bubble, typeof(MouseWheelEventHandler), typeof(MouseEvents));
+            EventManager.RegisterRoutedEvent("MouseHWheel", RoutingStrategy.Bubble, typeof(MouseWheelEventHandler), typeof(MouseTool));
 
         /// <summary>
         /// Adds a handler to the MouseHWheel event.
