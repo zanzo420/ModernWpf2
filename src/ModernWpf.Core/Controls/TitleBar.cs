@@ -11,7 +11,7 @@ using System.Windows.Media;
 namespace ModernWpf.Controls
 {
     /// <summary>
-    /// A UI piece for window title bar (icon, title, min/max/restore buttons).
+    /// A UI piece for window title bar (icon, title, min/max/restore buttons, and custom content).
     /// </summary>
     [TemplatePart(Name = PartCloseButtonName, Type = typeof(TitleBar))]
     [TemplatePart(Name = PartMinButtonName, Type = typeof(TitleBar))]
@@ -49,22 +49,38 @@ namespace ModernWpf.Controls
 
 
 
+        /// <summary>
+        /// Gets or sets the custom content that appears before the title text.
+        /// </summary>
+        /// <value>
+        /// The content before the title text.
+        /// </value>
         public object BeforeTitleContent
         {
             get { return (object)GetValue(BeforeTitleContentProperty); }
             set { SetValue(BeforeTitleContentProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="BeforeTitleContent"/>.
+        /// </summary>
         public static readonly DependencyProperty BeforeTitleContentProperty =
             DependencyProperty.Register("BeforeTitleContent", typeof(object), typeof(TitleBar), new FrameworkPropertyMetadata(null));
 
 
-
-
+        /// <summary>
+        /// Gets or sets the custom content that appears after the title text.
+        /// </summary>
+        /// <value>
+        /// The content after the title text.
+        /// </value>
         public object AfterTitleContent
         {
             get { return (object)GetValue(AfterTitleContentProperty); }
             set { SetValue(AfterTitleContentProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="AfterTitleContent"/>.
+        /// </summary>
         public static readonly DependencyProperty AfterTitleContentProperty =
             DependencyProperty.Register("AfterTitleContent", typeof(object), typeof(TitleBar), new FrameworkPropertyMetadata(null));
 
@@ -81,6 +97,9 @@ namespace ModernWpf.Controls
             get { return (Style)GetValue(ControlButtonStyleProperty); }
             set { SetValue(ControlButtonStyleProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="ControlButtonStyle"/>.
+        /// </summary>
         public static readonly DependencyProperty ControlButtonStyleProperty =
             DependencyProperty.Register("ControlButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
 
@@ -95,12 +114,15 @@ namespace ModernWpf.Controls
             get { return (Style)GetValue(CloseButtonStyleProperty); }
             set { SetValue(CloseButtonStyleProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="CloseButtonStyle"/>.
+        /// </summary>
         public static readonly DependencyProperty CloseButtonStyleProperty =
             DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
 
 
         /// <summary>
-        /// Gets the root window.
+        /// Gets the associated root window.
         /// </summary>
         /// <value>
         /// The root window.
@@ -145,7 +167,12 @@ namespace ModernWpf.Controls
         }
 
 
-
+        /// <summary>
+        /// Gets a value indicating whether the associated window is active.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the associated window is active; otherwise, <c>false</c>.
+        /// </value>
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
@@ -155,42 +182,72 @@ namespace ModernWpf.Controls
             DependencyProperty.Register("IsActive", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
 
 
-
-
-
+        /// <summary>
+        /// Gets or sets the inactive background.
+        /// </summary>
+        /// <value>
+        /// The inactive background.
+        /// </value>
         public Brush InactiveBackground
         {
             get { return (Brush)GetValue(InactiveBackgroundProperty); }
             set { SetValue(InactiveBackgroundProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="InactiveBackground"/>.
+        /// </summary>
         public static readonly DependencyProperty InactiveBackgroundProperty =
             DependencyProperty.Register("InactiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionBrush));
 
-
+        /// <summary>
+        /// Gets or sets the inactive foreground.
+        /// </summary>
+        /// <value>
+        /// The inactive foreground.
+        /// </value>
         public Brush InactiveForeground
         {
             get { return (Brush)GetValue(InactiveForegroundProperty); }
             set { SetValue(InactiveForegroundProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="InactiveForeground"/>.
+        /// </summary>
         public static readonly DependencyProperty InactiveForegroundProperty =
             DependencyProperty.Register("InactiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionTextBrush));
 
 
-
+        /// <summary>
+        /// Gets or sets the active background.
+        /// </summary>
+        /// <value>
+        /// The active background.
+        /// </value>
         public Brush ActiveBackground
         {
             get { return (Brush)GetValue(ActiveBackgroundProperty); }
             set { SetValue(ActiveBackgroundProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="ActiveBackground"/>.
+        /// </summary>
         public static readonly DependencyProperty ActiveBackgroundProperty =
             DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(new SolidColorBrush(Dwmapi.GetWindowColor())));
 
-
+        /// <summary>
+        /// Gets or sets the active foreground.
+        /// </summary>
+        /// <value>
+        /// The active foreground.
+        /// </value>
         public Brush ActiveForeground
         {
             get { return (Brush)GetValue(ActiveForegroundProperty); }
             set { SetValue(ActiveForegroundProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="ActiveForeground"/>.
+        /// </summary>
         public static readonly DependencyProperty ActiveForegroundProperty =
             DependencyProperty.Register("ActiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ActiveCaptionTextBrush));
 
@@ -206,35 +263,65 @@ namespace ModernWpf.Controls
             get { return (bool)GetValue(ShowIconProperty); }
             set { SetValue(ShowIconProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="ShowIcon"/>.
+        /// </summary>
         public static readonly DependencyProperty ShowIconProperty =
             DependencyProperty.Register("ShowIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
+        
 
-
-        public bool ShowTitle
-        {
-            get { return (bool)GetValue(ShowTitleProperty); }
-            set { SetValue(ShowTitleProperty, value); }
-        }
-        public static readonly DependencyProperty ShowTitleProperty =
-            DependencyProperty.Register("ShowTitle", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
-
-
-        public bool ShowControlBox
-        {
-            get { return (bool)GetValue(ShowControlBoxProperty); }
-            set { SetValue(ShowControlBoxProperty, value); }
-        }
-        public static readonly DependencyProperty ShowControlBoxProperty =
-            DependencyProperty.Register("ShowControlBox", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
-
-
+        /// <summary>
+        /// Gets or sets a value indicating whether to show large app icon.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> to show large app icon; otherwise, <c>false</c>.
+        /// </value>
         public bool LargeIcon
         {
             get { return (bool)GetValue(LargeIconProperty); }
             set { SetValue(LargeIconProperty, value); }
         }
+        /// <summary>
+        /// The dependency property for <see cref="LargeIcon"/>.
+        /// </summary>
         public static readonly DependencyProperty LargeIconProperty =
             DependencyProperty.Register("LargeIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
+
+        
+        /// <summary>
+        /// Gets or sets a value indicating whether to show title text.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> to show title; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowTitle
+        {
+            get { return (bool)GetValue(ShowTitleProperty); }
+            set { SetValue(ShowTitleProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ShowTitle"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowTitleProperty =
+            DependencyProperty.Register("ShowTitle", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
+
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show window control buttons.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> to show window control buttons; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowControlBox
+        {
+            get { return (bool)GetValue(ShowControlBoxProperty); }
+            set { SetValue(ShowControlBoxProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ShowControlBox"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowControlBoxProperty =
+            DependencyProperty.Register("ShowControlBox", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
 
 
         #endregion
@@ -244,6 +331,9 @@ namespace ModernWpf.Controls
             CommandManager.InvalidateRequerySuggested();
         }
 
+        /// <summary>
+        /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

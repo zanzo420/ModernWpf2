@@ -7,6 +7,10 @@ using System.Windows.Media;
 
 namespace ModernWpf.Controls
 {
+    /// <summary>
+    /// An image that only displays the current application's icon in small or large format.
+    /// </summary>
+    /// <seealso cref="System.Windows.Controls.Image" />
     public sealed class AppIconImage : Image
     {
         static readonly ImageSource __smallIcon;
@@ -39,18 +43,30 @@ namespace ModernWpf.Controls
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppIconImage"/> class.
+        /// </summary>
         public AppIconImage()
         {
             Source = __smallIcon;
         }
 
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to show large icon.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> to show large icon; otherwise, <c>false</c>.
+        /// </value>
         public bool LargeIcon
         {
             get { return (bool)GetValue(LargeIconProperty); }
             set { SetValue(LargeIconProperty, value); }
         }
 
+        /// <summary>
+        /// The dependency property for <see cref="LargeIcon"/>,
+        /// </summary>
         public static readonly DependencyProperty LargeIconProperty =
             DependencyProperty.Register("LargeIcon", typeof(bool), typeof(AppIconImage), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(LargeIcon_Changed)));
 

@@ -48,7 +48,7 @@ namespace ModernWpf
 
         /// <summary>
         /// Dependency property that automatically sets the TextOptions.TextFormattingMode when set on
-        /// a <see cref="TextBlock"/>.
+        /// a <see cref="TextBlock"/>. 
         /// </summary>
         public static readonly DependencyProperty AutoCrispProperty =
             DependencyProperty.RegisterAttached("AutoCrisp", typeof(bool), typeof(TextTool), new PropertyMetadata(false, new PropertyChangedCallback(AutoCrisp_Changed)));

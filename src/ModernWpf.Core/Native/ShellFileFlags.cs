@@ -6,7 +6,7 @@ using System.Text;
 namespace ModernWpf.Native
 {
     /// <summary>
-    /// Flags for <see cref="Shell32.SHGetFileInfo"/>.
+    /// Flags for <see cref="Api.Shell32.SHGetFileInfo"/>.
     /// </summary>
     [Flags]
     enum ShellFileFlags : uint

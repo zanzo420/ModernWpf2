@@ -7,7 +7,7 @@
         xmlns:modern="http://modernwpf"
         mc:Ignorable="d"
         x:Name="theWindow"
-        Title="Chrome With TitleBar" Height="300" Width="360"
+        Title="Chrome With TitleBar" Height="300" Width="460"
         ResizeMode="CanResizeWithGrip"
         modern:DpiTool.AutoDpiScale="True"
         modern:DpiTool.DpiChange="Window_DpiChange">
@@ -30,12 +30,19 @@
 
         <modern:TitleBar x:Name="titleBar">
             <modern:TitleBar.BeforeTitleContent>
-                <StackPanel x:Name="leftContent" Orientation="Horizontal">
+                <StackPanel x:Name="leftContent" Orientation="Horizontal"
+                            Visibility="{Binding ElementName=leftBtn, Path=IsChecked, Converter={x:Static modern:BoolVisibleConverter.Instance}}">
                     <Button Style="{Binding RelativeSource={RelativeSource AncestorType={x:Type modern:TitleBar}, Mode=FindAncestor}, Path=ControlButtonStyle}">
                         <TextBlock FontFamily="Wingdings" Text="&#223;"></TextBlock>
                     </Button>
                 </StackPanel>
             </modern:TitleBar.BeforeTitleContent>
+            <modern:TitleBar.AfterTitleContent>
+                <StackPanel x:Name="rightContent" Orientation="Horizontal"
+                            Visibility="{Binding ElementName=rightBtn, Path=IsChecked, Converter={x:Static modern:BoolVisibleConverter.Instance}}">
+                    <TextBox Width="100" Text="A textbox here" VerticalContentAlignment="Center"></TextBox>
+                </StackPanel>
+            </modern:TitleBar.AfterTitleContent>
         </modern:TitleBar>
 
         <StackPanel Grid.Row="1" Margin="8">
@@ -52,7 +59,8 @@
             </StackPanel>
 
             <StackPanel Margin="8" Orientation="Horizontal" HorizontalAlignment="Center">
-                <ToggleButton Content="Left Custom Content" x:Name="leftBtn" Click="leftBtn_Click" IsChecked="True"></ToggleButton>
+                <ToggleButton Content="Left Custom Content" x:Name="leftBtn" IsChecked="True"></ToggleButton>
+                <ToggleButton Content="Right Custom Content" x:Name="rightBtn" IsChecked="True"></ToggleButton>
             </StackPanel>
         </StackPanel>
     </Grid>
