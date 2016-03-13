@@ -25,6 +25,12 @@ namespace BasicRunner
         public LaunchWindow()
         {
             InitializeComponent();
+            Loaded += LaunchWindow_Loaded;
+        }
+
+        private void LaunchWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnChromeTitle_Click(null, null);
         }
 
         private void btnChromeOnly_Click(object sender, RoutedEventArgs e)
@@ -40,6 +46,11 @@ namespace BasicRunner
         private void btnChromeTitle_Click(object sender, RoutedEventArgs e)
         {
             new ChromeWithTitleBarWindow { Owner = this }.Show();
+        }
+
+        private void btnMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            new MaterialWindow { Owner = this }.Show();
         }
     }
 }

@@ -1,0 +1,48 @@
+﻿<Window x:Class="BasicRunner.MaterialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BasicRunner"
+        xmlns:modern="http://modernwpf"
+        mc:Ignorable="d"
+        x:Name="theWindow"
+        Title="Chrome With 3rd Party Material Theme" Height="300" Width="460"
+        ResizeMode="CanResizeWithGrip" 
+
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+
+        modern:DpiTool.AutoDpiScale="True"
+        modern:DpiTool.DpiChange="Window_DpiChange">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <modern:Chrome.Chrome>
+        <modern:Chrome></modern:Chrome>
+    </modern:Chrome.Chrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <modern:TitleBar x:Name="titleBar">
+        </modern:TitleBar>
+
+        <StackPanel Grid.Row="1" Margin="8">
+            <TextBlock Text="This window demonstrates using core Chrome + external theming lib (ButchersBoy)."
+                       TextWrapping="Wrap"></TextBlock>
+
+        </StackPanel>
+    </Grid>
+</Window>

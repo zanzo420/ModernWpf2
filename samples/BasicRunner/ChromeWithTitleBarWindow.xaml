@@ -32,7 +32,7 @@
             <modern:TitleBar.BeforeTitleContent>
                 <StackPanel x:Name="leftContent" Orientation="Horizontal"
                             Visibility="{Binding ElementName=leftBtn, Path=IsChecked, Converter={x:Static modern:BoolVisibleConverter.Instance}}">
-                    <Button Style="{Binding RelativeSource={RelativeSource AncestorType={x:Type modern:TitleBar}, Mode=FindAncestor}, Path=ControlButtonStyle}">
+                    <Button>
                         <TextBlock FontFamily="Wingdings" Text="&#223;"></TextBlock>
                     </Button>
                 </StackPanel>

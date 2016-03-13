@@ -299,7 +299,7 @@ namespace ModernWpf.Controls
                     //    handled = true;
                     //    break;
                     case WindowMessage.WM_NCHITTEST:
-                        ChromeHitTest test = HandleHcHitTest(hwnd, lParam, true);
+                        ChromeHitTest test = HandleHcHitTest(lParam, true);
                         // Don't actual report this window as NC anymore and just change cursor instead.
                         // This allows content window to properly get IsMouseOver=false at edges
                         if (Mouse.LeftButton != MouseButtonState.Pressed)
@@ -336,7 +336,7 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_LBUTTONDOWN:
                     case WindowMessage.WM_LBUTTONDBLCLK:
-                        var hitTest = HandleHcHitTest(hwnd, lParam, false);
+                        var hitTest = HandleHcHitTest(lParam, false);
                         //Debug.WriteLine("Should send {0} to content window.", hitTest);
                         if (hitTest != ChromeHitTest.Client)
                         {
@@ -403,7 +403,7 @@ namespace ModernWpf.Controls
             if (cs != Cursor) { Cursor = cs; }
         }
 
-        private ChromeHitTest HandleHcHitTest(IntPtr hwnd, IntPtr lParam, bool isPointNC)
+        private ChromeHitTest HandleHcHitTest(IntPtr lParam, bool isPointNC)
         {
             ChromeHitTest res = ChromeHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||

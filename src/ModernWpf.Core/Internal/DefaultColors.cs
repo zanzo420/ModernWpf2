@@ -8,7 +8,7 @@ namespace ModernWpf.Internal
 {
     static class DefaultColors
     {
-        static Brush MakeBrush(string htmlColor)
+        public static Brush MakeBrush(string htmlColor)
         {
             var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(htmlColor));
             brush.Freeze();

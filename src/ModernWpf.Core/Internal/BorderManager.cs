@@ -474,12 +474,6 @@ namespace ModernWpf
             }
         }
 
-        struct TranslateHolder
-        {
-            public Rect Rect;
-
-        }
-
         /// <summary>
         /// translate screen pixels to wpf units for high-dpi scaling.
         /// </summary>

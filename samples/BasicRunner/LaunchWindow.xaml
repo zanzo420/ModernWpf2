@@ -15,6 +15,8 @@
             <Button  Margin="8" Content="Basic Chrome Only" x:Name="btnChromeOnly" Click="btnChromeOnly_Click"></Button>
 
             <Button  Margin="8" Content="Basic Chrome With Title" x:Name="btnChromeTitle" Click="btnChromeTitle_Click"></Button>
+
+            <!--<Button  Margin="8" Content="Basic Chrome Material Lib" x:Name="btnMaterial" Click="btnMaterial_Click"></Button>-->
         </StackPanel>
     </Grid>
 </Window>

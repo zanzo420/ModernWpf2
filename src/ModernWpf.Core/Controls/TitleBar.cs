@@ -14,12 +14,27 @@ namespace ModernWpf.Controls
     /// <summary>
     /// A UI piece for window title bar (icon, title, min/max/restore buttons, and custom content).
     /// </summary>
+    [TemplatePart(Name = PartIconName, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartTitleName, Type = typeof(TitleBar))]
+    [TemplatePart(Name = PartControlBoxName, Type = typeof(TitleBar))]
     [TemplatePart(Name = PartCloseButtonName, Type = typeof(TitleBar))]
     [TemplatePart(Name = PartMinButtonName, Type = typeof(TitleBar))]
     [TemplatePart(Name = PartMaxButtonName, Type = typeof(TitleBar))]
     [TemplatePart(Name = PartRestoreButtonName, Type = typeof(TitleBar))]
     public class TitleBar : Control
     {
+        /// <summary>
+        /// Name of the icon Image in template.
+        /// </summary>
+        protected const string PartIconName = "PART_Icon";
+        /// <summary>
+        /// Name of the title TextBlock in template.
+        /// </summary>
+        protected const string PartTitleName = "PART_Title";
+        /// <summary>
+        /// Name of the control button box panel in template.
+        /// </summary>
+        protected const string PartControlBoxName = "PART_ControlBox";
         /// <summary>
         /// Name of the close button in template.
         /// </summary>
@@ -84,43 +99,120 @@ namespace ModernWpf.Controls
         /// </summary>
         public static readonly DependencyProperty AfterTitleContentProperty =
             DependencyProperty.Register("AfterTitleContent", typeof(object), typeof(TitleBar), new FrameworkPropertyMetadata(null));
-
-
+        
 
         /// <summary>
-        /// Gets or sets the control button style.
+        /// Gets or sets the button background.
         /// </summary>
         /// <value>
-        /// The control button style.
+        /// The button background.
         /// </value>
-        public Style ControlButtonStyle
+        public Brush ButtonBackground
         {
-            get { return (Style)GetValue(ControlButtonStyleProperty); }
-            set { SetValue(ControlButtonStyleProperty, value); }
+            get { return (Brush)GetValue(ButtonBackgroundProperty); }
+            set { SetValue(ButtonBackgroundProperty, value); }
         }
         /// <summary>
-        /// The dependency property for <see cref="ControlButtonStyle"/>.
+        /// The dependency property for <see cref="ButtonBackground"/>.
         /// </summary>
-        public static readonly DependencyProperty ControlButtonStyleProperty =
-            DependencyProperty.Register("ControlButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty ButtonBackgroundProperty =
+            DependencyProperty.Register("ButtonBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(Brushes.Transparent));
+
+
 
         /// <summary>
-        /// Gets or sets the close button style.
+        /// Gets or sets the button foreground.
         /// </summary>
         /// <value>
-        /// The control button style.
+        /// The button foreground.
         /// </value>
-        public Style CloseButtonStyle
+        public Brush ButtonForeground
         {
-            get { return (Style)GetValue(CloseButtonStyleProperty); }
-            set { SetValue(CloseButtonStyleProperty, value); }
+            get { return (Brush)GetValue(ButtonForegroundProperty); }
+            set { SetValue(ButtonForegroundProperty, value); }
         }
         /// <summary>
-        /// The dependency property for <see cref="CloseButtonStyle"/>.
+        /// The dependency property for <see cref="ButtonForeground"/>.
         /// </summary>
-        public static readonly DependencyProperty CloseButtonStyleProperty =
-            DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(TitleBar), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty ButtonForegroundProperty =
+            DependencyProperty.Register("ButtonForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
 
+
+
+
+        /// <summary>
+        /// Gets or sets the button hover background.
+        /// </summary>
+        /// <value>
+        /// The button hover background.
+        /// </value>
+        public Brush ButtonHoverBackground
+        {
+            get { return (Brush)GetValue(ButtonHoverBackgroundProperty); }
+            set { SetValue(ButtonHoverBackgroundProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ButtonHoverBackground"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonHoverBackgroundProperty =
+            DependencyProperty.Register("ButtonHoverBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.MakeBrush("#40dddddd")));
+
+
+
+        /// <summary>
+        /// Gets or sets the button hover foreground.
+        /// </summary>
+        /// <value>
+        /// The button hover foreground.
+        /// </value>
+        public Brush ButtonHoverForeground
+        {
+            get { return (Brush)GetValue(ButtonHoverForegroundProperty); }
+            set { SetValue(ButtonHoverForegroundProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ButtonHoverForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonHoverForegroundProperty =
+            DependencyProperty.Register("ButtonHoverForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
+
+
+
+        /// <summary>
+        /// Gets or sets the button pressed background.
+        /// </summary>
+        /// <value>
+        /// The button pressed background.
+        /// </value>
+        public Brush ButtonPressedBackground
+        {
+            get { return (Brush)GetValue(ButtonPressedBackgroundProperty); }
+            set { SetValue(ButtonPressedBackgroundProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ButtonPressedBackground"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonPressedBackgroundProperty =
+            DependencyProperty.Register("ButtonPressedBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.MakeBrush("#60dddddd")));
+
+
+        /// <summary>
+        /// Gets or sets the button pressed foreground.
+        /// </summary>
+        /// <value>
+        /// The button pressed foreground.
+        /// </value>
+        public Brush ButtonPressedForeground
+        {
+            get { return (Brush)GetValue(ButtonPressedForegroundProperty); }
+            set { SetValue(ButtonPressedForegroundProperty, value); }
+        }
+        /// <summary>
+        /// The dependency property for <see cref="ButtonPressedForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonPressedForegroundProperty =
+            DependencyProperty.Register("ButtonPressedForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
+        
 
         /// <summary>
         /// Gets the associated root window.
@@ -181,7 +273,7 @@ namespace ModernWpf.Controls
 
         static readonly DependencyProperty IsActiveProperty =
             DependencyProperty.Register("IsActive", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
-        
+
 
         /// <summary>
         /// Gets or sets the inactive background.
@@ -216,7 +308,7 @@ namespace ModernWpf.Controls
         /// </summary>
         public static readonly DependencyProperty InactiveForegroundProperty =
             DependencyProperty.Register("InactiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleInactiveForeground));
-        
+
 
         /// <summary>
         /// Gets or sets the active background.
@@ -269,7 +361,7 @@ namespace ModernWpf.Controls
         /// </summary>
         public static readonly DependencyProperty ShowIconProperty =
             DependencyProperty.Register("ShowIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
-        
+
 
         /// <summary>
         /// Gets or sets a value indicating whether to show large app icon.
@@ -288,7 +380,7 @@ namespace ModernWpf.Controls
         public static readonly DependencyProperty LargeIconProperty =
             DependencyProperty.Register("LargeIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
 
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether to show title text.
         /// </summary>
