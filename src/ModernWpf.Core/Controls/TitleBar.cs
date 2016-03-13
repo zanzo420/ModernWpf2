@@ -223,11 +223,11 @@ namespace ModernWpf.Controls
         public Window RootWindow
         {
             get { return (Window)GetValue(RootWindowProperty); }
-            private set { SetValue(RootWindowProperty, value); }
+            private set { SetValue(RootWindowPropertyKey, value); }
         }
-        static readonly DependencyProperty RootWindowProperty =
-            DependencyProperty.Register("RootWindow", typeof(Window), typeof(TitleBar), new FrameworkPropertyMetadata(null, WindowChanged));
-
+        static readonly DependencyPropertyKey RootWindowPropertyKey =
+            DependencyProperty.RegisterReadOnly("RootWindow", typeof(Window), typeof(TitleBar), new FrameworkPropertyMetadata(null, WindowChanged));
+        static readonly DependencyProperty RootWindowProperty = RootWindowPropertyKey.DependencyProperty;
 
         static void WindowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

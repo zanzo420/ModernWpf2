@@ -114,8 +114,8 @@
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="DisableTarget" Value="False"/>
-        <Setter Property="CloseOnEscapeKey" Value="True"/>
-        <Setter Property="CloseOnContainerClick" Value="False"/>
+        <Setter Property="DismissOnEscapeKey" Value="True"/>
+        <Setter Property="OverlayClickBehavior" Value="DragMove"/>
         <Setter Property="Padding" Value="0 20"/>
         <Setter Property="Template">
             <Setter.Value>

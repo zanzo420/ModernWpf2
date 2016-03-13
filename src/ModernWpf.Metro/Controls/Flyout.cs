@@ -64,38 +64,38 @@ namespace ModernWpf.Metro.Controls
         /// <value>
         /// <c>true</c> to close on escape key; otherwise, <c>false</c>.
         /// </value>
-        public bool CloseOnEscapeKey
+        public bool DismissOnEscapeKey
         {
-            get { return (bool)GetValue(CloseOnEscapeKeyProperty); }
-            set { SetValue(CloseOnEscapeKeyProperty, value); }
+            get { return (bool)GetValue(DismissOnEscapeKeyProperty); }
+            set { SetValue(DismissOnEscapeKeyProperty, value); }
         }
 
         /// <summary>
-        /// The dependency property for <see cref="CloseOnEscapeKey"/>.
+        /// The dependency property for <see cref="DismissOnEscapeKey"/>.
         /// </summary>
-        public static readonly DependencyProperty CloseOnEscapeKeyProperty =
-            DependencyProperty.Register("CloseOnEscapeKey", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
+        public static readonly DependencyProperty DismissOnEscapeKeyProperty =
+            DependencyProperty.Register("DismissOnEscapeKey", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
 
 
 
 
         /// <summary>
-        /// Gets or sets a value indicating whether dialog closes when mouse clicks on the container.
+        /// Gets or sets a value indicating the action to take when mouse clicks on the container's overlay area.
         /// </summary>
         /// <value>
-        /// <c>true</c> to close when mouse clicks on container; otherwise, <c>false</c>.
+        /// <c>true</c> to close when mouse clicks on container overlay; otherwise, <c>false</c>.
         /// </value>
-        public bool CloseOnContainerClick
+        public OverlayClickBehavior OverlayClickBehavior
         {
-            get { return (bool)GetValue(CloseOnContainerClickProperty); }
-            set { SetValue(CloseOnContainerClickProperty, value); }
+            get { return (OverlayClickBehavior)GetValue(OverlayClickBehaviorProperty); }
+            set { SetValue(OverlayClickBehaviorProperty, value); }
         }
 
         /// <summary>
-        /// The dependency property for <see cref="CloseOnContainerClick"/>.
+        /// The dependency property for <see cref="OverlayClickBehavior"/>.
         /// </summary>
-        public static readonly DependencyProperty CloseOnContainerClickProperty =
-            DependencyProperty.Register("CloseOnContainerClick", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
+        public static readonly DependencyProperty OverlayClickBehaviorProperty =
+            DependencyProperty.Register("OverlayClickBehavior", typeof(OverlayClickBehavior), typeof(Flyout), new FrameworkPropertyMetadata(OverlayClickBehavior.None));
 
 
 
@@ -113,7 +113,7 @@ namespace ModernWpf.Metro.Controls
         }
 
         /// <summary>
-        /// The dependency property for <see cref="CloseOnEscapeKey"/>.
+        /// The dependency property for <see cref="DismissOnEscapeKey"/>.
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
             DependencyProperty.Register("DisableTarget", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
@@ -133,7 +133,7 @@ namespace ModernWpf.Metro.Controls
         /// <param name="e">The <see cref="T:System.Windows.Input.KeyEventArgs" /> that contains the event data.</param>
         protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
-            if (e != null && CloseOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
+            if (e != null && DismissOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
             {
                 e.Handled = true;
                 DialogResult = false;
@@ -241,5 +241,24 @@ namespace ModernWpf.Metro.Controls
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// Indicates what happens when <see cref="FlyoutContainer"/>'s overlay is clicked.
+    /// </summary>
+    public enum OverlayClickBehavior
+    {
+        /// <summary>
+        /// No action taken.
+        /// </summary>
+        None,
+        /// <summary>
+        /// Dismisses the current flyout.
+        /// </summary>
+        Dismiss,
+        /// <summary>
+        /// Enter the move window loop.
+        /// </summary>
+        DragMove
     }
 }

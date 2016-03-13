@@ -44,7 +44,8 @@ namespace ModernWpf.Metro.Controls
             private set
             {
                 var changed = value != HasDialogOpen;
-                SetValue(HasDialogOpenProperty, value);
+
+                SetValue(HasDialogOpenPropertyKey, value);
                 if (changed)
                 {
                     if (value)
@@ -59,11 +60,12 @@ namespace ModernWpf.Metro.Controls
             }
         }
 
+        static readonly DependencyPropertyKey HasDialogOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("HasDialogOpen", typeof(bool), typeof(FlyoutContainer), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// The dependency property for <see cref="HasDialogOpen"/>.
         /// </summary>
-        static readonly DependencyProperty HasDialogOpenProperty =
-            DependencyProperty.Register("HasDialogOpen", typeof(bool), typeof(FlyoutContainer), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty HasDialogOpenProperty = HasDialogOpenPropertyKey.DependencyProperty;
 
 
         /// <summary>
@@ -83,12 +85,10 @@ namespace ModernWpf.Metro.Controls
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
             DependencyProperty.Register("DisableTarget", typeof(FrameworkElement), typeof(FlyoutContainer), new FrameworkPropertyMetadata(null));
-
-
-
+        
 
         #endregion
-        
+
         ContentPresenter _presenter;
         Border _overlay;
 
@@ -113,12 +113,19 @@ namespace ModernWpf.Metro.Controls
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             var diag = this.Content as Flyout;
-            if (diag != null && diag.CloseOnContainerClick)
+            if (diag != null)
             {
                 var hitRes = VisualTreeHelper.HitTest(this, e.GetPosition(this));
                 if (hitRes.VisualHit == _overlay)
                 {
-                    diag.DialogResult = false;
+                    if (diag.OverlayClickBehavior == OverlayClickBehavior.Dismiss)
+                    {
+                        diag.DialogResult = false;
+                    }
+                    else if (diag.OverlayClickBehavior == OverlayClickBehavior.DragMove)
+                    {
+                        Window.GetWindow(this).DragMove();
+                    }
                 }
             }
             base.OnMouseLeftButtonDown(e);
