@@ -30,7 +30,7 @@ namespace BasicRunner
 
         private void LaunchWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            btnChromeTitle_Click(null, null);
+            //btnChromeTitle_Click(null, null);
         }
 
         private void btnChromeOnly_Click(object sender, RoutedEventArgs e)
@@ -51,6 +51,11 @@ namespace BasicRunner
         private void btnMaterial_Click(object sender, RoutedEventArgs e)
         {
             new MaterialWindow { Owner = this }.Show();
+        }
+
+        private void btnMetro_Click(object sender, RoutedEventArgs e)
+        {
+            new MetroThemeWindow { Owner = this }.Show();
         }
     }
 }

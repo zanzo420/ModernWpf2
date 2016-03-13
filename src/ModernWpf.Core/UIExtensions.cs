@@ -143,30 +143,37 @@ namespace ModernWpf
             return null;
         }
 
-        //internal static bool ProcessInVisualTree<T>(this DependencyObject control, Predicate<T> callback) where T : DependencyObject
-        //{
-        //    if (control != null)
-        //    {
-        //        var count = VisualTreeHelper.GetChildrenCount(control);
+        /// <summary>
+        /// Processes all children that are of the specified type in the visual tree.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="container">The control.</param>
+        /// <param name="callback">The callback. Return <code>true</code> to stop the tree walk.</param>
+        /// <returns></returns>
+        public static bool ProcessInVisualTree<T>(this DependencyObject container, Predicate<T> callback) where T : DependencyObject
+        {
+            if (container != null)
+            {
+                var count = VisualTreeHelper.GetChildrenCount(container);
 
-        //        for (int i = 0; i < count; i++)
-        //        {
-        //            var c = VisualTreeHelper.GetChild(control, i);
-        //            var casted = c as T;
-        //            if (casted != null)
-        //            {
-        //                var result = callback(casted);
-        //                if (result) { return true; }
-        //            }
-        //            if (c != null)
-        //            {
-        //                var subResult = ProcessInVisualTree<T>(c, callback);
-        //                if (subResult) { return true; }
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
+                for (int i = 0; i < count; i++)
+                {
+                    var c = VisualTreeHelper.GetChild(container, i);
+                    var casted = c as T;
+                    if (casted != null)
+                    {
+                        var result = callback(casted);
+                        if (result) { return true; }
+                    }
+                    if (c != null)
+                    {
+                        var subResult = ProcessInVisualTree<T>(c, callback);
+                        if (subResult) { return true; }
+                    }
+                }
+            }
+            return false;
+        }
 
 
 

@@ -18,7 +18,7 @@ namespace ModernWpf.Internal
         public static Brush TitleInactiveBackground { get; } = MakeBrush("#69A5D3");
         public static Brush TitleInactiveForeground { get; } = MakeBrush("#eeeeee");
 
-        public static Brush TitleActiveBackground { get; } = MakeBrush("#0078D7");
+        public static Brush TitleActiveBackground { get; } = MakeBrush("#007ACC");
         public static Brush TitleActiveForeground { get; } = MakeBrush("#f0f0f0");
     }
 }

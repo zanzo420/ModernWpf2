@@ -1,0 +1,76 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <!--this is has a smaller/thinners versions of the sizes for desktop use-->
+
+    <!--old metro wpf, to remove later-->
+
+    <s:Double x:Key="WindowTitleFontSize">24</s:Double>
+    <s:Double x:Key="TopTitleFontSize">20</s:Double>
+    <s:Double x:Key="SubTitleFontSize">14</s:Double>
+    <s:Double x:Key="ContentFontSize">12</s:Double>
+    <s:Double x:Key="SmallFontSize">11</s:Double>
+    <s:Double x:Key="TinyFontSize">10.5</s:Double>
+    <Thickness x:Key="ContentThemePadding">8 4</Thickness>
+
+    <Thickness x:Key="MenuBorderThickness">1</Thickness>
+
+    <!--modified from windows app-->
+
+    <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
+    <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
+    <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Arial, Verdana</FontFamily>
+    <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
+    <s:Double x:Key="ControlContentThemeFontSize">12</s:Double>
+    <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
+    <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
+
+    <!--margin and color alpha don't matter if using system shadow, only for custom shadow-->
+    <Thickness x:Key="PopUpShadowMargin">0,0,5,5</Thickness>
+    <Color x:Key="PopupShadowColor">#71000000</Color>
+
+    <s:Double x:Key="TextControlThemeMinHeight">32</s:Double>
+    <s:Double x:Key="TextControlThemeMinWidth">64</s:Double>
+    <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="TextControlThemePadding">3</Thickness>
+
+    <s:Double x:Key="AppBarThemeMinHeight">68</s:Double>
+    <Thickness x:Key="AppBarBottomBorderThemeThickness">0,2,0,0</Thickness>
+    <Thickness x:Key="AppBarBottomThemePadding">0,0,0,2</Thickness>
+    <Thickness x:Key="AppBarTopBorderThemeThickness">0,0,0,2</Thickness>
+    <Thickness x:Key="AppBarTopThemePadding">0,2,0,0</Thickness>
+
+    <Thickness x:Key="ButtonControlPadding">12 4</Thickness>
+    <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="HyperlinkButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="RepeatButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
+
+    <s:Double x:Key="CheckBoxBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="CheckBoxBorderSize">19</s:Double>
+
+    <s:Double x:Key="RadioButtonBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="RadioButtonBorderSize">21</s:Double>
+    <s:Double x:Key="RadioButtonGlyphSize">11</s:Double>
+
+    <Thickness x:Key="ComboBoxPadding">6 4</Thickness>
+    <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
+    <Thickness x:Key="ComboBoxPopupBorderThickness">1</Thickness>
+    
+    <Thickness x:Key="ListBoxBorderThemeThickness">1</Thickness>
+
+    <s:Double x:Key="SliderOutsideTickBarThemeHeight">6</s:Double>
+    <s:Double x:Key="SliderTrackThemeHeight">11</s:Double>
+    <Thickness x:Key="SliderBorderThemeThickness">0</Thickness>
+
+    <s:Double x:Key="ProgressBarThemeMinHeight">4</s:Double>
+    <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
+
+    <s:Double x:Key="ToolTipContentThemeFontSize">12</s:Double>
+    <Thickness x:Key="ToolTipBorderThemeThickness">1</Thickness>
+
+    <s:Double x:Key="ScrollBarTrackBorderThemeThickness">0</s:Double>
+    <Thickness x:Key="ScrollBarPanningBorderThemeThickness">1</Thickness>
+
+</ResourceDictionary>

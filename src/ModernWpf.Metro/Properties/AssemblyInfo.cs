@@ -41,4 +41,5 @@ using System.Windows.Markup;
                                       // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Controls")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Metro")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Metro.Controls")]
