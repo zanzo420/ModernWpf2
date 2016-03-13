@@ -63,7 +63,7 @@ namespace ModernWpf.Metro.Controls
         /// The dependency property for <see cref="HasDialogOpen"/>.
         /// </summary>
         static readonly DependencyProperty HasDialogOpenProperty =
-            DependencyProperty.Register("HasDialogOpen", typeof(bool), typeof(FlyoutContainer), new PropertyMetadata(false));
+            DependencyProperty.Register("HasDialogOpen", typeof(bool), typeof(FlyoutContainer), new FrameworkPropertyMetadata(false));
 
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace ModernWpf.Metro.Controls
         /// The dependency property for <see cref="DisableTarget"/>.
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
-            DependencyProperty.Register("DisableTarget", typeof(FrameworkElement), typeof(FlyoutContainer), new PropertyMetadata(null));
+            DependencyProperty.Register("DisableTarget", typeof(FrameworkElement), typeof(FlyoutContainer), new FrameworkPropertyMetadata(null));
 
 
 

@@ -51,7 +51,7 @@ namespace ModernWpf
         /// a <see cref="TextBlock"/>. 
         /// </summary>
         public static readonly DependencyProperty AutoCrispProperty =
-            DependencyProperty.RegisterAttached("AutoCrisp", typeof(bool), typeof(TextTool), new PropertyMetadata(false, new PropertyChangedCallback(AutoCrisp_Changed)));
+            DependencyProperty.RegisterAttached("AutoCrisp", typeof(bool), typeof(TextTool), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(AutoCrisp_Changed)));
 
         private static void AutoCrisp_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

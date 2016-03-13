@@ -139,7 +139,7 @@ namespace ModernWpf
             obj.SetValue(IsDpiTransformProperty, value);
         }
         static readonly DependencyProperty IsDpiTransformProperty =
-            DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(DpiTool), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(DpiTool), new FrameworkPropertyMetadata(false));
 
 
 
@@ -176,7 +176,7 @@ namespace ModernWpf
         /// The automatic dpi scale dependency property. Can be used on a <see cref="Window"/>, <see cref="ContextMenu"/>, or <see cref="ToolTip"/>.
         /// </summary>
         public static readonly DependencyProperty AutoDpiScaleProperty =
-            DependencyProperty.RegisterAttached("AutoDpiScale", typeof(bool), typeof(DpiTool), new PropertyMetadata(false, AutoDpiScaleChanged));
+            DependencyProperty.RegisterAttached("AutoDpiScale", typeof(bool), typeof(DpiTool), new FrameworkPropertyMetadata(false, AutoDpiScaleChanged));
 
         private static void AutoDpiScaleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

@@ -62,9 +62,17 @@
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Controls\FlyoutContainer.cs" />
     <Compile Include="Controls\AnimatedContentControl.cs" />
+    <Compile Include="Controls\MessageBoxFlyout.cs" />
+    <Compile Include="Controls\ModernMessageBox.xaml.cs">
+      <DependentUpon>ModernMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Internal\HSLColor.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
+    <Page Include="Controls\ModernMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +88,14 @@
     <Page Include="Themes\ColorLight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MetroExplicit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

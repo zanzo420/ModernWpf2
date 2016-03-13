@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:ModernWpf"
 	xmlns:ctrl="clr-namespace:ModernWpf.Controls"
     xmlns:conv="clr-namespace:ModernWpf.Converters"
+    xmlns:resx="clr-namespace:ModernWpf.Resources"
     >
     <Style TargetType="{x:Type ctrl:BorderWindow}">
         <Setter Property="Template">
@@ -176,17 +177,21 @@
                                         x:Name="PART_ControlBox"
                                         VerticalAlignment="Stretch"
                                         local:Chrome.HitTestType="Client">
-                                <Button x:Name="PART_MinButton">
+                                <Button x:Name="PART_MinButton"
+                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}">
                                     <TextBlock Text="0" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
-                                <Button x:Name="PART_MaxButton">
+                                <Button x:Name="PART_MaxButton"
+                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}">
                                     <TextBlock Text="1" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
-                                <Button x:Name="PART_RestoreButton">
+                                <Button x:Name="PART_RestoreButton"
+                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}">
                                     <TextBlock Text="2" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
                                 <Button x:Name="PART_CloseButton"
-                                        Style="{StaticResource CloseButton}">
+                                        Style="{StaticResource CloseButton}"
+                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}">
                                     <TextBlock Text="r" Style="{StaticResource MarlettGlyph}"></TextBlock>
                                 </Button>
                             </StackPanel>

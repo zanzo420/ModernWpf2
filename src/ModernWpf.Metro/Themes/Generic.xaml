@@ -102,7 +102,103 @@
         <Style.Triggers>
             <Trigger Property="HasDialogOpen" Value="True">
                 <Setter Property="IsHitTestVisible" Value="True"/>
+                <Setter Property="Panel.ZIndex" Value="100"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style TargetType="ctrl:MessageBoxFlyout">
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="DisableTarget" Value="False"/>
+        <Setter Property="CloseOnEscapeKey" Value="True"/>
+        <Setter Property="CloseOnContainerClick" Value="False"/>
+        <Setter Property="Padding" Value="0 20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:MessageBoxFlyout">
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid MinWidth="{TemplateBinding ContentMinWidth}" 
+                              MaxWidth="{TemplateBinding ContentMaxWidth}" 
+                              HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <DockPanel.Resources>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Width" Value="32"></Setter>
+                                        <Setter Property="Height" Value="32"></Setter>
+                                        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                        <Setter Property="DockPanel.Dock" Value="Left"></Setter>
+                                    </Style>
+                                </DockPanel.Resources>
+
+                                <!--icons from https://materialdesignicons.com/-->
+                                <Viewbox x:Name="PART_iconWarning" Width="32" Height="32">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" 
+                                              Fill="#EAA900" />
+                                    </Canvas>
+                                </Viewbox>
+                                <Viewbox x:Name="PART_iconInfo" Width="32" Height="32">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" 
+                                              Fill="#1D42AD" />
+                                    </Canvas>
+                                </Viewbox>
+                                <Viewbox x:Name="PART_iconError" Width="32" Height="32">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" 
+                                              Fill="#D30C0C" />
+                                    </Canvas>
+                                </Viewbox>
+                                <Viewbox x:Name="PART_iconQuestion" Width="32" Height="32">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" 
+                                              Fill="#1D42AD" />
+                                    </Canvas>
+                                </Viewbox>
+
+                                <TextBlock x:Name="PART_Title" TextTrimming="CharacterEllipsis" 
+                                           FontSize="{DynamicResource WindowTitleFontSize}" Margin="2 0"
+                                           FontWeight="Light"
+                                           VerticalAlignment="Center"></TextBlock>
+                            </DockPanel>
+
+                            <ContentPresenter Grid.Row="1" />
+
+                            <StackPanel x:Name="PART_btnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <StackPanel.Resources>
+                                    <!--<Style TargetType="Button" BasedOn="{StaticResource ModernButton}">-->
+                                    <Style TargetType="Button">
+                                        <Setter Property="MinWidth" Value="80"></Setter>
+                                        <Setter Property="Margin" Value="4 0 0 0"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="PART_btnOK"></Button>
+                                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="PART_btnYes"></Button>
+                                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="PART_btnNo"></Button>
+                                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="PART_btnCancel" IsCancel="True" ></Button>
+                            </StackPanel>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -99,7 +99,7 @@ namespace ModernWpf.Metro.Controls
         /// The DP for <see cref="SlideFromDirection"/>.
         /// </summary>
         public static readonly DependencyProperty SlideFromDirectionProperty =
-            DependencyProperty.Register("SlideFromDirection", typeof(SlideFromDirection), typeof(AnimatedContentControl), new PropertyMetadata(SlideFromDirection.Right));
+            DependencyProperty.Register("SlideFromDirection", typeof(SlideFromDirection), typeof(AnimatedContentControl), new FrameworkPropertyMetadata(SlideFromDirection.Right));
 
 
     }

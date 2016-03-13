@@ -18,10 +18,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/BaseValues.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/ColorLight.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -33,8 +31,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <modern:FlyoutContainer x:Name="outerFlyoutBox"
+                                Grid.RowSpan="3"></modern:FlyoutContainer>
 
         <modern:TitleBar x:Name="titleBar">
         </modern:TitleBar>
@@ -42,7 +44,24 @@
         <StackPanel Grid.Row="1" Margin="8">
             <TextBlock Text="This window demonstrates using the ModernWpf.Metro lib."
                        TextWrapping="Wrap"></TextBlock>
-
         </StackPanel>
+        <TabControl TabStripPlacement="Left"
+                    Grid.Row="2">
+            <TabItem Header="Flyout">
+                <modern:AnimatedContentControl>
+                    <Grid>
+                        <modern:FlyoutContainer x:Name="innerFlyoutBox"></modern:FlyoutContainer>
+                        
+                        <StackPanel HorizontalAlignment="Left">
+                            <RadioButton Content="Use outer" GroupName="flyGroup" x:Name="flyOuter" IsChecked="True"></RadioButton>
+                            <RadioButton Content="Use inner" GroupName="flyGroup" x:Name="flyInner"></RadioButton>
+                            
+                            <Button x:Name="btnMsgBox" Content="MessageBox replacements"
+                                Margin="8" Click="btnMsgBox_Click"></Button>
+                        </StackPanel>
+                    </Grid>
+                </modern:AnimatedContentControl>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

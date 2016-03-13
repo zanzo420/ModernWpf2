@@ -124,7 +124,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="ResizeBorderThickness"/>.
         /// </summary>
         public static readonly DependencyProperty ResizeBorderThicknessProperty =
-            DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(Chrome), new PropertyMetadata(new Thickness(8)));
+            DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(Chrome), new FrameworkPropertyMetadata(new Thickness(8)));
 
         /// <summary>
         /// Gets the resize border thickness.
@@ -142,7 +142,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="ActiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(DefaultColors.TitleActiveBackground));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new FrameworkPropertyMetadata(DefaultColors.TitleActiveBackground));
 
         /// <summary>
         /// Gets or sets the active border brush.
@@ -162,7 +162,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="InactiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.DarkGray));
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(Chrome), new FrameworkPropertyMetadata(Brushes.DarkGray));
 
         /// <summary>
         /// Gets or sets the inactive border brush.

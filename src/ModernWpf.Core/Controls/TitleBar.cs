@@ -116,7 +116,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonBackground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonBackgroundProperty =
-            DependencyProperty.Register("ButtonBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(Brushes.Transparent));
+            DependencyProperty.Register("ButtonBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(Brushes.Transparent));
 
 
 
@@ -135,7 +135,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonForeground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonForegroundProperty =
-            DependencyProperty.Register("ButtonForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
+            DependencyProperty.Register("ButtonForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleActiveForeground));
 
 
 
@@ -155,7 +155,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonHoverBackground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonHoverBackgroundProperty =
-            DependencyProperty.Register("ButtonHoverBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.MakeBrush("#40dddddd")));
+            DependencyProperty.Register("ButtonHoverBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.MakeBrush("#40dddddd")));
 
 
 
@@ -174,7 +174,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonHoverForeground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonHoverForegroundProperty =
-            DependencyProperty.Register("ButtonHoverForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
+            DependencyProperty.Register("ButtonHoverForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleActiveForeground));
 
 
 
@@ -193,7 +193,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonPressedBackground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonPressedBackgroundProperty =
-            DependencyProperty.Register("ButtonPressedBackground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.MakeBrush("#60dddddd")));
+            DependencyProperty.Register("ButtonPressedBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.MakeBrush("#60dddddd")));
 
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ButtonPressedForeground"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonPressedForegroundProperty =
-            DependencyProperty.Register("ButtonPressedForeground", typeof(Brush), typeof(TitleBar), new PropertyMetadata(DefaultColors.TitleActiveForeground));
+            DependencyProperty.Register("ButtonPressedForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleActiveForeground));
         
 
         /// <summary>

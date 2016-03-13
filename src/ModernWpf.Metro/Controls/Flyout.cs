@@ -13,7 +13,7 @@ using System.Windows.Threading;
 namespace ModernWpf.Metro.Controls
 {
     /// <summary>
-    /// A user control that can be hosted in a <see cref="FlyoutContainer"/> like a dialog.
+    /// A user control that can be hosted in a <see cref="FlyoutContainer"/>.
     /// </summary>
     public class Flyout : UserControl
     {
@@ -74,7 +74,7 @@ namespace ModernWpf.Metro.Controls
         /// The dependency property for <see cref="CloseOnEscapeKey"/>.
         /// </summary>
         public static readonly DependencyProperty CloseOnEscapeKeyProperty =
-            DependencyProperty.Register("CloseOnEscapeKey", typeof(bool), typeof(Flyout), new PropertyMetadata(true));
+            DependencyProperty.Register("CloseOnEscapeKey", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
 
 
 
@@ -95,7 +95,7 @@ namespace ModernWpf.Metro.Controls
         /// The dependency property for <see cref="CloseOnContainerClick"/>.
         /// </summary>
         public static readonly DependencyProperty CloseOnContainerClickProperty =
-            DependencyProperty.Register("CloseOnContainerClick", typeof(bool), typeof(Flyout), new PropertyMetadata(true));
+            DependencyProperty.Register("CloseOnContainerClick", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
 
 
 
@@ -116,7 +116,7 @@ namespace ModernWpf.Metro.Controls
         /// The dependency property for <see cref="CloseOnEscapeKey"/>.
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
-            DependencyProperty.Register("DisableTarget", typeof(bool), typeof(Flyout), new PropertyMetadata(true));
+            DependencyProperty.Register("DisableTarget", typeof(bool), typeof(Flyout), new FrameworkPropertyMetadata(true));
 
 
 

@@ -29,7 +29,7 @@ namespace ModernWpf
         }
 
         public static readonly DependencyProperty ManagerProperty =
-            DependencyProperty.RegisterAttached("Manager", typeof(BorderManager), typeof(BorderManager), new PropertyMetadata(null, ManagerChanged));
+            DependencyProperty.RegisterAttached("Manager", typeof(BorderManager), typeof(BorderManager), new FrameworkPropertyMetadata(null, ManagerChanged));
 
         private static void ManagerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
