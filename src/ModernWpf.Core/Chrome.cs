@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWpf.Internal;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -141,7 +142,7 @@ namespace ModernWpf
         /// The dependency property for <see cref="ActiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.Gray));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(DefaultColors.TitleActiveBackground));
 
         /// <summary>
         /// Gets or sets the active border brush.

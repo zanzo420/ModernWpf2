@@ -72,6 +72,7 @@
     <Compile Include="EditorCommands.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\BorderManager.cs" />
+    <Compile Include="Internal\DefaultColors.cs" />
     <Compile Include="Native\ClassLong.cs" />
     <Compile Include="Internal\Controls\BorderSide.cs" />
     <Compile Include="Internal\Controls\BorderWindow.cs" />

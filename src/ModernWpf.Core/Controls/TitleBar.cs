@@ -1,4 +1,5 @@
-﻿using ModernWpf.Native.Api;
+﻿using ModernWpf.Internal;
+using ModernWpf.Native.Api;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -42,7 +43,7 @@ namespace ModernWpf.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TitleBar), new FrameworkPropertyMetadata(typeof(TitleBar)));
             IsTabStopProperty.OverrideMetadata(typeof(TitleBar), new FrameworkPropertyMetadata(false));
-
+            MinHeightProperty.OverrideMetadata(typeof(TitleBar), new FrameworkPropertyMetadata(28d));
         }
 
         #region properties
@@ -180,7 +181,7 @@ namespace ModernWpf.Controls
 
         static readonly DependencyProperty IsActiveProperty =
             DependencyProperty.Register("IsActive", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
-
+        
 
         /// <summary>
         /// Gets or sets the inactive background.
@@ -197,7 +198,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="InactiveBackground"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveBackgroundProperty =
-            DependencyProperty.Register("InactiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionBrush));
+            DependencyProperty.Register("InactiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleInactiveBackground));
 
         /// <summary>
         /// Gets or sets the inactive foreground.
@@ -214,8 +215,8 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="InactiveForeground"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveForegroundProperty =
-            DependencyProperty.Register("InactiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.InactiveCaptionTextBrush));
-
+            DependencyProperty.Register("InactiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleInactiveForeground));
+        
 
         /// <summary>
         /// Gets or sets the active background.
@@ -232,7 +233,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ActiveBackground"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBackgroundProperty =
-            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(new SolidColorBrush(Dwmapi.GetWindowColor())));
+            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleActiveBackground));
 
         /// <summary>
         /// Gets or sets the active foreground.
@@ -249,7 +250,7 @@ namespace ModernWpf.Controls
         /// The dependency property for <see cref="ActiveForeground"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveForegroundProperty =
-            DependencyProperty.Register("ActiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ActiveCaptionTextBrush));
+            DependencyProperty.Register("ActiveForeground", typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(DefaultColors.TitleActiveForeground));
 
 
         /// <summary>

@@ -16,10 +16,15 @@
                               Stroke="{TemplateBinding BorderBrush}" 
                               SnapsToDevicePixels="True">
                             <Line.Effect>
-                                <DropShadowEffect ShadowDepth="1.5" 
+                                <!--<DropShadowEffect ShadowDepth="1.5" 
                                                   Direction="{Binding Side, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:EnumValueConverter.Instance}}" 
                                                   BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Color="{Binding Path=BorderBrush.Color, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Opacity="{Binding Path=GlowOpacity, RelativeSource={RelativeSource TemplatedParent}}"></DropShadowEffect>-->
+                                <DropShadowEffect ShadowDepth="1.5" 
+                                                  Direction="{Binding Side, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:EnumValueConverter.Instance}}" 
+                                                  BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Color="#111111"
                                                   Opacity="{Binding Path=GlowOpacity, RelativeSource={RelativeSource TemplatedParent}}"></DropShadowEffect>
                             </Line.Effect>
                         </Line>
@@ -121,11 +126,6 @@
     <Style TargetType="{x:Type ctrl:TitleBar}">
         <Setter Property="ControlButtonStyle" Value="{StaticResource ControlButton}"></Setter>
         <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButton}"></Setter>
-        <Setter Property="ActiveBackground" Value="#0078D7"></Setter>
-        <Setter Property="ActiveForeground" Value="#f0f0f0"></Setter>
-        <Setter Property="InactiveBackground" Value="#69A5D3"></Setter>
-        <Setter Property="InactiveForeground" Value="#eeeeee"></Setter>
-        <Setter Property="MinHeight" Value="28"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:TitleBar}">

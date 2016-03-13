@@ -2,7 +2,6 @@
 using ModernWpf.Native;
 using ModernWpf.Native.Api;
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Data;
@@ -253,17 +252,20 @@ namespace ModernWpf.Controls
             if (!handled)
             {
                 var wmsg = (WindowMessage)msg;
-                Debug.WriteLine(wmsg);
+                //Debug.WriteLine(wmsg);
                 switch (wmsg)
                 {
-                    case WindowMessage.WM_NCCALCSIZE:
-                        handled = true;
-                        break;
+                    //case WindowMessage.WM_NCCALCSIZE:
+                    //    handled = true;
+                    //    break;
                     case WindowMessage.WM_NCHITTEST:
-                        ChromeHitTest test = HandleHcHitTest(lParam, true);
+                        ChromeHitTest test = HandleHcHitTest(hwnd, lParam, true);
                         // Don't actual report this window as NC anymore and just change cursor instead.
                         // This allows content window to properly get IsMouseOver=false at edges
-                        ChangeCursor(test);
+                        if (Mouse.LeftButton != MouseButtonState.Pressed)
+                        {
+                            ChangeCursor(test);
+                        }
 
                         //retVal = new IntPtr((int)test);
                         //handled = true;
@@ -294,10 +296,14 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_LBUTTONDOWN:
                     case WindowMessage.WM_LBUTTONDBLCLK:
-                        var hitTest = HandleHcHitTest(lParam, false);
+                        var hitTest = HandleHcHitTest(hwnd, lParam, false);
                         //Debug.WriteLine("Should send {0} to content window.", hitTest);
-                        User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
-                        handled = true;
+                        if (hitTest != ChromeHitTest.Client)
+                        {
+                            User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
+                            //User32.SendMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
+                            handled = true;
+                        }
                         break;
                     case WindowMessage.WM_MOUSEACTIVATE:
                         //var lowword = 0xffff & lParam.ToInt32();
@@ -355,7 +361,7 @@ namespace ModernWpf.Controls
             if (cs != Cursor) { Cursor = cs; }
         }
 
-        private ChromeHitTest HandleHcHitTest(IntPtr lParam, bool isPointNC)
+        private ChromeHitTest HandleHcHitTest(IntPtr hwnd, IntPtr lParam, bool isPointNC)
         {
             ChromeHitTest res = ChromeHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||
@@ -364,6 +370,7 @@ namespace ModernWpf.Controls
                 var pt = (Point)lParam.ToPoint();
                 if (isPointNC) { pt = PointFromScreen(pt); }
                 int diagSize = (int)(2 * PadSize);
+                
                 switch (Side)
                 {
                     case BorderSide.Left:
@@ -387,6 +394,7 @@ namespace ModernWpf.Controls
                         else { res = ChromeHitTest.Bottom; }
                         break;
                 }
+                //Debug.WriteLine("Side {0}({1},{2}) at {3}, res = {4}", Side, Width, Height, pt, res);
             }
 
             return res;
