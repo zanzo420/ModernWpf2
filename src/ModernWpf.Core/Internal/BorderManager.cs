@@ -60,7 +60,7 @@ namespace ModernWpf
         internal Window ContentWindow { get; private set; }
         internal IntPtr hWndContent { get; private set; }
 
-        
+
         ResizeGrip _resizeGrip;
 
         BorderWindow _left;
@@ -123,10 +123,41 @@ namespace ModernWpf
             {
                 Rect rcWpf = TranslateToWpf(ref rcNative);
 
-                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
-                _top.UpdatePosn(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
-                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
-                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+                //var scale = DpiTool.GetWindowDpiScale(ContentWindow);
+
+                var leftW = _left.PadSize;
+                var topH = _top.PadSize;
+                var rightW = _right.PadSize;
+                var botH = _bottom.PadSize;
+
+                _left.UpdatePosn(
+                    rcWpf.Left - leftW,
+                    rcWpf.Top - topH,
+                    leftW,
+                    rcWpf.Height + topH + botH);
+                _top.UpdatePosn(
+                    rcWpf.Left - leftW,
+                    rcWpf.Top - topH,
+                    rcWpf.Width + leftW + rightW,
+                    topH);
+                _right.UpdatePosn(
+                    rcWpf.Right,
+                    rcWpf.Top - topH,
+                    rightW,
+                    rcWpf.Height + topH + botH);
+                _bottom.UpdatePosn(
+                    rcWpf.Left - leftW,
+                    rcWpf.Bottom,
+                    rcWpf.Width + leftW + rightW,
+                    botH);
+
+                //Rect rcWpf = rcNative;
+                //IntPtr blah = User32.BeginDeferWindowPos(4);
+                //blah = _left.UpdatePosnExp(blah, rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
+                //blah = _top.UpdatePosnExp(blah, rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
+                //blah = _right.UpdatePosnExp(blah, rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
+                //blah = _bottom.UpdatePosnExp(blah, rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+                //User32.EndDeferWindowPos(blah);
 
                 if (SystemParameters.MinimizeAnimation)
                 {
@@ -156,7 +187,7 @@ namespace ModernWpf
             ContentWindow = contentWindow;
             ContentWindow.Closed += ContentWindow_Closed;
             ContentWindow.ContentRendered += ContentWindow_ContentRendered;
-            
+
             hWndContent = new WindowInteropHelper(contentWindow).Handle;
             if (hWndContent == IntPtr.Zero)
             {
@@ -167,7 +198,7 @@ namespace ModernWpf
                 InitBorders();
             }
         }
-        
+
         void DetatchWindow()
         {
             if (ContentWindow != null)
@@ -219,7 +250,7 @@ namespace ModernWpf
 
             var hSrc = HwndSource.FromHwnd(hWndContent);
             hSrc.AddHook(WndProc);
-            
+
             // SWP_DRAWFRAME makes window bg really transparent (visible during resize) and not black
             User32.SetWindowPos(hWndContent, IntPtr.Zero, 0, 0, 0, 0,
                 SetWindowPosOptions.SWP_NOOWNERZORDER |
@@ -321,7 +352,7 @@ namespace ModernWpf
             }
             return retVal;
         }
-        
+
         private ChromeHitTest HandleNcHitTest(IntPtr lParam)
         {
             Point screenPoint = lParam.ToPoint();
@@ -441,6 +472,12 @@ namespace ModernWpf
                     }
                 }
             }
+        }
+
+        struct TranslateHolder
+        {
+            public Rect Rect;
+
         }
 
         /// <summary>

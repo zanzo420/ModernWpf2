@@ -192,6 +192,7 @@ namespace ModernWpf
                     {
                         if (hookIt)
                         {
+                            Debug.WriteLine("AutoDPI hooked for " + window.GetType().Name);
                             AttachWindow(window);
                         }
                         else

@@ -126,6 +126,16 @@ namespace ModernWpf.Controls
             _manager = manager;
 
             CreateBinding(IsActiveProperty.Name, _manager.ContentWindow, IsContentActiveProperty);
+
+
+            //var dpiBinding = new Binding()
+            //{
+            //    Source = _manager.ContentWindow,
+            //    Path = new PropertyPath(DpiTool.AutoDpiScaleProperty)
+            //};
+            //this.SetBinding(DpiTool.AutoDpiScaleProperty, dpiBinding);
+
+            //CreateBinding(DpiTool.AutoDpiScaleProperty.Name, _manager.ContentWindow, DpiTool.AutoDpiScaleProperty);
             UpdateChromeBindings(Chrome.GetChrome(_manager.ContentWindow));
         }
 
@@ -171,12 +181,19 @@ namespace ModernWpf.Controls
 
         internal void UpdatePosn(double left, double top, double width, double height)
         {
-            //User32.SetWindowPos(_hwnd, _manager.hWndContent, left, top, width, height, SetWindowPosOptions.SWP_NOACTIVATE);
+            //User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
+            //var scale = DpiTool.GetWindowDpiScale(_manager.ContentWindow);
+            //left /= scale;
+            //top /= scale;
+            //width /= scale;
+            //height /= scale;
+
+
             this.Left = left;
             this.Top = top;
             this.Width = width;
             this.Height = height;
-            var pad = 2 * PadSize;
+            var pad = 2 * PadSize;// * scale;
             switch (Side)
             {
                 case BorderSide.Left:
@@ -188,9 +205,32 @@ namespace ModernWpf.Controls
                     BorderLength = Math.Max(0, width - pad);
                     break;
             }
-
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
         }
+        //internal IntPtr UpdatePosnExp(IntPtr blah, double left, double top, double width, double height)
+        //{
+        //    //User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
+
+        //    blah = User32.DeferWindowPos(blah, _hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
+        //    //this.Left = left;
+        //    //this.Top = top;
+        //    //this.Width = width;
+        //    //this.Height = height;
+        //    var pad = 2 * PadSize;
+        //    switch (Side)
+        //    {
+        //        case BorderSide.Left:
+        //        case BorderSide.Right:
+        //            BorderLength = Math.Max(0, height - pad);
+        //            break;
+        //        case BorderSide.Top:
+        //        case BorderSide.Bottom:
+        //            BorderLength = Math.Max(0, width - pad);
+        //            break;
+        //    }
+        //    return blah;
+        //    //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
+        //}
 
         internal void ShowNoActivate()
         {
@@ -300,6 +340,7 @@ namespace ModernWpf.Controls
                         //Debug.WriteLine("Should send {0} to content window.", hitTest);
                         if (hitTest != ChromeHitTest.Client)
                         {
+                            User32.SetForegroundWindow(_manager.hWndContent);
                             User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
                             //User32.SendMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
                             handled = true;
@@ -322,14 +363,15 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_GETMINMAXINFO:
                         // overridden so max size = normal max + resize border (for when content window is max size without maximizing)
-                        var thick = 2 * (int)PadSize;
+                        
+                        //var thick = 2 * (int)PadSize;
 
-                        MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
-                        var orig = para.ptMaxTrackSize;
-                        orig.x += thick;
-                        orig.y += thick;
-                        para.ptMaxTrackSize = orig;
-                        Marshal.StructureToPtr(para, lParam, true);
+                        //MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+                        //var orig = para.ptMaxTrackSize;
+                        //orig.x += thick;
+                        //orig.y += thick;
+                        //para.ptMaxTrackSize = orig;
+                        //Marshal.StructureToPtr(para, lParam, true);
                         break;
                 }
             }
@@ -369,8 +411,8 @@ namespace ModernWpf.Controls
             {
                 var pt = (Point)lParam.ToPoint();
                 if (isPointNC) { pt = PointFromScreen(pt); }
-                int diagSize = (int)(2 * PadSize);
-                
+                int diagSize = (int)(2 * PadSize * DpiTool.GetWindowDpiScale(_manager.ContentWindow));
+
                 switch (Side)
                 {
                     case BorderSide.Left:
