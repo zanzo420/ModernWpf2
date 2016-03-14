@@ -2,17 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
-    <!--this is has a smaller/thinners versions of the sizes for desktop use-->
-
-    <!--old metro wpf, to remove later-->
-
     <s:Double x:Key="WindowTitleFontSize">24</s:Double>
     <s:Double x:Key="TopTitleFontSize">20</s:Double>
     <s:Double x:Key="SubTitleFontSize">14</s:Double>
     <s:Double x:Key="ContentFontSize">12</s:Double>
     <s:Double x:Key="SmallFontSize">11</s:Double>
     <s:Double x:Key="TinyFontSize">10.5</s:Double>
-    <Thickness x:Key="ContentThemePadding">8 4</Thickness>
+    <!--<Thickness x:Key="ContentThemePadding">8 4</Thickness>-->
 
     <Thickness x:Key="MenuBorderThickness">1</Thickness>
 
@@ -21,8 +17,6 @@
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
     <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Arial, Verdana</FontFamily>
-    <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
-    <s:Double x:Key="ControlContentThemeFontSize">12</s:Double>
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
     <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
 

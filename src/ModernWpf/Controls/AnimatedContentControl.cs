@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     // originally from http://xamlcoder.com/blog/2010/11/04/creating-a-metro-ui-style-control/
     // but no longer resembles it

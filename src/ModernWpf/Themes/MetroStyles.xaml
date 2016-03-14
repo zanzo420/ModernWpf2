@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ctrl="clr-namespace:ModernWpf.Metro.Controls">
+                    xmlns:ctrl="clr-namespace:ModernWpf.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/MetroStylesExplicit.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/MetroStylesExplicit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

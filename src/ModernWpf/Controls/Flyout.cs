@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     /// <summary>
     /// A user control that can be hosted in a <see cref="FlyoutContainer"/>.

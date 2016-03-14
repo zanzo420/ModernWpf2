@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9719
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicRunner", "samples\BasicRunner\BasicRunner.csproj", "{EF1209F0-EFED-4AE8-9A31-0422F6866694}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWpf.Metro", "src\ModernWpf.Metro\ModernWpf.Metro.csproj", "{DE00D372-BD45-4FCA-BFFD-54D75067AAC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWpf", "src\ModernWpf\ModernWpf.csproj", "{DE00D372-BD45-4FCA-BFFD-54D75067AAC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

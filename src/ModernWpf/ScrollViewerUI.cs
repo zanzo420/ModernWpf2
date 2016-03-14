@@ -1,4 +1,4 @@
-﻿using ModernWpf.Metro.Controls;
+﻿using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// Contains various attached properties for <see cref="ScrollViewer"/> using the modern theme.

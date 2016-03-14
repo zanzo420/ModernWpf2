@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// The parameter passed to <see cref="ListViewUI.SortCommand"/>.

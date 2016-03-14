@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// Specifies an accent color and its derived variations.

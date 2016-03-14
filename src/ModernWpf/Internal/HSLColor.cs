@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     // modified from Rich Newman's HSLColor class for wpf
     // http://richnewman.wordpress.com/about/code-listings-and-diagrams/hslcolor-class/

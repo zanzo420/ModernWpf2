@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// Allows changing current theme and accent colors.

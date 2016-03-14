@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     /// <summary>
     /// A container element for hosting <see cref="Flyout"/>s.

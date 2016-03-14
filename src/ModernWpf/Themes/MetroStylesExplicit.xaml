@@ -3,14 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:local="clr-namespace:ModernWpf.Metro"
-    xmlns:ctrl="clr-namespace:ModernWpf.Metro.Controls"
+    xmlns:local="clr-namespace:ModernWpf"
+    xmlns:ctrl="clr-namespace:ModernWpf.Controls"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     
     xmlns:modern="http://modernwpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/BaseValues.xaml"/>
-        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/ColorLight.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/BaseValues.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/ColorLight.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -596,7 +596,7 @@
 
     <!--window-->
     <!--<Style x:Key="ModernWindow" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="local:Chrome.Chrome">
@@ -685,7 +685,7 @@
     </Style>
 
     <Style x:Key="ModernWindowFull" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="local:Chrome.Chrome">
@@ -773,7 +773,7 @@
     </Style>
 
     <Style x:Key="ModernWindowV2" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="local:Chrome.Chrome">
@@ -2019,7 +2019,7 @@
         <Setter Property="MinHeight" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
@@ -2089,7 +2089,7 @@
         <Setter Property="Background" Value="{DynamicResource ModernBackground4}"/>
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="42"/>
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -3237,7 +3237,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Template" Value="{DynamicResource ModernSubmenuItemTemplate}" />
         <Setter Property="Padding" Value="0 4 0 5" />
         <Style.Triggers>

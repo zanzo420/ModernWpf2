@@ -148,7 +148,8 @@
                             <!--icon-->
                             <ctrl:AppIconImage x:Name="PART_Icon" Margin="6 0 6 0"
                                                LargeIcon="{TemplateBinding LargeIcon}"
-                                               RenderOptions.BitmapScalingMode="HighQuality"></ctrl:AppIconImage>
+                                               RenderOptions.BitmapScalingMode="HighQuality"
+                                               local:Chrome.HitTestType="SystemMenu"></ctrl:AppIconImage>
 
                             <!--custom content-->
                             <ContentPresenter Grid.Column="1"

@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// Contains various attached properties for <see cref="MenuItem"/>.

@@ -9,10 +9,10 @@ using System.Windows.Markup;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ModernWpf.Metro")]
+[assembly: AssemblyTitle("ModernWpf")]
 [assembly: AssemblyDescription("Contains the \"metro\" styles and controls for the ModernWpf lib.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("ModernWpf.Metro")]
+[assembly: AssemblyProduct("ModernWpf")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
@@ -41,5 +41,5 @@ using System.Windows.Markup;
                                       // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Metro")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Metro.Controls")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWpf.Controls")]

@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace ModernWpf.Metro
+namespace ModernWpf
 {
     /// <summary>
     /// Contains various attached properties for <see cref="TextBox"/> and <see cref="PasswordBox"/> using the modern theme.

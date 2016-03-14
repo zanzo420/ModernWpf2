@@ -7,7 +7,7 @@
         xmlns:modern="http://modernwpf"
         mc:Ignorable="d"
         x:Name="theWindow"
-        Title="ModernWpf.Metro Controls and Themes" Height="650" Width="650"
+        Title="ModernWpf Controls and Themes" Height="650" Width="650"
         ResizeMode="CanResizeWithGrip" 
 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
@@ -18,9 +18,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/BaseValues.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/ColorLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/MetroStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/BaseValues.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/ColorLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/MetroStyles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -43,11 +43,16 @@
         </modern:TitleBar>
 
         <StackPanel Grid.Row="1" Margin="8">
-            <TextBlock Text="This window demonstrates using the ModernWpf.Metro lib."
+            <TextBlock Text="This window demonstrates using the ModernWpf lib."
                        TextWrapping="Wrap"></TextBlock>
         </StackPanel>
         <TabControl TabStripPlacement="Left"
-                    Grid.Row="2">
+                    Grid.Row="2"
+                    Style="{StaticResource ModernTabControl}"
+                    ItemContainerStyle="{StaticResource ModernTabItem2}"
+                    Margin="8" 
+                    Background="{DynamicResource ModernBackground}" 
+                    BorderBrush="{DynamicResource ModernAccent}" BorderThickness="1">
             <TabItem Header="Flyout">
                 <modern:AnimatedContentControl>
                     <Grid>

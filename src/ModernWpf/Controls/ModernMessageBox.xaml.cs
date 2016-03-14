@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     /// <summary>
     /// A drop-in <see cref="MessageBox"/> replacment that displays in a <see cref="FlyoutContainer"/>.

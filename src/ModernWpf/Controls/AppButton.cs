@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     /// <summary>
     /// A button with circle around the content and optional text.

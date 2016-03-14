@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ctrl="clr-namespace:ModernWpf.Metro.Controls"
+    xmlns:ctrl="clr-namespace:ModernWpf.Controls"
     xmlns:modern="http://modernwpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/BaseValues.xaml"/>
-        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/ColorLight.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/BaseValues.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/ColorLight.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/MetroStylesExplicit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -30,9 +31,101 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ctrl:AppButton">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
+        <Setter Property="Background" Value="{DynamicResource AppBarItemBackgroundThemeBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="2 0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource TinyFontSize}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:AppButton">
+                    <Grid Background="#01000000">
+                        <StackPanel Orientation="{TemplateBinding Orientation}"
+                                    Margin="{TemplateBinding Padding}">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Ellipse StrokeThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static modern:ThicknessToDoubleConverter.Instance}}" 
+                                         Stroke="{TemplateBinding BorderBrush}"
+                                         Fill="{TemplateBinding Background}"
+                                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                         x:Name="Circle"/>
+                                <Viewbox x:Name="contentSizer" Width="48" Height="48"
+                                     VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <ContentPresenter x:Name="ContentPresenter" 
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Viewbox>
+                            </Grid>
+                            <AccessText Text="{TemplateBinding Text}" TextWrapping="Wrap" TextAlignment="Center"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Foreground="{DynamicResource AppBarItemForegroundThemeBrush}"
+                                        Visibility="{Binding Path=Text, Converter={x:Static modern:NullEmptyCollapsedConverter.Instance}, RelativeSource={RelativeSource Self}}"
+                                        Margin="2 0"/>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonSize" Value="Small">
+                            <Setter TargetName="contentSizer" Property="Width" Value="26"/>
+                            <Setter TargetName="contentSizer" Property="Height" Value="26"/>
+                        </Trigger>
+                        <Trigger Property="TextSize" Value="Large">
+                            <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonSize" Value="Large"/>
+                                <Condition Property="Orientation" Value="Vertical"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Width" Value="76"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonSize" Value="Small"/>
+                                <Condition Property="Orientation" Value="Vertical"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Width" Value="50"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource AppBarItemPointerOverBackgroundThemeBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource AppBarItemPointerOverForegroundThemeBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <!--<Setter Property="Background" Value="{DynamicResource AppBarItemForegroundThemeBrush}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
+                <Setter Property="Foreground" Value="{DynamicResource AppBarItemPressedForegroundThemeBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="false"/>
+                    <Condition Property="CollapseOnDisable" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="false"/>
+                    <Condition Property="CollapseOnDisable" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Opacity" Value=".4" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    
 
     <Style TargetType="ctrl:Flyout">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="Template">
@@ -109,7 +202,7 @@
 
 
     <Style TargetType="ctrl:MessageBoxFlyout">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -181,8 +274,7 @@
 
                             <StackPanel x:Name="PART_btnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                 <StackPanel.Resources>
-                                    <!--<Style TargetType="Button" BasedOn="{StaticResource ModernButton}">-->
-                                    <Style TargetType="Button">
+                                    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
                                         <Setter Property="MinWidth" Value="80"></Setter>
                                         <Setter Property="Margin" Value="4 0 0 0"></Setter>
                                     </Style>

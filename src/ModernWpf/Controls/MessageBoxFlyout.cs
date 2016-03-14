@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ModernWpf.Metro.Controls
+namespace ModernWpf.Controls
 {
     /// <summary>
     /// A base message box type <see cref="Flyout"/> with custom content support.
