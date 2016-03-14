@@ -1,4 +1,5 @@
-﻿using ModernWpf;
+﻿using BasicRunner.VM;
+using ModernWpf;
 using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,13 @@ namespace BasicRunner
             ModernMessageBox.Show(box, "Information Message", "Caption", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.Cancel);
             ModernMessageBox.Show(box, "Error Message", "Caption", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
 
+        }
+
+        private void radioAccent_Checked(object sender, RoutedEventArgs e)
+        {
+            var accent = (Accent)((RadioButton)sender).DataContext;
+
+            Theme.ApplyTheme(Theme.CurrentTheme.GetValueOrDefault(), accent, this.Resources);
         }
     }
 }
