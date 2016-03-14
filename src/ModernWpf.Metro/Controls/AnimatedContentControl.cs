@@ -54,9 +54,9 @@ namespace ModernWpf.Metro.Controls
         ///// </summary>
         //public void AnimateOut()
         //{
-        //    if (Animation.ShouldAnimate)
+        //    if (Animations.ShouldAnimate)
         //    {
-        //        Animation.FadeOut(this, Animation.TypicalDuration);
+        //        Animations.FadeOut(this, Animations.TypicalDuration);
         //    }
         //}
 

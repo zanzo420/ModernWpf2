@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="clr-namespace:ModernWpf.Metro.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ModernWpf.Metro;component/Themes/MetroStylesExplicit.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style TargetType="ItemsControl" BasedOn="{StaticResource ModernItemsControl}"/>
+
+    <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
+
+    <Style TargetType="Label" BasedOn="{StaticResource ModernLabel}"/>
+
+    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}"/>
+
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernToggleButton}"/>
+
+    <Style TargetType="RadioButton" BasedOn="{StaticResource ModernRadioButton}"/>
+
+    <Style TargetType="RepeatButton" BasedOn="{StaticResource ModernRepeatButton}"/>
+
+    <Style TargetType="StatusBar" BasedOn="{StaticResource ModernStatusBar}"/>
+
+    <Style TargetType="StatusBarItem" BasedOn="{StaticResource ModernStatusBarItem}"/>
+
+    <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"/>
+
+    <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"/>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}"/>
+
+    <Style TargetType="RichTextBox" BasedOn="{StaticResource ModernRichTextBox}"/>
+
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"/>
+
+    <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"/>
+
+    <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
+
+    <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
+
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
+    <Style TargetType="ctrl:AnimatedScrollViewer" BasedOn="{StaticResource ModernAnimatedScrollViewer}"/>
+
+    <Style TargetType="Thumb" BasedOn="{StaticResource ModernThumb}"/>
+    <Style TargetType="Slider" BasedOn="{StaticResource ModernSlider}"/>
+
+    <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}"/>
+
+    <Style TargetType="Separator" BasedOn="{StaticResource ModernSeparator}"/>
+
+    <Style TargetType="Menu" BasedOn="{StaticResource ModernMenu}"/>
+    <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
+
+    <Style TargetType="ListBox" BasedOn="{StaticResource ModernListBox}" />
+
+    <Style TargetType="ListView" BasedOn="{StaticResource ModernListView}" />
+    <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource ModernGridViewColumnHeader}"/>
+
+    <Style TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}" />
+
+    <Style TargetType="TreeView" BasedOn="{StaticResource ModernTreeView}"/>
+
+    <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
+    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource ModernDatePickerTextBox}" />
+    <Style TargetType="Calendar" BasedOn="{StaticResource ModernCalendar}" />
+    <!--<Style TargetType="CalendarItem" BasedOn="{StaticResource ModernCalendarItem}" />
+    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource ModernCalendarDayButton}" />
+    <Style TargetType="CalendarButton" BasedOn="{StaticResource ModernCalendarButton}" />-->
+
+</ResourceDictionary>

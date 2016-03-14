@@ -1,6 +1,7 @@
 ﻿using ModernWpf.Converters;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -65,6 +66,8 @@ namespace ModernWpf
                 {
                     if ((bool)e.NewValue)
                     {
+                        //Debug.WriteLine("Hooking up AutoCrisp for text {0}", (object)tb.Text);
+
                         var bind = new MultiBinding();
                         bind.Converter = TextFormattingModeConverter.Instance;
                         // actual binding used by converter

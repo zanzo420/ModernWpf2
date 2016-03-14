@@ -42,6 +42,7 @@
     <AssemblyOriginatorKeyFile>..\ModernWpf.Core\Sign.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -59,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accent.cs" />
+    <Compile Include="Controls\AnimatedScrollViewer.cs" />
+    <Compile Include="Controls\AppButton.cs" />
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Controls\FlyoutContainer.cs" />
     <Compile Include="Controls\AnimatedContentControl.cs" />
@@ -66,7 +69,13 @@
     <Compile Include="Controls\ModernMessageBox.xaml.cs">
       <DependentUpon>ModernMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridViewSortParameter.cs" />
     <Compile Include="Internal\HSLColor.cs" />
+    <Compile Include="Internal\ScrollViewerExtensions.cs" />
+    <Compile Include="ListViewUI.cs" />
+    <Compile Include="MenuItemUI.cs" />
+    <Compile Include="ScrollViewerUI.cs" />
+    <Compile Include="TextBoxUI.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
     <Page Include="Controls\ModernMessageBox.xaml">
@@ -89,11 +98,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Metro.xaml">
+    <Page Include="Themes\MetroStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\MetroExplicit.xaml">
+    <Page Include="Themes\MetroStylesExplicit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

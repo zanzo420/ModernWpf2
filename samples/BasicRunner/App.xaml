@@ -5,7 +5,8 @@
              xmlns:modern="http://modernwpf"
              StartupUri="LaunchWindow.xaml">
     <Application.Resources>
-        <Style TargetType="TextBlock">
+        <!--show case auto selecting between ideal/display text formatting-->
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="modern:TextTool.AutoCrisp" Value="True"></Setter>
         </Style>
     </Application.Resources>

@@ -20,6 +20,7 @@
 
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/BaseValues.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/ColorLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf.Metro;component/Themes/MetroStyles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

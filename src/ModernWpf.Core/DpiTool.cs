@@ -188,7 +188,7 @@ namespace ModernWpf
                 if (old != hookIt)
                 {
                     var window = d as Window;
-                    if (d != null)
+                    if (window != null)
                     {
                         if (hookIt)
                         {
