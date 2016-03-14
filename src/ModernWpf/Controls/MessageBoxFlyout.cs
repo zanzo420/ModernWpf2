@@ -197,37 +197,23 @@ namespace ModernWpf.Controls
                 }
             }
         }
-
-        /// <summary>
-        /// Shows the dialog modal.
-        /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="button">The button to display.</param>
-        /// <param name="icon">The icon to display.</param>
-        /// <param name="defaultResult">The default result.</param>
-        /// <returns></returns>
-        public virtual MessageBoxResult ShowDialogModal(Window owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
-        {
-            return ShowDialogModal(owner.FindChildInVisualTree<FlyoutContainer>(), caption, button, icon, defaultResult);
-        }
-
+        
         /// <summary>
         /// Shows the dialog with icon/caption/buttons.
         /// </summary>
-        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
+        /// <param name="owner">A <see cref="FlyoutContainer" /> or <see cref="Window"/> with <see cref="FlyoutContainer"/> to host this message box.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="button">The button to display.</param>
         /// <param name="icon">The icon to display.</param>
         /// <param name="defaultResult">The default result.</param>
-        public virtual MessageBoxResult ShowDialogModal(FlyoutContainer owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
+        public virtual MessageBoxResult ShowDialogModal(ContentControl owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
         {
             _title = caption;
             _button = button;
             _icon = icon;
             _defResult = defaultResult;
             ApplyOptions();
-            ShowDialogModal(owner);
+            ShowDialogModal(owner.FindChildInVisualTree<FlyoutContainer>());
             return _result;
         }
 

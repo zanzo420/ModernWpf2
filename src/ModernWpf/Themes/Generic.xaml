@@ -6,7 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ModernWpf;component/Themes/BaseValues.xaml"/>
         <ResourceDictionary Source="/ModernWpf;component/Themes/ColorLight.xaml"/>
-        <ResourceDictionary Source="/ModernWpf;component/Themes/MetroStylesExplicit.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/ModernStylesExplicit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -193,9 +193,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="HasDialogOpen" Value="True">
+            <Trigger Property="HasFlyoutOpen" Value="True">
                 <Setter Property="IsHitTestVisible" Value="True"/>
-                <Setter Property="Panel.ZIndex" Value="100"/>
+                <Setter Property="Panel.ZIndex" Value="{Binding RelativeSource={RelativeSource Self}, Path=OpenZIndex}"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

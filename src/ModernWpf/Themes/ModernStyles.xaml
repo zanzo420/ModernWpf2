@@ -1,10 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ctrl="clr-namespace:ModernWpf.Controls">
+                    xmlns:ctrl="clr-namespace:ModernWpf.Controls"
+                    xmlns:modern="http://modernwpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWpf;component/Themes/MetroStylesExplicit.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/ModernStylesExplicit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+
+    <Style TargetType="modern:TitleBar" BasedOn="{StaticResource ModernTitleBar}"/>
 
     <Style TargetType="ItemsControl" BasedOn="{StaticResource ModernItemsControl}"/>
 

@@ -32,20 +32,42 @@ namespace ModernWpf.Controls
         #region properties
 
 
+
         /// <summary>
-        /// Gets a value indicating whether this container has any dialog open.
+        /// Gets or sets the z-index when a flyout is displayed.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if it has dialog open; otherwise, <c>false</c>.
+        /// The z-index when displaying.
         /// </value>
-        public bool HasDialogOpen
+        public int OpenZIndex
         {
-            get { return (bool)GetValue(HasDialogOpenProperty); }
+            get { return (int)GetValue(OpenZIndexProperty); }
+            set { SetValue(OpenZIndexProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="OpenZIndex"/>.
+        /// </summary>
+        public static readonly DependencyProperty OpenZIndexProperty =
+            DependencyProperty.Register("OpenZIndex", typeof(int), typeof(FlyoutContainer), new FrameworkPropertyMetadata(1));
+
+
+
+
+        /// <summary>
+        /// Gets a value indicating whether this container has any flyout open.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if it has flyout open; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasFlyoutOpen
+        {
+            get { return (bool)GetValue(HasFlyoutOpenProperty); }
             private set
             {
-                var changed = value != HasDialogOpen;
+                var changed = value != HasFlyoutOpen;
 
-                SetValue(HasDialogOpenPropertyKey, value);
+                SetValue(HasFlyoutOpenPropertyKey, value);
                 if (changed)
                 {
                     if (value)
@@ -60,16 +82,16 @@ namespace ModernWpf.Controls
             }
         }
 
-        static readonly DependencyPropertyKey HasDialogOpenPropertyKey =
-            DependencyProperty.RegisterReadOnly("HasDialogOpen", typeof(bool), typeof(FlyoutContainer), new FrameworkPropertyMetadata(false));
+        static readonly DependencyPropertyKey HasFlyoutOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("HasFlyoutOpen", typeof(bool), typeof(FlyoutContainer), new FrameworkPropertyMetadata(false));
         /// <summary>
-        /// The dependency property for <see cref="HasDialogOpen"/>.
+        /// The dependency property for <see cref="HasFlyoutOpen"/>.
         /// </summary>
-        public static readonly DependencyProperty HasDialogOpenProperty = HasDialogOpenPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty HasFlyoutOpenProperty = HasFlyoutOpenPropertyKey.DependencyProperty;
 
 
         /// <summary>
-        /// Gets or sets the target to disable when dialogs are visible.
+        /// Gets or sets the target to disable when flyouts are visible.
         /// </summary>
         /// <value>
         /// The disable target.
@@ -100,7 +122,7 @@ namespace ModernWpf.Controls
             base.OnApplyTemplate();
             _presenter = GetTemplateChild(PARTContent) as ContentPresenter;
             _overlay = GetTemplateChild(PARTOverlay) as Border;
-            if (HasDialogOpen)
+            if (HasFlyoutOpen)
             {
                 var test = VisualStateManager.GoToState(this, "IsOpen", Animations.ShouldAnimate);
             }
@@ -167,7 +189,7 @@ namespace ModernWpf.Controls
             var next = _openDialogs.LastOrDefault();
             if (next == null)
             {
-                HasDialogOpen = false;
+                HasFlyoutOpen = false;
                 this.Content = null;
                 if (_presenter != null) { BindingOperations.ClearAllBindings(_presenter); }
                 if (DisableTarget != null) { DisableTarget.IsEnabled = true; }
@@ -185,7 +207,7 @@ namespace ModernWpf.Controls
                 {
                     DoShowContentAnimation(next);
                 }
-                HasDialogOpen = true;
+                HasFlyoutOpen = true;
 
                 var dt = new DispatcherTimer(DispatcherPriority.Send);
                 dt.Tick += (s, e) =>

@@ -21,134 +21,60 @@ namespace ModernWpf.Controls
     public sealed partial class ModernMessageBox : MessageBoxFlyout
     {
         #region static stuff
-
+        
         /// <summary>
-        /// Displays a message box in front of the specified window.
+        /// Displays a message box in front of the specified container (either <see cref="FlyoutContainer" /> or <see cref="Window"/> containing a <see cref="FlyoutContainer"/>).
         /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
+        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
         /// <param name="messageBoxText">The message box text.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(Window owner, string messageBoxText)
+        public static MessageBoxResult Show(ContentControl owner, string messageBoxText)
         {
             return Show(owner, messageBoxText, null, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None);
         }
-
-
         /// <summary>
-        /// Displays a message box in front of the specified window.
+        /// Displays a message box in front of the specified container (either <see cref="FlyoutContainer" /> or <see cref="Window"/> containing a <see cref="FlyoutContainer"/>).
         /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
+        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
         /// <param name="messageBoxText">The message box text.</param>
         /// <param name="caption">The caption.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption)
+        public static MessageBoxResult Show(ContentControl owner, string messageBoxText, string caption)
         {
             return Show(owner, messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None);
         }
-
-
         /// <summary>
-        /// Displays a message box in front of the specified window.
+        /// Displays a message box in front of the specified container (either <see cref="FlyoutContainer" /> or <see cref="Window"/> containing a <see cref="FlyoutContainer"/>).
         /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
+        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
         /// <param name="messageBoxText">The message box text.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="button">The button to display.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption, MessageBoxButton button)
+        public static MessageBoxResult Show(ContentControl owner, string messageBoxText, string caption, MessageBoxButton button)
         {
             return Show(owner, messageBoxText, caption, button, MessageBoxImage.None, MessageBoxResult.None);
         }
-
-
         /// <summary>
-        /// Displays a message box in front of the specified window.
+        /// Displays a message box in front of the specified container (either <see cref="FlyoutContainer" /> or <see cref="Window"/> containing a <see cref="FlyoutContainer"/>).
         /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
+        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
         /// <param name="messageBoxText">The message box text.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="button">The button to display.</param>
         /// <param name="icon">The icon to display.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon)
+        public static MessageBoxResult Show(ContentControl owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon)
         {
             return Show(owner, messageBoxText, caption, button, icon, MessageBoxResult.None);
         }
 
         /// <summary>
-        /// Displays a message box in front of the specified window.
-        /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="FlyoutContainer" /> in its visual tree.</param>
-        /// <param name="messageBoxText">The message box text.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="button">The button to display.</param>
-        /// <param name="icon">The icon to display.</param>
-        /// <param name="defaultResult">The default result.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
-        {
-            return Show(owner.FindChildInVisualTree<FlyoutContainer>(), messageBoxText, caption, button, icon, defaultResult);
-        }
-
-
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="FlyoutContainer" />.
-        /// </summary>
-        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
-        /// <param name="messageBoxText">The message box text.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(FlyoutContainer owner, string messageBoxText)
-        {
-            return Show(owner, messageBoxText, null, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None);
-        }
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="FlyoutContainer" />.
-        /// </summary>
-        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
-        /// <param name="messageBoxText">The message box text.</param>
-        /// <param name="caption">The caption.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(FlyoutContainer owner, string messageBoxText, string caption)
-        {
-            return Show(owner, messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.None);
-        }
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="FlyoutContainer" />.
-        /// </summary>
-        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
-        /// <param name="messageBoxText">The message box text.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="button">The button to display.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(FlyoutContainer owner, string messageBoxText, string caption, MessageBoxButton button)
-        {
-            return Show(owner, messageBoxText, caption, button, MessageBoxImage.None, MessageBoxResult.None);
-        }
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="FlyoutContainer" />.
-        /// </summary>
-        /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
-        /// <param name="messageBoxText">The message box text.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="button">The button to display.</param>
-        /// <param name="icon">The icon to display.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(FlyoutContainer owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon)
-        {
-            return Show(owner, messageBoxText, caption, button, icon, MessageBoxResult.None);
-        }
-
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="FlyoutContainer" />.
+        /// Displays a message box in front of the specified container (either <see cref="FlyoutContainer" /> or <see cref="Window"/> containing a <see cref="FlyoutContainer"/>).
         /// </summary>
         /// <param name="owner">A <see cref="FlyoutContainer" /> to host this message box.</param>
         /// <param name="messageBoxText">The message box text.</param>
@@ -158,7 +84,7 @@ namespace ModernWpf.Controls
         /// <param name="defaultResult">The default result.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">owner</exception>
-        public static MessageBoxResult Show(FlyoutContainer owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
+        public static MessageBoxResult Show(ContentControl owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
 

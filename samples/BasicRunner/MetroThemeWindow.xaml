@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:BasicRunner.VM"
         mc:Ignorable="d"
         x:Name="theWindow"
-        Title="ModernWpf Controls and Themes" Height="650" Width="650"
+        Title="ModernWpf Controls and Themes" Height="650" Width="750"
         ResizeMode="CanResizeWithGrip" 
 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
@@ -20,7 +20,7 @@
 
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/BaseValues.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/ColorLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/MetroStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/ModernStyles.xaml" />
                 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -28,33 +28,20 @@
     <Window.DataContext>
         <vm:SampleAppVM></vm:SampleAppVM>
     </Window.DataContext>
-    <modern:Chrome.Chrome>
-        <modern:Chrome ActiveBorderBrush="{DynamicResource ModernAccent}"></modern:Chrome>
-    </modern:Chrome.Chrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <modern:FlyoutContainer x:Name="outerFlyoutBox"
-                                Grid.RowSpan="3"></modern:FlyoutContainer>
-
-        <modern:TitleBar x:Name="titleBar"
-                         ActiveBackground="{DynamicResource ModernAccent}"
-                         ActiveForeground="{DynamicResource AccentForeground}"
-                         InactiveBackground="{DynamicResource ModernAccentAlpha2}"
-                         InactiveForeground="{DynamicResource AccentForeground}">
-        </modern:TitleBar>
-
-        <StackPanel Grid.Row="1" Margin="8">
+        <StackPanel Grid.Row="0" Margin="8">
             <TextBlock Text="This window demonstrates using the ModernWpf lib."
                        TextWrapping="Wrap"></TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="1">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="100 0 0 0">
                 <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
@@ -118,7 +105,7 @@
         </StackPanel>
         
         <TabControl TabStripPlacement="Left"
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Style="{StaticResource ModernTabControl}"
                     ItemContainerStyle="{StaticResource ModernTabItem2}"
                     Margin="8" 

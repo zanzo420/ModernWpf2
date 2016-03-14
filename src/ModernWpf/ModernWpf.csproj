@@ -98,11 +98,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\MetroStyles.xaml">
+    <Page Include="Themes\ModernStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\MetroStylesExplicit.xaml">
+    <Page Include="Themes\ModernStylesExplicit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

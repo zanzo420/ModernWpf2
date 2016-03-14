@@ -74,7 +74,7 @@ namespace ModernWpf
             while (control != null)
             {
                 var test = control as T;
-                if(test != null) { return test; }
+                if (test != null) { return test; }
 
                 control = VisualTreeHelper.GetParent(control);
             }
@@ -103,6 +103,9 @@ namespace ModernWpf
         {
             if (control != null)
             {
+                var casted = control as T;
+                if (casted != null) { return casted; }
+
                 var count = VisualTreeHelper.GetChildrenCount(control);
 
                 if (reverse)
@@ -110,7 +113,7 @@ namespace ModernWpf
                     for (int i = count - 1; i >= 0; i--)
                     {
                         var c = VisualTreeHelper.GetChild(control, i);
-                        var casted = c as T;
+                        casted = c as T;
                         if (casted != null)
                         {
                             return casted;
@@ -127,7 +130,7 @@ namespace ModernWpf
                     for (int i = 0; i < count; i++)
                     {
                         var c = VisualTreeHelper.GetChild(control, i);
-                        var casted = c as T;
+                        casted = c as T;
                         if (casted != null)
                         {
                             return casted;
