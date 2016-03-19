@@ -72,7 +72,7 @@
         <Style.Setters>
             <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="modern:TextTool.AutoCrisp" Value="True"/>
+            <Setter Property="modern:UIHooks.AutoCrisp" Value="True"/>
         </Style.Setters>
     </Style>
 
@@ -612,7 +612,7 @@
                                InactiveBorderBrush="{DynamicResource ModernForeground4}"></modern:Chrome>
             </Setter.Value>
         </Setter>
-        <Setter Property="modern:DpiTool.AutoDpiScale" Value="True"/>
+        <Setter Property="modern:UIHooks.AutoDpiScale" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
@@ -989,7 +989,7 @@
         <Setter Property="FontSize" Value="{DynamicResource ToolTipContentThemeFontSize}" />
         <Setter Property="Padding" Value="10,6,10,7" />
         <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
-        <Setter Property="modern:DpiTool.AutoDpiScale" Value="True"/>
+        <Setter Property="modern:UIHooks.AutoDpiScale" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
@@ -2903,7 +2903,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
         <Setter Property="Padding" Value="0 4" />
-        <Setter Property="modern:DpiTool.AutoDpiScale" Value="True"/>
+        <Setter Property="modern:UIHooks.AutoDpiScale" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">

@@ -48,7 +48,7 @@ namespace ModernWpf.Controls
         /// </summary>
         public AnimatedScrollViewer()
         {
-            MouseTool.AddMouseHWheelHandler(this, HandleHWheel);
+            UIHooks.AddMouseHWheelHandler(this, HandleHWheel);
         }
 
         private void HandleHWheel(object sender, MouseWheelEventArgs e)

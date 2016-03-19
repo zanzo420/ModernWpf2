@@ -123,7 +123,7 @@ namespace ModernWpf
             {
                 Rect rcWpf = TranslateToWpf(ref rcNative);
 
-                //var scale = DpiTool.GetWindowDpiScale(ContentWindow);
+                //var scale = UIHooks.GetWindowDpiScale(ContentWindow);
 
                 var leftW = _left.PadSize;
                 var topH = _top.PadSize;
@@ -335,12 +335,12 @@ namespace ModernWpf
                             var delta = wParam.ToInt32() >> 16;
                             var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
                             {
-                                RoutedEvent = MouseTool.PreviewMouseHWheelEvent
+                                RoutedEvent = UIHooks.PreviewMouseHWheelEvent
                             };
                             element.RaiseEvent(arg);
                             if (!arg.Handled)
                             {
-                                arg.RoutedEvent = MouseTool.MouseHWheelEvent;
+                                arg.RoutedEvent = UIHooks.MouseHWheelEvent;
                                 arg.Handled = false;
                                 element.RaiseEvent(arg);
 

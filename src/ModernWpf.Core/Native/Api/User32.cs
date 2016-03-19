@@ -54,8 +54,8 @@ namespace ModernWpf.Native.Api
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
             [DllImport("user32.dll")]
             public static extern IntPtr DefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -65,16 +65,16 @@ namespace ModernWpf.Native.Api
             public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
                 int x, int y, int cx, int cy, SetWindowPosOptions flags);
 
-            [DllImport("user32.dll")]
-            public static extern IntPtr BeginDeferWindowPos(int nNumWindows);
+            //[DllImport("user32.dll")]
+            //public static extern IntPtr BeginDeferWindowPos(int nNumWindows);
 
-            [DllImport("user32.dll")]
-            public static extern IntPtr DeferWindowPos(IntPtr hWinPosInfo, IntPtr hWnd, IntPtr hWndInsertAfter,
-                int x, int y, int cx, int cy, SetWindowPosOptions flags);
+            //[DllImport("user32.dll")]
+            //public static extern IntPtr DeferWindowPos(IntPtr hWinPosInfo, IntPtr hWnd, IntPtr hWndInsertAfter,
+            //    int x, int y, int cx, int cy, SetWindowPosOptions flags);
 
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool EndDeferWindowPos(IntPtr hWinPosInfo);
+            //[DllImport("user32.dll")]
+            //[return: MarshalAs(UnmanagedType.Bool)]
+            //public static extern bool EndDeferWindowPos(IntPtr hWinPosInfo);
 
             //[DllImport("user32.dll")]
             //public static extern int GetSystemMetrics(SystemMetric metric);
@@ -289,18 +289,18 @@ namespace ModernWpf.Native.Api
             return NativeMethods.PostMessage(hWnd, msg, wParam, lParam);
         }
 
-        /// <summary>
-        /// Sends the specified message to a window or windows. 
-        /// </summary>
-        /// <param name="hWnd">A handle to the window whose window procedure will receive the message. </param>
-        /// <param name="msg">The message to be sent.</param>
-        /// <param name="wParam">Additional message-specific information.</param>
-        /// <param name="lParam">Additional message-specific information.</param>
-        /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
-        public static IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
-        {
-            return NativeMethods.SendMessage(hWnd, msg, wParam, lParam);
-        }
+        ///// <summary>
+        ///// Sends the specified message to a window or windows. 
+        ///// </summary>
+        ///// <param name="hWnd">A handle to the window whose window procedure will receive the message. </param>
+        ///// <param name="msg">The message to be sent.</param>
+        ///// <param name="wParam">Additional message-specific information.</param>
+        ///// <param name="lParam">Additional message-specific information.</param>
+        ///// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
+        //public static IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        //{
+        //    return NativeMethods.SendMessage(hWnd, msg, wParam, lParam);
+        //}
 
         /// <summary>
         /// Calls the default window procedure to provide default processing for any window messages that an application does not process. This function ensures that every message is processed. DefWindowProc is called with the same parameters received by the window procedure.
@@ -332,21 +332,21 @@ namespace ModernWpf.Native.Api
             return NativeMethods.SetWindowPos(hWnd, hWndInsertAfter, x, y, cx, cy, flags);
         }
 
-        public static IntPtr DeferWindowPos(IntPtr whatever, IntPtr hWnd, IntPtr hWndInsertAfter,
-            int x, int y, int cx, int cy, SetWindowPosOptions flags)
-        {
-            return NativeMethods.DeferWindowPos(whatever, hWnd, hWndInsertAfter, x, y, cx, cy, flags);
-        }
+        //public static IntPtr DeferWindowPos(IntPtr whatever, IntPtr hWnd, IntPtr hWndInsertAfter,
+        //    int x, int y, int cx, int cy, SetWindowPosOptions flags)
+        //{
+        //    return NativeMethods.DeferWindowPos(whatever, hWnd, hWndInsertAfter, x, y, cx, cy, flags);
+        //}
 
-        public static IntPtr BeginDeferWindowPos(int count)
-        {
-            return NativeMethods.BeginDeferWindowPos(count);
-        }
+        //public static IntPtr BeginDeferWindowPos(int count)
+        //{
+        //    return NativeMethods.BeginDeferWindowPos(count);
+        //}
 
-        public static bool EndDeferWindowPos(IntPtr handle)
-        {
-            return NativeMethods.EndDeferWindowPos(handle);
-        }
+        //public static bool EndDeferWindowPos(IntPtr handle)
+        //{
+        //    return NativeMethods.EndDeferWindowPos(handle);
+        //}
 
         /// <summary>
         /// Retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.

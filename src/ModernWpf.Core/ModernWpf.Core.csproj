@@ -69,7 +69,7 @@
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
-    <Compile Include="DpiTool.cs" />
+    <Compile Include="UIHooks.Dpi.cs" />
     <Compile Include="EditorCommands.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\BorderManager.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Internal\Converters\EnumValueConverter.cs" />
     <Compile Include="Internal\Converters\TextFormattingModeConverter.cs" />
     <Compile Include="Internal\RelayCommand.cs" />
-    <Compile Include="MouseTool.cs" />
+    <Compile Include="UIHooks.Mouse.cs" />
     <Compile Include="Native\Api\Gdi32.cs" />
     <Compile Include="Native\Api\IconReader.cs" />
     <Compile Include="Native\Api\Shell32.cs" />
@@ -126,13 +126,14 @@
       <DependentUpon>CommandText.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\CommandTextBinder.cs" />
-    <Compile Include="TextTool.cs" />
+    <Compile Include="UIHooks.TextBlock.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="UIHooks.cs" />
     <Compile Include="WindowCommands.cs" />
   </ItemGroup>
   <ItemGroup>

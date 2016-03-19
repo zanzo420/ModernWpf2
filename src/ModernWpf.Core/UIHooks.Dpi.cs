@@ -11,10 +11,9 @@ using System.Windows.Media;
 
 namespace ModernWpf
 {
-    /// <summary>
-    /// Contains attached properties and routed event for DPI-related things.
-    /// </summary>
-    public static class DpiTool
+    // Contains attached properties and routed event for DPI-related things.
+
+    static partial class UIHooks
     {
         /// <summary>
         /// Tries to enable per-monitor high dpi support if possible (win8.1+), or general high dpi support (vista+).
@@ -55,26 +54,32 @@ namespace ModernWpf
         /// Identifies the DpiChange event. This can only be listened to by a <see cref="Window"/>.
         /// </summary>
         public static readonly RoutedEvent DpiChangeEvent =
-            EventManager.RegisterRoutedEvent("DpiChange", RoutingStrategy.Direct, typeof(EventHandler<DpiChangeEventArgs>), typeof(DpiTool));
+            EventManager.RegisterRoutedEvent("DpiChange", RoutingStrategy.Direct, typeof(EventHandler<DpiChangeEventArgs>), typeof(UIHooks));
 
         /// <summary>
         /// Adds a handler to the DpiChange event.
         /// </summary>
-        /// <param name="element">The element.</param>
+        /// <param name="window">The window.</param>
         /// <param name="handler">The handler.</param>
-        public static void AddDpiChangeHandler(DependencyObject element, EventHandler<DpiChangeEventArgs> handler)
+        /// <exception cref="ArgumentNullException">window</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        public static void AddDpiChangeHandler(Window window, EventHandler<DpiChangeEventArgs> handler)
         {
-            element.AddHandler(DpiChangeEvent, handler);
+            if (window == null) { throw new ArgumentNullException("window"); }
+            window.AddHandler(DpiChangeEvent, handler);
         }
 
         /// <summary>
         /// Removes a handler to the DpiChange event.
         /// </summary>
-        /// <param name="element">The element.</param>
+        /// <param name="window">The window.</param>
         /// <param name="handler">The handler.</param>
-        public static void RemoveDpiChangeHandler(DependencyObject element, EventHandler<DpiChangeEventArgs> handler)
+        /// <exception cref="ArgumentNullException">window</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        public static void RemoveDpiChangeHandler(Window window, EventHandler<DpiChangeEventArgs> handler)
         {
-            element.RemoveHandler(DpiChangeEvent, handler);
+            if (window == null) { throw new ArgumentNullException("window"); }
+            window.RemoveHandler(DpiChangeEvent, handler);
         }
 
 
@@ -84,7 +89,7 @@ namespace ModernWpf
         /// Attached property on a window to store its current DPI scale value.
         /// </summary>
         private static readonly DependencyProperty WindowDpiScaleProperty =
-            DependencyProperty.RegisterAttached("WindowDpiScale", typeof(double), typeof(DpiTool),
+            DependencyProperty.RegisterAttached("WindowDpiScale", typeof(double), typeof(UIHooks),
             new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -108,7 +113,7 @@ namespace ModernWpf
         /// Attached property on a window to store its current DPI value.
         /// </summary>
         internal static readonly DependencyProperty WindowDpiProperty =
-            DependencyProperty.RegisterAttached("WindowDpi", typeof(int), typeof(DpiTool),
+            DependencyProperty.RegisterAttached("WindowDpi", typeof(int), typeof(UIHooks),
             new FrameworkPropertyMetadata(96, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -129,7 +134,7 @@ namespace ModernWpf
         }
 
 
-        // marker on a transform to indicate it's created by the DpiTool
+        // marker on a transform to indicate it's created by the UIHooks
         static bool GetIsDpiTransform(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsDpiTransformProperty);
@@ -139,7 +144,7 @@ namespace ModernWpf
             obj.SetValue(IsDpiTransformProperty, value);
         }
         static readonly DependencyProperty IsDpiTransformProperty =
-            DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(DpiTool), new FrameworkPropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(UIHooks), new FrameworkPropertyMetadata(false));
 
 
 
@@ -176,7 +181,7 @@ namespace ModernWpf
         /// The automatic dpi scale dependency property. Can be used on a <see cref="Window"/>, <see cref="ContextMenu"/>, or <see cref="ToolTip"/>.
         /// </summary>
         public static readonly DependencyProperty AutoDpiScaleProperty =
-            DependencyProperty.RegisterAttached("AutoDpiScale", typeof(bool), typeof(DpiTool), new FrameworkPropertyMetadata(false, AutoDpiScaleChanged));
+            DependencyProperty.RegisterAttached("AutoDpiScale", typeof(bool), typeof(UIHooks), new FrameworkPropertyMetadata(false, AutoDpiScaleChanged));
 
         private static void AutoDpiScaleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -433,13 +438,13 @@ namespace ModernWpf
                 group.Children.Add(origTransform);
             }
             group.Children.Add(new ScaleTransform(dpiScaleFactor, dpiScaleFactor));
-            DpiTool.SetIsDpiTransform(group, true);
+            UIHooks.SetIsDpiTransform(group, true);
             return group;
         }
 
         static Transform UnwrapDpiTransform(Transform currentTransform)
         {
-            if (currentTransform != null && DpiTool.GetIsDpiTransform(currentTransform))
+            if (currentTransform != null && UIHooks.GetIsDpiTransform(currentTransform))
             {
                 var group = currentTransform as TransformGroup;
                 if (group != null && group.Children.Count > 1)
@@ -467,7 +472,7 @@ namespace ModernWpf
         /// <param name="window">The window.</param>
         /// <param name="newDpi">The new dpi.</param>
         /// <param name="scale">The scale.</param>
-        public DpiChangeEventArgs(Window window, int newDpi, double scale) : base(DpiTool.DpiChangeEvent, window)
+        public DpiChangeEventArgs(Window window, int newDpi, double scale) : base(UIHooks.DpiChangeEvent, window)
         {
             NewDpi = newDpi;
             Scale = scale;

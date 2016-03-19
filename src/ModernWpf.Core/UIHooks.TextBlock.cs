@@ -11,12 +11,11 @@ using System.Windows.Media;
 
 namespace ModernWpf
 {
-    /// <summary>
-    /// Contains attached property for making <see cref="TextBlock"/> look nice.
-    /// </summary>
-    public static class TextTool
+    // Contains attached properties for text-related things.
+
+    static partial class UIHooks
     {
-        static double _threshold = 14;
+        static double __threshold = 14;
 
         /// <summary>
         /// Gets or sets the font size threshold for <see cref="AutoCrispProperty"/> option.
@@ -24,27 +23,31 @@ namespace ModernWpf
         /// <value>
         /// The font size threshold.
         /// </value>
-        public static double FontSizeThreshold { get { return _threshold; } set { _threshold = value; } }
+        public static double FontSizeThreshold { get { return __threshold; } set { __threshold = value; } }
 
         /// <summary>
         /// Gets the AutoCrispProperty value.
         /// </summary>
-        /// <param name="obj">The object.</param>
+        /// <param name="textBlock">The text block.</param>
         /// <returns></returns>
-        public static bool GetAutoCrisp(DependencyObject obj)
+        /// <exception cref="ArgumentNullException">textBlock</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        public static bool GetAutoCrisp(TextBlock textBlock)
         {
-            if (obj == null) { throw new ArgumentNullException("obj"); }
-            return (bool)obj.GetValue(AutoCrispProperty);
+            if (textBlock == null) { throw new ArgumentNullException("textBlock"); }
+            return (bool)textBlock.GetValue(AutoCrispProperty);
         }
         /// <summary>
         /// Gets the AutoCrispProperty value.
         /// </summary>
-        /// <param name="obj">The object.</param>
+        /// <param name="textBlock">The text block.</param>
         /// <param name="value">if set to <c>true</c> then auto crisp is turned on.</param>
-        public static void SetAutoCrisp(DependencyObject obj, bool value)
+        /// <exception cref="ArgumentNullException">textBlock</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        public static void SetAutoCrisp(TextBlock textBlock, bool value)
         {
-            if (obj == null) { throw new ArgumentNullException("obj"); }
-            obj.SetValue(AutoCrispProperty, value);
+            if (textBlock == null) { throw new ArgumentNullException("textBlock"); }
+            textBlock.SetValue(AutoCrispProperty, value);
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace ModernWpf
         /// a <see cref="TextBlock"/>. 
         /// </summary>
         public static readonly DependencyProperty AutoCrispProperty =
-            DependencyProperty.RegisterAttached("AutoCrisp", typeof(bool), typeof(TextTool), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(AutoCrisp_Changed)));
+            DependencyProperty.RegisterAttached("AutoCrisp", typeof(bool), typeof(UIHooks), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(AutoCrisp_Changed)));
 
         private static void AutoCrisp_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -73,7 +76,7 @@ namespace ModernWpf
                         // actual binding used by converter
                         bind.Bindings.Add(new Binding { Source = tb });
                         // hack to listen to dpi change
-                        bind.Bindings.Add(new Binding { Source = tb, Path = new PropertyPath(DpiTool.WindowDpiProperty) });
+                        bind.Bindings.Add(new Binding { Source = tb, Path = new PropertyPath(UIHooks.WindowDpiProperty) });
                         // hack to listen to font size change
                         bind.Bindings.Add(new Binding(TextBlock.FontSizeProperty.Name) { Source = tb });
                         BindingOperations.SetBinding(tb, TextOptions.TextFormattingModeProperty, bind);

@@ -9,8 +9,8 @@
         x:Name="theWindow"
         Title="Chrome With TitleBar" Height="300" Width="460"
         ResizeMode="CanResizeWithGrip"
-        modern:DpiTool.AutoDpiScale="True"
-        modern:DpiTool.DpiChange="Window_DpiChange">
+        modern:UIHooks.AutoDpiScale="True"
+        modern:UIHooks.DpiChange="Window_DpiChange">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="8 4"></Setter>

@@ -4,16 +4,15 @@ using System.Windows.Input;
 
 namespace ModernWpf
 {
-    /// <summary>
-    /// Contains extra mouse events when using the modern <see cref="Chrome"/> on a <see cref="Window"/>.
-    /// </summary>
-    public static class MouseTool
+    // Contains extra mouse events when using the modern <see cref="Chrome"/> on a <see cref="Window"/>.
+    
+    static partial class UIHooks
     {
         /// <summary>
         /// Identifies the PreviewMouseHWheel event.
         /// </summary>
         public static readonly RoutedEvent PreviewMouseHWheelEvent =
-            EventManager.RegisterRoutedEvent("PreviewMouseHWheel", RoutingStrategy.Tunnel, typeof(MouseWheelEventHandler), typeof(MouseTool));
+            EventManager.RegisterRoutedEvent("PreviewMouseHWheel", RoutingStrategy.Tunnel, typeof(MouseWheelEventHandler), typeof(UIHooks));
 
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace ModernWpf
         /// Identifies the MouseHWheel event.
         /// </summary>
         public static readonly RoutedEvent MouseHWheelEvent =
-            EventManager.RegisterRoutedEvent("MouseHWheel", RoutingStrategy.Bubble, typeof(MouseWheelEventHandler), typeof(MouseTool));
+            EventManager.RegisterRoutedEvent("MouseHWheel", RoutingStrategy.Bubble, typeof(MouseWheelEventHandler), typeof(UIHooks));
 
         /// <summary>
         /// Adds a handler to the MouseHWheel event.

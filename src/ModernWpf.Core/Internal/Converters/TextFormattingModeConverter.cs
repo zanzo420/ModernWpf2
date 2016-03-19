@@ -30,8 +30,8 @@ namespace ModernWpf.Converters
                     var tb = v as TextBlock;
                     if (tb != null)
                     {
-                        var dpi = DpiTool.GetWindowDpi(tb);
-                        if (dpi <= 96 && tb.FontSize <= TextTool.FontSizeThreshold)
+                        var dpi = UIHooks.GetWindowDpi(tb);
+                        if (dpi <= 96 && tb.FontSize <= UIHooks.FontSizeThreshold)
                         {
                             mode = TextFormattingMode.Display;
                         }

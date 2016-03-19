@@ -131,11 +131,11 @@ namespace ModernWpf.Controls
             //var dpiBinding = new Binding()
             //{
             //    Source = _manager.ContentWindow,
-            //    Path = new PropertyPath(DpiTool.AutoDpiScaleProperty)
+            //    Path = new PropertyPath(UIHooks.AutoDpiScaleProperty)
             //};
-            //this.SetBinding(DpiTool.AutoDpiScaleProperty, dpiBinding);
+            //this.SetBinding(UIHooks.AutoDpiScaleProperty, dpiBinding);
 
-            //CreateBinding(DpiTool.AutoDpiScaleProperty.Name, _manager.ContentWindow, DpiTool.AutoDpiScaleProperty);
+            //CreateBinding(UIHooks.AutoDpiScaleProperty.Name, _manager.ContentWindow, UIHooks.AutoDpiScaleProperty);
             UpdateChromeBindings(Chrome.GetChrome(_manager.ContentWindow));
         }
 
@@ -182,7 +182,7 @@ namespace ModernWpf.Controls
         internal void UpdatePosn(double left, double top, double width, double height)
         {
             //User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
-            //var scale = DpiTool.GetWindowDpiScale(_manager.ContentWindow);
+            //var scale = UIHooks.GetWindowDpiScale(_manager.ContentWindow);
             //left /= scale;
             //top /= scale;
             //width /= scale;
@@ -411,7 +411,7 @@ namespace ModernWpf.Controls
             {
                 var pt = (Point)lParam.ToPoint();
                 if (isPointNC) { pt = PointFromScreen(pt); }
-                int diagSize = (int)(2 * PadSize * DpiTool.GetWindowDpiScale(_manager.ContentWindow));
+                int diagSize = (int)(2 * PadSize * UIHooks.GetWindowDpiScale(_manager.ContentWindow));
 
                 switch (Side)
                 {

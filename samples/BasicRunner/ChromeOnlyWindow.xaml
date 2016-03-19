@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="Basic Chrome Window" Height="300" Width="300"
         ResizeMode="CanResizeWithGrip"
-        modern:DpiTool.AutoDpiScale="True"
-        modern:DpiTool.DpiChange="Window_DpiChange">
+        modern:UIHooks.AutoDpiScale="True"
+        modern:UIHooks.DpiChange="Window_DpiChange">
     <modern:Chrome.Chrome>
         <modern:Chrome></modern:Chrome>
     </modern:Chrome.Chrome>

@@ -7,7 +7,7 @@
     <Application.Resources>
         <!--show case auto selecting between ideal/display text formatting-->
         <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-            <Setter Property="modern:TextTool.AutoCrisp" Value="True"></Setter>
+            <Setter Property="modern:UIHooks.AutoCrisp" Value="True"></Setter>
         </Style>
     </Application.Resources>
 </Application>

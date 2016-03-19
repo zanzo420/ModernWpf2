@@ -163,7 +163,7 @@ namespace ModernWpf
                 {
                     var c = VisualTreeHelper.GetChild(container, i);
                     var casted = c as T;
-                    if (casted != null)
+                    if (casted != null && callback != null)
                     {
                         var result = callback(casted);
                         if (result) { return true; }
@@ -185,7 +185,7 @@ namespace ModernWpf
         // from msdn http://msdn.microsoft.com/library/system.windows.threading.dispatcher.pushframe.aspx
 
         /// <summary>
-        /// Simulate the famous DoEvents() method from winform days.
+        /// Simulate the famous DoEvents() method from winform days. This may or may not work.
         /// </summary>
         /// <param name="application">The application.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters"), SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]

@@ -154,10 +154,10 @@ namespace ModernWpf
             // animated scroll viewer handles this already so do nothing
             if (scroller != null && !(scroller is AnimatedScrollViewer))
             {
-                scroller.RemoveHandler(MouseTool.MouseHWheelEvent, new MouseWheelEventHandler(HandleRealHWheelEvent));
+                scroller.RemoveHandler(UIHooks.MouseHWheelEvent, new MouseWheelEventHandler(HandleRealHWheelEvent));
                 if ((bool)e.NewValue)
                 {
-                    scroller.AddHandler(MouseTool.MouseHWheelEvent, new MouseWheelEventHandler(HandleRealHWheelEvent));
+                    scroller.AddHandler(UIHooks.MouseHWheelEvent, new MouseWheelEventHandler(HandleRealHWheelEvent));
                 }
             }
         }

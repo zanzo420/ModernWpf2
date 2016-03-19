@@ -17,8 +17,8 @@ namespace BasicRunner
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            DpiTool.EnableHighDpiSupport();
-            Debug.WriteLine("Per-monitor DPI Awareness=" + DpiTool.IsPerMonitorAware);
+            UIHooks.EnableHighDpiSupport();
+            Debug.WriteLine("Per-monitor DPI Awareness=" + UIHooks.IsPerMonitorAware);
             base.OnStartup(e);
         }
     }

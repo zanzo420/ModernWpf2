@@ -10,7 +10,7 @@ using System.Windows.Markup;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ModernWpf")]
-[assembly: AssemblyDescription("Contains the \"metro\" styles and controls for the ModernWpf lib.")]
+[assembly: AssemblyDescription("Contains the extra \"metro\" styles and controls for the ModernWpf lib.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ModernWpf")]
 [assembly: AssemblyTrademark("")]

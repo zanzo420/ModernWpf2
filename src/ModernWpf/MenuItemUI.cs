@@ -44,7 +44,7 @@ namespace ModernWpf
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns></returns>
-        public static String GetGroupName(MenuItem element)
+        public static string GetGroupName(MenuItem element)
         {
             if (element == null) { throw new ArgumentNullException("element"); }
             return element.GetValue(GroupNameProperty).ToString();
