@@ -33,6 +33,7 @@ namespace ModernWpf
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="value">The value.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static void SetGroupName(MenuItem element, String value)
         {
             if (element == null) { throw new ArgumentNullException("element"); }
@@ -44,6 +45,7 @@ namespace ModernWpf
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static string GetGroupName(MenuItem element)
         {
             if (element == null) { throw new ArgumentNullException("element"); }

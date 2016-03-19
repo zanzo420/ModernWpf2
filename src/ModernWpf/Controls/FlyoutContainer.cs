@@ -107,7 +107,7 @@ namespace ModernWpf.Controls
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
             DependencyProperty.Register("DisableTarget", typeof(FrameworkElement), typeof(FlyoutContainer), new FrameworkPropertyMetadata(null));
-        
+
 
         #endregion
 
@@ -124,18 +124,18 @@ namespace ModernWpf.Controls
             _overlay = GetTemplateChild(PARTOverlay) as Border;
             if (HasFlyoutOpen)
             {
-                var test = VisualStateManager.GoToState(this, "IsOpen", Animations.ShouldAnimate);
+                VisualStateManager.GoToState(this, "IsOpen", Animations.ShouldAnimate);
             }
             else
             {
-                var test = VisualStateManager.GoToState(this, "IsClosed", Animations.ShouldAnimate);
+                VisualStateManager.GoToState(this, "IsClosed", Animations.ShouldAnimate);
             }
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             var diag = this.Content as Flyout;
-            if (diag != null)
+            if (diag != null && e != null)
             {
                 var hitRes = VisualTreeHelper.HitTest(this, e.GetPosition(this));
                 if (hitRes.VisualHit == _overlay)
