@@ -612,6 +612,7 @@
                                InactiveBorderBrush="{DynamicResource ModernForeground4}"></modern:Chrome>
             </Setter.Value>
         </Setter>
+        <Setter Property="modern:DpiTool.AutoDpiScale" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">

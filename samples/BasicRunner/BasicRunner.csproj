@@ -89,7 +89,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="VM\SampleAppVM.cs" />
-    <Page Include="MetroThemeWindow.xaml">
+    <Page Include="ModernThemeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -113,8 +113,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MetroThemeWindow.xaml.cs">
-      <DependentUpon>MetroThemeWindow.xaml</DependentUpon>
+    <Compile Include="ModernThemeWindow.xaml.cs">
+      <DependentUpon>ModernThemeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaterialWindow.xaml.cs">
       <DependentUpon>MaterialWindow.xaml</DependentUpon>

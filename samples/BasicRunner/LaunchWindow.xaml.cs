@@ -55,7 +55,7 @@ namespace BasicRunner
 
         private void btnMetro_Click(object sender, RoutedEventArgs e)
         {
-            new MetroThemeWindow { Owner = this }.Show();
+            new ModernThemeWindow { Owner = this }.Show();
         }
     }
 }

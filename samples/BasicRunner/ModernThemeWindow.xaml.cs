@@ -19,29 +19,18 @@ using System.Windows.Shapes;
 namespace BasicRunner
 {
     /// <summary>
-    /// Interaction logic for MetroThemeWindow.xaml
+    /// Interaction logic for ModernThemeWindow.xaml
     /// </summary>
-    public partial class MetroThemeWindow : Window
+    public partial class ModernThemeWindow : Window
     {
-        public MetroThemeWindow()
+        public ModernThemeWindow()
         {
             InitializeComponent();
-            Style = (Style)FindResource("ModernWindow");
         }
 
         private void Window_DpiChange(object sender, ModernWpf.DpiChangeEventArgs e)
         {
             Debug.WriteLine("DPI changed to " + e.NewDpi);
-        }
-
-        private void btnRtl_Checked(object sender, RoutedEventArgs e)
-        {
-            this.FlowDirection = FlowDirection.RightToLeft;
-        }
-
-        private void btnRtl_Unchecked(object sender, RoutedEventArgs e)
-        {
-            this.FlowDirection = FlowDirection.LeftToRight;
         }
 
         private void btnMsgBox_Click(object sender, RoutedEventArgs e)

@@ -7,16 +7,19 @@
         xmlns:modern="http://modernwpf"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Launcher" Height="250" Width="200"
+        Title="Launcher" Height="250" Width="250"
         modern:DpiTool.AutoDpiScale="True"
         modern:DpiTool.DpiChange="Window_DpiChange">
     <Grid>
         <StackPanel>
+            <TextBlock Text="All windows should be per-monitor DPI aware and scale accordingly."
+                       Padding="8" TextWrapping="Wrap"></TextBlock>
+            
             <Button  Margin="8" Content="Basic Chrome Only" x:Name="btnChromeOnly" Click="btnChromeOnly_Click"></Button>
 
-            <Button  Margin="8" Content="Basic Chrome With Title" x:Name="btnChromeTitle" Click="btnChromeTitle_Click"></Button>
+            <Button  Margin="8" Content="Basic Chrome With TitleBar" x:Name="btnChromeTitle" Click="btnChromeTitle_Click"></Button>
 
-            <Button  Margin="8" Content="Metro lib sample" x:Name="btnMetro" Click="btnMetro_Click"></Button>
+            <Button  Margin="8" Content="Modern lib sample" x:Name="btnMetro" Click="btnMetro_Click"></Button>
 
             <!--<Button  Margin="8" Content="Basic Chrome Material Lib" x:Name="btnMaterial" Click="btnMaterial_Click"></Button>-->
         </StackPanel>

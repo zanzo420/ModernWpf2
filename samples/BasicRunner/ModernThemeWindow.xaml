@@ -1,4 +1,4 @@
-﻿<Window x:Class="BasicRunner.MetroThemeWindow"
+﻿<Window x:Class="BasicRunner.ModernThemeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,9 +10,7 @@
         x:Name="theWindow"
         Title="ModernWpf Controls and Themes" Height="650" Width="750"
         ResizeMode="CanResizeWithGrip" 
-
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        modern:DpiTool.AutoDpiScale="True"
         modern:DpiTool.DpiChange="Window_DpiChange">
     <Window.Resources>
         <ResourceDictionary>
@@ -21,10 +19,13 @@
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/BaseValues.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/ColorLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/Themes/ModernStyles.xaml" />
-                
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.Style>
+        <Style TargetType="Window" BasedOn="{StaticResource ModernWindow}"></Style>
+    </Window.Style>
     <Window.DataContext>
         <vm:SampleAppVM></vm:SampleAppVM>
     </Window.DataContext>
@@ -88,22 +89,25 @@
                 </StackPanel>
             </StackPanel>
 
-            <ItemsControl ItemsSource="{Binding Accents}" HorizontalAlignment="Center">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <RadioButton GroupName="GroupColor" Margin="4" ToolTip="{Binding Name}" x:Name="radioAccent" Checked="radioAccent_Checked">
-                            <Rectangle Width="24" Height="24" Margin="0 0 2 2" Fill="{Binding MainBrush}" />
-                        </RadioButton>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Accents: "></Label>
+                <ItemsControl ItemsSource="{Binding Accents}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="GroupColor" Margin="4" ToolTip="{Binding Name}" x:Name="radioAccent" Checked="radioAccent_Checked">
+                                <Rectangle Width="24" Height="24" Margin="0 0 2 2" Fill="{Binding MainBrush}" />
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </StackPanel>
-        
+
         <TabControl TabStripPlacement="Left"
                     Grid.Row="2"
                     Style="{StaticResource ModernTabControl}"
@@ -115,11 +119,11 @@
                 <modern:AnimatedContentControl>
                     <Grid>
                         <modern:FlyoutContainer x:Name="innerFlyoutBox"></modern:FlyoutContainer>
-                        
+
                         <StackPanel HorizontalAlignment="Left">
                             <RadioButton Content="Use outer" GroupName="flyGroup" x:Name="flyOuter" IsChecked="True"></RadioButton>
                             <RadioButton Content="Use inner" GroupName="flyGroup" x:Name="flyInner"></RadioButton>
-                            
+
                             <Button x:Name="btnMsgBox" Content="MessageBox replacements"
                                 Margin="8" Click="btnMsgBox_Click"></Button>
                         </StackPanel>
