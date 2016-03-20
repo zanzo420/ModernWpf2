@@ -74,10 +74,9 @@ namespace ModernWpf.Messages
 
         /// <summary>
         /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a folder dialog based on the message options.
-        /// This uses the ancient folder browser and is not recommended.
         /// </summary>
-        /// <param name="owner">The owner.</param>
-        /// </exception>
+        /// <param name="owner">The owner.</pa
+        /// <exception cref="System.NotSupportedException"></exception>
         public virtual void HandleWithPlatform(Window owner)
         {
             if (HackyFolderBrowserDialog.IsSupported)
