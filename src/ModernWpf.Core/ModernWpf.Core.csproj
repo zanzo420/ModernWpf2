@@ -102,7 +102,7 @@
     <Compile Include="Internal\Native\NCCALCSIZE_PARAMS.cs" />
     <Compile Include="Internal\Native\Api\Ntdll.cs" />
     <Compile Include="Internal\Native\OSVERSIONINFOEX.cs" />
-    <Compile Include="Internal\Native\PlatformInfo.cs" />
+    <Compile Include="PlatformInfo.cs" />
     <Compile Include="Internal\Native\POINT.cs" />
     <Compile Include="Internal\Native\PROCESS_DPI_AWARENESS.cs" />
     <Compile Include="Internal\Native\RECT.cs" />

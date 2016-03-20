@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="GridViewSortParameter.cs" />
     <Compile Include="Internal\HSLColor.cs" />
+    <Compile Include="Internal\HackyFolderBrowserDialog.cs" />
     <Compile Include="Internal\ScrollViewerExtensions.cs" />
     <Compile Include="Internal\WpfWin32Window.cs" />
     <Compile Include="ListViewUI.cs" />

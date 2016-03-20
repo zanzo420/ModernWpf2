@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ModernWpf.Native
+namespace ModernWpf
 {
     /// <summary>
     /// Provides checks for platform support.
     /// </summary>
-    static class PlatformInfo
+    public static class PlatformInfo
     {
         static PlatformInfo()
         {

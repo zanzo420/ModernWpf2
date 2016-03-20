@@ -80,24 +80,49 @@ namespace ModernWpf.Messages
         /// </exception>
         public virtual void HandleWithPlatform(Window owner)
         {
-            using (var diag = new System.Windows.Forms.FolderBrowserDialog())
+            if (HackyFolderBrowserDialog.IsSupported)
             {
-                diag.ShowNewFolderButton = true;
-                diag.SelectedPath = InitialFolder;
-
-                var winformOwner = owner == null ? null : new Wpf32Window(owner);
-                if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
+                var diag = new HackyFolderBrowserDialog
+                {
+                    FileName = InitialFolder,
+                    Title = this.Caption,
+                };
+                if (diag.ShowDialog(owner))
                 {
                     if (owner == null || owner.Dispatcher.CheckAccess())
                     {
-                        DoCallback(diag.SelectedPath);
+                        DoCallback(diag.FileName);
                     }
                     else
                     {
                         owner.Dispatcher.BeginInvoke(new Action(() =>
                         {
-                            DoCallback(diag.SelectedPath);
+                            DoCallback(diag.FileName);
                         }));
+                    }
+                }
+            }
+            else
+            {
+                using (var diag = new System.Windows.Forms.FolderBrowserDialog())
+                {
+                    diag.ShowNewFolderButton = true;
+                    diag.SelectedPath = InitialFolder;
+
+                    var winformOwner = owner == null ? null : new Wpf32Window(owner);
+                    if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        if (owner == null || owner.Dispatcher.CheckAccess())
+                        {
+                            DoCallback(diag.SelectedPath);
+                        }
+                        else
+                        {
+                            owner.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                DoCallback(diag.SelectedPath);
+                            }));
+                        }
                     }
                 }
             }
