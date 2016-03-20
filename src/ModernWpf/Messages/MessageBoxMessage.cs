@@ -13,6 +13,7 @@ namespace ModernWpf.Messages
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
         /// </summary>
         /// <param name="content">The content.</param>
+        /// <param name="callback">The callback.</param>
         public MessageBoxMessage(string content, Action<MessageBoxResult> callback = null) : this(null, null, content, callback) { }
 
         /// <summary>
@@ -20,6 +21,7 @@ namespace ModernWpf.Messages
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="content">The content.</param>
+        /// <param name="callback">The callback.</param>
         public MessageBoxMessage(object sender, string content, Action<MessageBoxResult> callback = null) : this(sender, null, content, callback) { }
 
         /// <summary>
@@ -28,11 +30,12 @@ namespace ModernWpf.Messages
         /// <param name="sender">The message's original sender.</param>
         /// <param name="target">The message's intended target.</param>
         /// <param name="content">The content.</param>
+        /// <param name="callback">The callback.</param>
         public MessageBoxMessage(object sender, object target, string content, Action<MessageBoxResult> callback = null)
             : base(sender, target)
         {
             Content = content;
-            Callback = callback;
+            _callback = callback;
         }
 
         /// <summary>
@@ -83,10 +86,19 @@ namespace ModernWpf.Messages
         /// </value>
         public MessageBoxOptions Options { get; set; }
 
+        Action<MessageBoxResult> _callback;
+
         /// <summary>
-        /// Gets the callback.
+        /// Does the callback to notify dialog result.
         /// </summary>
-        public Action<MessageBoxResult> Callback { get; private set; }
+        /// <param name="result">The result.</param>
+        public void DoCallback(MessageBoxResult result)
+        {
+            if (_callback != null)
+            {
+                _callback(result);
+            }
+        }
 
 
         /// <summary>
@@ -98,21 +110,41 @@ namespace ModernWpf.Messages
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
 
-            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
-            if (Callback != null)
+            var d = owner.FindDispatcher();
+            if (d != null && !d.CheckAccess())
             {
-                if (owner == null || owner.CheckAccess())
+                d.BeginInvoke(new Action<Window>(win =>
                 {
-                    Callback(res);
-                }
-                else
-                {
-                    owner.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        Callback(res);
-                    }));
-                }
+                    HandleWithModern(win);
+                }), owner);
+                return;
             }
+
+            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
+            DoCallback(res);
+        }
+
+        /// <summary>
+        /// Handles a basic <see cref="MessageBoxMessage" /> on a flyout container by showing a <see cref="ModernMessageBox" />
+        /// and invokes the callback.
+        /// </summary>
+        /// <param name="owner">The owner.</param>
+        public void HandleWithModern(FlyoutContainer owner)
+        {
+            if (owner == null) { throw new ArgumentNullException("owner"); }
+
+            var d = owner.FindDispatcher();
+            if (d != null && !d.CheckAccess())
+            {
+                d.BeginInvoke(new Action<Window>(win =>
+                {
+                    HandleWithModern(win);
+                }), owner);
+                return;
+            }
+
+            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
+            DoCallback(res);
         }
 
         /// <summary>
@@ -123,6 +155,17 @@ namespace ModernWpf.Messages
         public void HandleWithPlatform(Window owner)
         {
             MessageBoxResult res = MessageBoxResult.None;
+
+            var d = owner.FindDispatcher();
+            if (d != null && !d.CheckAccess())
+            {
+                d.BeginInvoke(new Action<Window>(win =>
+                {
+                    HandleWithPlatform(win);
+                }), owner);
+                return;
+            }
+
             if (owner == null)
             {
                 res = MessageBox.Show(Content, Caption, Button, Icon, DefaultResult, Options);
@@ -131,21 +174,7 @@ namespace ModernWpf.Messages
             {
                 res = MessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult, Options);
             }
-
-            if (Callback != null)
-            {
-                if (owner == null || owner.CheckAccess())
-                {
-                    Callback(res);
-                }
-                else
-                {
-                    owner.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        Callback(res);
-                    }));
-                }
-            }
+            DoCallback(res);
         }
 
     }

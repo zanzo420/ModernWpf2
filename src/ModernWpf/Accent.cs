@@ -15,77 +15,89 @@ namespace ModernWpf
         #region static stuff
 
 
-        #region known accent names
+        #region pre-defined accents
 
         /// <summary>
-        /// Pre-defined name for the red accent.
+        /// Gets the pre-defined red accent.
         /// </summary>
-        public const string Red = "Red";
+        public static Accent Red { get; } = new Accent("Red", (Color)ColorConverter.ConvertFromString("#CD3333"));
         /// <summary>
-        /// Pre-defined name for the orange accent.
+        /// Gets the pre-defined orange accent.
         /// </summary>
-        public const string Orange = "Orange";
+        public static Accent Orange { get; } = new Accent("Orange", Colors.Chocolate);
         /// <summary>
-        /// Pre-defined name for the green accent.
+        /// Gets the pre-defined gold accent.
         /// </summary>
-        public const string Green = "Green";
+        public static Accent Gold { get; } = new Accent("Gold", Colors.Goldenrod); // #CDAD00
         /// <summary>
-        /// Pre-defined name for the teal accent.
+        /// Gets the pre-defined olive accent.
         /// </summary>
-        public const string Teal = "Teal";
+        public static Accent Olive { get; } = new Accent("Olive", (Color)ColorConverter.ConvertFromString("#6B8E23"));
         /// <summary>
-        /// Pre-defined name for the olive accent.
+        /// Gets the pre-defined teal accent.
         /// </summary>
-        public const string Olive = "Olive";
+        public static Accent Teal { get; } = new Accent("Teal", (Color)ColorConverter.ConvertFromString("#00959D"));
         /// <summary>
-        /// Pre-defined name for the gold accent.
+        /// Gets the pre-defined green accent.
         /// </summary>
-        public const string Gold = "Gold";
+        public static Accent Green { get; } = new Accent("Green", Colors.ForestGreen);
+        /// <summary>
+        /// Gets the pre-defined light blue accent.
+        /// </summary>
+        public static Accent LightBlue { get; } = new Accent("Light Blue", Colors.DodgerBlue);
+        /// <summary>
+        /// Gets the pre-defined dark blue accent.
+        /// </summary>
+        public static Accent DarkBlue { get; } = new Accent("Dark Blue", (Color)ColorConverter.ConvertFromString("#007ACC"));
+        /// <summary>
+        /// Gets the pre-defined light purple accent.
+        /// </summary>
+        public static Accent LightPurple { get; } = new Accent("Light Purple", Colors.MediumOrchid);
+        /// <summary>
+        /// Gets the pre-defined dark purple accent.
+        /// </summary>
+        public static Accent DarkPurple { get; } = new Accent("Dark Purple", Colors.BlueViolet);
 
         /// <summary>
-        /// Pre-defined name for the light blue accent.
+        /// Gets all the predefined accents in an array.
+        /// This returns a new array when called.
         /// </summary>
-        public const string LightBlue = "Light Blue";
-        /// <summary>
-        /// Pre-defined name for the dark blue accent.
-        /// </summary>
-        public const string DarkBlue = "Dark Blue";
-        /// <summary>
-        /// Pre-defined name for the light purple accent.
-        /// </summary>
-        public const string LightPurple = "Light Purple";
-        /// <summary>
-        /// Pre-defined name for the dark purple accent.
-        /// </summary>
-        public const string DarkPurple = "Dark Purple";
-
-        #endregion
-
-
-        #endregion
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Accent"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="color">The color.</param>
-        public Accent(string name, Color color)
+        /// <returns></returns>
+        public static Accent[] GetPredefinedAccents()
         {
-            Name = name;
-            Color = color;
+            return new Accent[]
+            {
+                Red, Orange, Gold, Olive, Teal, Green, LightBlue, DarkBlue, LightPurple, DarkPurple
+            };
+        }
+
+        #endregion
+
+
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Accent" /> class.
+        /// </summary>
+        /// <param name="displayName">The display name.</param>
+        /// <param name="accentColor">Color of the accent.</param>
+        public Accent(string displayName, Color accentColor)
+        {
+            Name = displayName;
+            Color = accentColor;
 
             // instead of alpha modify in intensity
 
-            var hsl = (HSLColor)color;
+            var hsl = (HSLColor)accentColor;
             var lumiStep = (hsl.Luminosity - 0.1) / 5;
-            Debug.WriteLine("{0}\t{1} at {2:n2}", name, hsl, lumiStep);
+            Debug.WriteLine("{0}\t{1} at {2:n2}", displayName, hsl, lumiStep);
             //var satStep = 0d;
             //if (hsl.Saturation > 0.3)
             //{
             //    satStep = (hsl.Saturation - 0.3) / 5;
             //}
 
-            MainBrush = GetBrush(0xff, color);
+            MainBrush = GetBrush(0xff, accentColor);
             var origLumi = hsl.Luminosity;
 
             hsl.Luminosity -= lumiStep;
@@ -123,15 +135,15 @@ namespace ModernWpf
             LightBrush4 = GetBrush(0xff, hsl);
 
             // opacity scale
-            AlphaBrush1 = GetBrush(0xe5, color);
-            AlphaBrush2 = GetBrush(0xcc, color);
-            AlphaBrush3 = GetBrush(0xb2, color);
-            AlphaBrush4 = GetBrush(0x99, color);
-            AlphaBrush5 = GetBrush(0x7f, color);
-            AlphaBrush6 = GetBrush(0x66, color);
-            AlphaBrush7 = GetBrush(0x4c, color);
-            AlphaBrush8 = GetBrush(0x33, color);
-            AlphaBrush9 = GetBrush(0x19, color);
+            AlphaBrush1 = GetBrush(0xe5, accentColor);
+            AlphaBrush2 = GetBrush(0xcc, accentColor);
+            AlphaBrush3 = GetBrush(0xb2, accentColor);
+            AlphaBrush4 = GetBrush(0x99, accentColor);
+            AlphaBrush5 = GetBrush(0x7f, accentColor);
+            AlphaBrush6 = GetBrush(0x66, accentColor);
+            AlphaBrush7 = GetBrush(0x4c, accentColor);
+            AlphaBrush8 = GetBrush(0x33, accentColor);
+            AlphaBrush9 = GetBrush(0x19, accentColor);
         }
 
         static SolidColorBrush GetBrush(byte alpha, Color color)
@@ -286,5 +298,16 @@ namespace ModernWpf
         /// The alpha brush9.
         /// </value>
         public Brush AlphaBrush9 { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

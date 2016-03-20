@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace ModernWpf
 {
@@ -10,18 +11,18 @@ namespace ModernWpf
     class HackyFolderBrowserDialog : Microsoft.Win32.CommonDialog
     {
         public string SelectedPath { get; private set; }
-        public string[] SelectedPaths { get; private set; }
+        //public string[] SelectedPaths { get; private set; }
         public string InitialDirectory { get; set; }
         public string Title { get; set; }
-        public bool MultiSelect { get; set; }
+        //public bool MultiSelect { get; set; }
 
         public override void Reset()
         {
             SelectedPath = null;
-            SelectedPaths = null;
+            //SelectedPaths = null;
             InitialDirectory = null;
             Title = null;
-            MultiSelect = false;
+            //MultiSelect = false;
         }
 
         static bool __errored;
@@ -54,7 +55,7 @@ namespace ModernWpf
                 setupDlg.AddExtension = false;
                 setupDlg.CheckFileExists = false;
                 setupDlg.DereferenceLinks = true;
-                setupDlg.Multiselect = MultiSelect;
+                //setupDlg.Multiselect = MultiSelect;
 
                 try
                 {
@@ -77,14 +78,14 @@ namespace ModernWpf
                         if (result == 0)
                         {
                             SelectedPath = setupDlg.FileName;
-                            SelectedPaths = setupDlg.FileNames;
+                            //SelectedPaths = setupDlg.FileNames;
                             return true;
                         }
                     }
                     finally
                     {
                         HiddenDialogType.CallMethod("Unadvise", realDlg, cookie);
-                        GC.KeepAlive(dlgEvents);
+                        //GC.KeepAlive(dlgEvents);
                     }
                 }
                 catch

@@ -22,39 +22,6 @@ namespace ModernWpf
             return style;
         }
 
-        #region predefined accents
-
-        /// <summary>
-        /// Gets the predefined accent with the specified name.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns></returns>
-        public static Accent GetPredefinedAccent(string name)
-        {
-            return PredefinedAccents.Where(a => string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-        }
-
-        static readonly Accent[] _accents = new Accent[]{
-            new Accent(Accent.Red, (Color)ColorConverter.ConvertFromString("#CD3333")),
-            new Accent(Accent.Orange, Colors.Chocolate),
-            //new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
-            new Accent(Accent.Gold,Colors.Goldenrod),
-            new Accent(Accent.Olive,(Color)ColorConverter.ConvertFromString("#6B8E23")),
-            new Accent(Accent.Teal,(Color)ColorConverter.ConvertFromString("#00959D")),
-            new Accent(Accent.Green, Colors.ForestGreen),
-            new Accent(Accent.LightBlue, Colors.DodgerBlue),
-            new Accent(Accent.DarkBlue,(Color)ColorConverter.ConvertFromString("#007ACC")),
-            new Accent(Accent.LightPurple, Colors.MediumOrchid),
-            new Accent(Accent.DarkPurple, Colors.BlueViolet),
-        };
-
-        /// <summary>
-        /// Gets the predefined accents colors.
-        /// </summary>
-        public static IEnumerable<Accent> PredefinedAccents { get { return _accents; } }
-
-        #endregion
-
         static Accent _curAccent;
         /// <summary>
         /// Gets the current accent.
@@ -66,8 +33,7 @@ namespace ModernWpf
         {
             get
             {
-                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LightBlue); }
-                return _curAccent;
+                return _curAccent ?? (_curAccent = Accent.LightBlue);
             }
         }
 
@@ -82,35 +48,39 @@ namespace ModernWpf
 
 
         /// <summary>
-        /// Applies the theme with the name of the accent color theme.
-        /// </summary>
-        /// <param name="theme">The theme.</param>
-        /// <param name="predefinedAccentName">Name of the predefined accent. These can be found in the <see cref="Accent" /> class.</param>
-        /// <param name="dictionary">The dictionary to apply. If <code>null</code> then the application's resource dictionary is used.</param>
-        public static void ApplyTheme(ThemeColor theme, string predefinedAccentName, ResourceDictionary dictionary = null)
-        {
-            var accent = GetPredefinedAccent(predefinedAccentName);
-            if (accent != null)
-            {
-                ApplyTheme(theme, accent, dictionary);
-            }
-        }
-
-        /// <summary>
-        /// Applies the theme with the accent color theme.
+        /// Applies the theme with the accent color to the global application dictionary.
         /// </summary>
         /// <param name="theme">The theme.</param>
         /// <param name="accent">The accent.</param>
-        /// <param name="dictionary">The dictionary to apply. If <code>null</code> then the application's resource dictionary is used.</param>
         /// <exception cref="System.ArgumentNullException">accent</exception>
-        public static void ApplyTheme(ThemeColor theme, Accent accent, ResourceDictionary dictionary = null)
+        public static void ApplyTheme(ThemeColor theme, Accent accent)
+        {
+            ApplyTheme(theme, accent, null);
+        }
+
+        /// <summary>
+        /// Applies the theme with the accent color to the specified dictionary.
+        /// </summary>
+        /// <param name="theme">The theme.</param>
+        /// <param name="accent">The accent.</param>
+        /// <param name="dictionary">The dictionary to apply. If <code>null</code> then the application's resource dictionary is used if possible.</param>
+        /// <exception cref="System.ArgumentNullException">accent</exception>
+        /// <exception cref="System.NotSupportedException">No application resource dictionary found.</exception>
+        public static void ApplyTheme(ThemeColor theme, Accent accent, ResourceDictionary dictionary)
         {
             if (accent == null) { throw new ArgumentNullException("accent"); }
+            if (dictionary == null)
+            {
+                if (Application.Current == null)
+                {
+                    throw new NotSupportedException("No application resource dictionary found.");
+                }
+                dictionary = Application.Current.Resources;
+            }
 
             _curAccent = accent;
             CurrentTheme = theme;
 
-            if (dictionary == null) { dictionary = Application.Current.Resources; }
 
             ApplyResources(theme == ThemeColor.Light ? LIGHT_THEME : DARK_THEME, dictionary);
             dictionary["ModernAccent"] = accent.MainBrush;

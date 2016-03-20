@@ -9,13 +9,17 @@ namespace ModernWpf.ViewModels
     /// </summary>
     public abstract class ObservableBase : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        protected virtual void RaisePropertyChanged(string propertyName = null)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        protected virtual void RaisePropertyChanged(string propertyName)
         {
             var handle = PropertyChanged;
             if (handle != null) { handle(this, new PropertyChangedEventArgs(propertyName)); }
@@ -26,6 +30,8 @@ namespace ModernWpf.ViewModels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName">Name of the property using linq expression.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         protected virtual void RaisePropertyChanged<T>(Expression<Func<T>> propertyName)
         {
             var handle = PropertyChanged;

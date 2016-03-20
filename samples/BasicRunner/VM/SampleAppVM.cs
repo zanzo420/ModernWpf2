@@ -43,7 +43,7 @@ namespace BasicRunner.VM
             //        String = string.Format("Item # {0}", i)
             //    });
             //}
-            Accents = Theme.PredefinedAccents.ToList();
+            Accents = new List<Accent>(Accent.GetPredefinedAccents());
 
             //Progress = new ProgressViewModel();
 

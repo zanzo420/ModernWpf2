@@ -75,6 +75,16 @@ namespace ModernWpf.Messages
         /// <param name="owner">The owner.</param>
         public virtual void HandleWithPlatform(Window owner)
         {
+            var d = owner.FindDispatcher();
+            if (d != null && !d.CheckAccess())
+            {
+                d.BeginInvoke(new Action<Window>(win =>
+                {
+                    HandleWithPlatform(win);
+                }), owner);
+                return;
+            }
+
             try
             {
                 // could've used windows api codepack but didn't feel like taking depenency for only 1 thing
@@ -87,19 +97,7 @@ namespace ModernWpf.Messages
                     };
                     if (diag.ShowDialog(owner).GetValueOrDefault())
                     {
-                        Dispatcher d = owner.FindDispatcher();
-
-                        if (d == null || d.CheckAccess())
-                        {
-                            DoCallback(diag.SelectedPath);
-                        }
-                        else
-                        {
-                            d.BeginInvoke(new Action(() =>
-                            {
-                                DoCallback(diag.SelectedPath);
-                            }));
-                        }
+                        DoCallback(diag.SelectedPath);
                     }
                     return;
                 }
@@ -115,19 +113,7 @@ namespace ModernWpf.Messages
                 var winformOwner = owner == null ? null : new Wpf32Window(owner);
                 if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
                 {
-                    Dispatcher d = owner.FindDispatcher();
-
-                    if (d == null || d.CheckAccess())
-                    {
-                        DoCallback(diag.SelectedPath);
-                    }
-                    else
-                    {
-                        d.BeginInvoke(new Action(() =>
-                        {
-                            DoCallback(diag.SelectedPath);
-                        }));
-                    }
+                    DoCallback(diag.SelectedPath);
                 }
             }
         }

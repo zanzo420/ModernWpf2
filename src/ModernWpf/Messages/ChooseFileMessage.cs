@@ -23,7 +23,8 @@ namespace ModernWpf.Messages
         /// <param name="sender">The message's original sender.</param>
         /// <param name="callback">The callback when files are selected.</param>
         public ChooseFileMessage(object sender, FileSelected callback)
-            : this(sender, null, callback) { }
+            : this(sender, null, callback)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
@@ -99,14 +100,22 @@ namespace ModernWpf.Messages
         /// <param name="owner">The owner.</param>
         public virtual void HandleWithPlatform(Window owner)
         {
+            var d = owner.FindDispatcher();
+            if (d != null && !d.CheckAccess())
+            {
+                d.BeginInvoke(new Action<Window>(win =>
+                {
+                    HandleWithPlatform(win);
+                }), owner);
+                return;
+            }
+
             FileDialog dialog = null;
 
             switch (Purpose)
             {
                 case FilePurpose.OpenMultiple:
-                    var d = new OpenFileDialog();
-                    d.Multiselect = true;
-                    dialog = d;
+                    dialog = new OpenFileDialog { Multiselect = true };
                     break;
                 case FilePurpose.OpenSingle:
                     dialog = new OpenFileDialog();
@@ -130,19 +139,7 @@ namespace ModernWpf.Messages
                 var result = owner == null ? dialog.ShowDialog().GetValueOrDefault() : dialog.ShowDialog(owner).GetValueOrDefault();
                 if (result)
                 {
-                    Dispatcher d = owner.FindDispatcher();
-
-                    if (d == null || d.CheckAccess())
-                    {
-                        DoCallback(dialog.FileNames);
-                    }
-                    else
-                    {
-                        d.BeginInvoke(new Action(() =>
-                        {
-                            DoCallback(dialog.FileNames);
-                        }));
-                    }
+                    DoCallback(dialog.FileNames);
                 }
             }
         }

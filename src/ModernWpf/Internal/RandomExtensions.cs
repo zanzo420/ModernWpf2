@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,7 +13,7 @@ namespace ModernWpf
         /// </summary>
         /// <param name="owner">The owner.</param>
         /// <returns></returns>
-        public static Dispatcher FindDispatcher(this Window owner)
+        public static Dispatcher FindDispatcher(this DispatcherObject owner)
         {
             if (owner != null) { return owner.Dispatcher; }
             if (Application.Current != null) { return Application.Current.Dispatcher; }
@@ -37,5 +38,15 @@ namespace ModernWpf
             }
             throw new NotSupportedException($"Method {methodName} is not supported for {type.Name}.");
         }
+
+        ///// <summary>
+        ///// Makes CA1305 go away with <see cref="CultureInfo.InvariantCulture"/>.
+        ///// </summary>
+        ///// <param name="interpolated">The interpolated string.</param>
+        ///// <returns></returns>
+        //public static string Invariant(this IFormattable interpolated)
+        //{
+        //    return interpolated.ToString(null, CultureInfo.InvariantCulture);
+        //}
     }
 }

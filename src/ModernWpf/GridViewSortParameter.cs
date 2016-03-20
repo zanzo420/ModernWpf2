@@ -8,10 +8,15 @@ using System.Windows.Controls;
 namespace ModernWpf
 {
     /// <summary>
-    /// The parameter passed to <see cref="ListViewUI.SortCommand"/>.
+    /// The parameter passed to <see cref="ListViewUI.SortCommandProperty"/>.
     /// </summary>
     public class GridViewSortParameter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GridViewSortParameter"/> class.
+        /// </summary>
+        /// <param name="header">The header.</param>
+        /// <param name="newDirection">The new direction.</param>
         public GridViewSortParameter(GridViewColumnHeader header, ListSortDirection? newDirection)
         {
             Header = header;
