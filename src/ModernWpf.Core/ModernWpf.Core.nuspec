@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
 	<metadata>
-		<id>$id$-alpha1</id>
-		<version>$version$</version>
+		<id>$id$</id>
+		<version>$version$-alpha1</version>
 		<title>$title$</title>
 		<authors>$author$</authors>
 		<owners>$author$</owners>
