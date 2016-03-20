@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the sender.
+        /// Gets the sender.
         /// </summary>
         /// <value>
         /// The sender.
@@ -35,7 +35,7 @@
         public object Sender { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the target.
+        /// Gets the target.
         /// </summary>
         /// <value>
         /// The target.

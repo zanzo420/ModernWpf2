@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Windows;
-using System.Windows.Interop;
 
 namespace ModernWpf
 {
@@ -11,41 +9,28 @@ namespace ModernWpf
     /// <seealso cref="Microsoft.Win32.CommonDialog" />
     class HackyFolderBrowserDialog : Microsoft.Win32.CommonDialog
     {
-        public string FileName { get; set; }
-        public string[] FileNames { get; private set; }
+        public string SelectedPath { get; private set; }
+        public string[] SelectedPaths { get; private set; }
         public string InitialDirectory { get; set; }
         public string Title { get; set; }
         public bool MultiSelect { get; set; }
 
-        public bool ShowDialog()
-        {
-            return RunDialog(GetForegroundWindow());
-        }
-
-        public bool ShowDialog(Window owner)
-        {
-            IntPtr handle = owner == null ? GetForegroundWindow() : new WindowInteropHelper(owner).Handle;
-            return RunDialog(handle);
-        }
-
-
-        private IntPtr GetForegroundWindow()
-        {
-            // TODO: get foreground window.
-            return IntPtr.Zero;
-        }
-
         public override void Reset()
         {
+            SelectedPath = null;
+            SelectedPaths = null;
+            InitialDirectory = null;
+            Title = null;
+            MultiSelect = false;
         }
 
-
-
+        static bool __errored;
         public static bool IsSupported
         {
             get
             {
-                return PlatformInfo.IsWinVistaUp &&
+                return PlatformInfo.IsWinVistaUp && 
+                    !__errored &&
                     HiddenDialogType != null && DialogEventsType != null;
             }
         }
@@ -61,57 +46,54 @@ namespace ModernWpf
         {
             using (var setupDlg = new System.Windows.Forms.OpenFileDialog())
             {
-                setupDlg.FileName = FileName;
-                setupDlg.InitialDirectory = InitialDirectory;
+                if (!string.IsNullOrEmpty(InitialDirectory))
+                {
+                    setupDlg.InitialDirectory = InitialDirectory;
+                }
                 setupDlg.Title = Title;
                 setupDlg.AddExtension = false;
                 setupDlg.CheckFileExists = false;
                 setupDlg.DereferenceLinks = true;
                 setupDlg.Multiselect = MultiSelect;
 
-
-                object realDlg = setupDlg.GetType().CallMethod("CreateVistaDialog", setupDlg);
-                setupDlg.GetType().CallMethod("OnBeforeVistaDialog", setupDlg, realDlg);
-
-                uint options = (uint)PubDialogType.CallMethod("GetOptions", setupDlg);
-                HiddenDialogType.CallMethod("SetOptions", realDlg, options | FOS_PICKFOLDERS);
-
-                object dlgEvents = Activator.CreateInstance(DialogEventsType, setupDlg);
-
-                uint cookie = 0;
-                object[] parameters = new object[] { dlgEvents, cookie };
-                HiddenDialogType.CallMethod("Advise", realDlg, parameters);
-
-                cookie = (uint)parameters[1];
                 try
                 {
-                    int result = (int)HiddenDialogType.CallMethod("Show", realDlg, hwndOwner);
-                    if (result == 0)
+                    object realDlg = setupDlg.GetType().CallMethod("CreateVistaDialog", setupDlg);
+                    setupDlg.GetType().CallMethod("OnBeforeVistaDialog", setupDlg, realDlg);
+
+                    uint options = (uint)PubDialogType.CallMethod("GetOptions", setupDlg);
+                    HiddenDialogType.CallMethod("SetOptions", realDlg, options | FOS_PICKFOLDERS);
+
+                    object dlgEvents = Activator.CreateInstance(DialogEventsType, setupDlg);
+
+                    uint cookie = 0;
+                    object[] parameters = new object[] { dlgEvents, cookie };
+                    HiddenDialogType.CallMethod("Advise", realDlg, parameters);
+
+                    cookie = (uint)parameters[1];
+                    try
                     {
-                        FileName = setupDlg.FileName;
-                        FileNames = setupDlg.FileNames;
-                        return true;
+                        int result = (int)HiddenDialogType.CallMethod("Show", realDlg, hwndOwner);
+                        if (result == 0)
+                        {
+                            SelectedPath = setupDlg.FileName;
+                            SelectedPaths = setupDlg.FileNames;
+                            return true;
+                        }
+                    }
+                    finally
+                    {
+                        HiddenDialogType.CallMethod("Unadvise", realDlg, cookie);
+                        GC.KeepAlive(dlgEvents);
                     }
                 }
-                finally
+                catch
                 {
-                    HiddenDialogType.CallMethod("Unadvise", realDlg, cookie);
-                    GC.KeepAlive(dlgEvents);
+                    __errored = false;
+                    throw;
                 }
             }
             return false;
-        }
-    }
-    static class TypeExtensions
-    {
-        public static object CallMethod(this Type type, string methodName, object instance, params object[] args)
-        {
-            var method = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            if (method != null)
-            {
-                return method.Invoke(instance, args);
-            }
-            throw new NotSupportedException($"Method {methodName} is not supported for {type.Name}.");
         }
     }
 

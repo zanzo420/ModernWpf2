@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ModernWpf.Messages
 {
@@ -129,13 +130,15 @@ namespace ModernWpf.Messages
                 var result = owner == null ? dialog.ShowDialog().GetValueOrDefault() : dialog.ShowDialog(owner).GetValueOrDefault();
                 if (result)
                 {
-                    if (owner == null || owner.CheckAccess())
+                    Dispatcher d = owner.FindDispatcher();
+
+                    if (d == null || d.CheckAccess())
                     {
                         DoCallback(dialog.FileNames);
                     }
                     else
                     {
-                        owner.Dispatcher.BeginInvoke(new Action(() =>
+                        d.BeginInvoke(new Action(() =>
                         {
                             DoCallback(dialog.FileNames);
                         }));

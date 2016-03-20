@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ModernWpf.Messages
 {
@@ -71,60 +68,69 @@ namespace ModernWpf.Messages
         }
 
 
-
         /// <summary>
-        /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a folder dialog based on the message options.
+        /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a 
+        /// win32 folder dialog based on the message options.
         /// </summary>
-        /// <param name="owner">The owner.</pa
-        /// <exception cref="System.NotSupportedException"></exception>
+        /// <param name="owner">The owner.</param>
         public virtual void HandleWithPlatform(Window owner)
         {
-            if (HackyFolderBrowserDialog.IsSupported)
+            try
             {
-                var diag = new HackyFolderBrowserDialog
+                // could've used windows api codepack but didn't feel like taking depenency for only 1 thing
+                if (HackyFolderBrowserDialog.IsSupported)
                 {
-                    FileName = InitialFolder,
-                    Title = this.Caption,
-                };
-                if (diag.ShowDialog(owner))
-                {
-                    if (owner == null || owner.Dispatcher.CheckAccess())
+                    var diag = new HackyFolderBrowserDialog
                     {
-                        DoCallback(diag.FileName);
-                    }
-                    else
+                        InitialDirectory = InitialFolder,
+                        Title = Caption,
+                    };
+                    if (diag.ShowDialog(owner).GetValueOrDefault())
                     {
-                        owner.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            DoCallback(diag.FileName);
-                        }));
-                    }
-                }
-            }
-            else
-            {
-                using (var diag = new System.Windows.Forms.FolderBrowserDialog())
-                {
-                    diag.ShowNewFolderButton = true;
-                    diag.SelectedPath = InitialFolder;
+                        Dispatcher d = owner.FindDispatcher();
 
-                    var winformOwner = owner == null ? null : new Wpf32Window(owner);
-                    if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
-                    {
-                        if (owner == null || owner.Dispatcher.CheckAccess())
+                        if (d == null || d.CheckAccess())
                         {
                             DoCallback(diag.SelectedPath);
                         }
                         else
                         {
-                            owner.Dispatcher.BeginInvoke(new Action(() =>
+                            d.BeginInvoke(new Action(() =>
                             {
                                 DoCallback(diag.SelectedPath);
                             }));
                         }
                     }
+                    return;
+                }
+            }
+            catch { }
+
+            // fallback to lame old dialog
+            using (var diag = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                diag.ShowNewFolderButton = true;
+                diag.SelectedPath = InitialFolder;
+
+                var winformOwner = owner == null ? null : new Wpf32Window(owner);
+                if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
+                {
+                    Dispatcher d = owner.FindDispatcher();
+
+                    if (d == null || d.CheckAccess())
+                    {
+                        DoCallback(diag.SelectedPath);
+                    }
+                    else
+                    {
+                        d.BeginInvoke(new Action(() =>
+                        {
+                            DoCallback(diag.SelectedPath);
+                        }));
+                    }
                 }
             }
         }
+
     }
 }

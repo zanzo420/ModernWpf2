@@ -47,7 +47,7 @@ namespace BasicRunner
             });
             Messenger.Default.Register<ChooseFolderMessage>(this, m =>
             {
-                if (m.Sender == DataContext) { m.HandleWithPlatform(this); }
+                if (m.Sender == DataContext) { m.HandleWithPlatform(null); }
             });
         }
 
