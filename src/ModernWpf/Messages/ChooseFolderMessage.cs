@@ -17,14 +17,15 @@ namespace ModernWpf.Messages
         /// </summary>
         /// <param name="callback">The callback when a folder is chosen.</param>
         public ChooseFolderMessage(Action<string> callback) : this(null, null, callback) { }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ChooseFolderMessage"/> class.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="callback">The callback when a folder is chosen.</param>
         public ChooseFolderMessage(object sender, Action<string> callback)
-            : this(sender, null, callback) { }
+            : this(sender, null, callback)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChooseFolderMessage"/> class.
@@ -73,6 +74,7 @@ namespace ModernWpf.Messages
 
         /// <summary>
         /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a folder dialog based on the message options.
+        /// This uses the ancient folder browser and is not recommended.
         /// </summary>
         /// <param name="owner">The owner.</param>
         /// </exception>
@@ -83,7 +85,8 @@ namespace ModernWpf.Messages
                 diag.ShowNewFolderButton = true;
                 diag.SelectedPath = InitialFolder;
 
-                if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                var winformOwner = owner == null ? null : new Wpf32Window(owner);
+                if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
                 {
                     if (owner == null || owner.Dispatcher.CheckAccess())
                     {

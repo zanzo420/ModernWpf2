@@ -13,14 +13,14 @@ namespace ModernWpf.Messages
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
         /// </summary>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(string content, Action<MessageBoxResult> callback) : this(null, null, content, callback) { }
+        public MessageBoxMessage(string content, Action<MessageBoxResult> callback = null) : this(null, null, content, callback) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(object sender, string content, Action<MessageBoxResult> callback) : this(sender, null, content, callback) { }
+        public MessageBoxMessage(object sender, string content, Action<MessageBoxResult> callback = null) : this(sender, null, content, callback) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
@@ -28,7 +28,7 @@ namespace ModernWpf.Messages
         /// <param name="sender">The message's original sender.</param>
         /// <param name="target">The message's intended target.</param>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(object sender, object target, string content, Action<MessageBoxResult> callback)
+        public MessageBoxMessage(object sender, object target, string content, Action<MessageBoxResult> callback = null)
             : base(sender, target)
         {
             Content = content;

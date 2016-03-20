@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using ModernWpf;
+using ModernWpf.Messages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +44,7 @@ namespace BasicRunner.VM
             //    });
             //}
             Accents = Theme.PredefinedAccents.ToList();
-            
+
             //Progress = new ProgressViewModel();
 
             //TreeItems = new ObservableCollection<HierarchyVM>();
@@ -54,7 +55,62 @@ namespace BasicRunner.VM
         }
 
         public List<Accent> Accents { get; private set; }
-        
+
+
+        private ICommand _testMessageCommand;
+
+        public ICommand TestMessageCommand
+        {
+            get
+            {
+                return _testMessageCommand ?? (_testMessageCommand = new RelayCommand<string>(arg =>
+                  {
+                      switch (arg)
+                      {
+                          case "open-file":
+                              Messenger.Default.Send(new ChooseFileMessage(this, files =>
+                              {
+                                  Messenger.Default.Send(new MessageBoxMessage(this, "You selected " + files.FirstOrDefault()));
+                              })
+                              {
+                                  Caption = "Test Opening A File (no change will be made)",
+                                  Purpose = FilePurpose.OpenSingle
+                              });
+                              break;
+                          case "open-files":
+                              Messenger.Default.Send(new ChooseFileMessage(this, files =>
+                              {
+                                  Messenger.Default.Send(new MessageBoxMessage(this, $"You selected {files.Count()} files."));
+                              })
+                              {
+                                  Caption = "Test Opening Multiple Files (no change will be made)",
+                                  Purpose = FilePurpose.OpenMultiple
+                              });
+                              break;
+                          case "save-file":
+                              Messenger.Default.Send(new ChooseFileMessage(this, files =>
+                              {
+                                  Messenger.Default.Send(new MessageBoxMessage(this, "You chose " + files.FirstOrDefault()));
+                              })
+                              {
+                                  Caption = "Test Saving A File (no change will be made)",
+                                  Purpose = FilePurpose.Save
+                              });
+                              break;
+                          case "choose-folder":
+                              Messenger.Default.Send(new ChooseFolderMessage(this, folder =>
+                              {
+                                  Messenger.Default.Send(new MessageBoxMessage(this, "You chose " + folder));
+                              })
+                              {
+                                  Caption = "Test Choosing A Folder",
+                              });
+                              break;
+                      }
+                  }));
+            }
+        }
+
 
         //public ObservableCollection<CultureInfoVM> Languages { get; private set; }
 

@@ -130,6 +130,18 @@
                     </Grid>
                 </modern:AnimatedContentControl>
             </TabItem>
+            <TabItem Header="Messages">
+                <modern:AnimatedContentControl>
+                    <Grid>
+                        <StackPanel>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-file" Content="Open a file"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-files" Content="Open multiple files"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="save-file" Content="Save file"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="choose-folder" Content="Choose folder"></Button>
+                        </StackPanel>
+                    </Grid>
+                </modern:AnimatedContentControl>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
