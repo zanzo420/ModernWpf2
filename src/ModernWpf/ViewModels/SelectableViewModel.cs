@@ -43,7 +43,7 @@
         /// Initializes a new instance of the <see cref="SelectableViewModel{TModel}"/> class.
         /// </summary>
         /// <param name="model">The model.</param>
-        protected SelectableViewModel(TModel model)
+        public SelectableViewModel(TModel model)
         {
             Model = model;
         }

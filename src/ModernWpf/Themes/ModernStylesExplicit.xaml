@@ -13,7 +13,7 @@
         <ResourceDictionary Source="/ModernWpf;component/Themes/ColorLight.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    
+
     <Style x:Key="ModernTitleBar" TargetType="modern:TitleBar">
         <Setter Property="ActiveBackground" Value="{DynamicResource ModernAccent}"></Setter>
         <Setter Property="ActiveForeground" Value="{DynamicResource AccentForeground}"></Setter>
@@ -127,21 +127,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Border x:Name="Border"
+                    <Border x:Name="Border"
                                 Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="3">
-                            <ContentPresenter x:Name="ContentPresenter" 
+                        <ContentPresenter x:Name="ContentPresenter" 
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               RecognizesAccessKey="True"/>
-                        </Border>
-                    </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -187,20 +186,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
-                    <Grid>
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter x:Name="ContentPresenter" 
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                              RecognizesAccessKey="True"/>
-                        </Border>
-                    </Grid>
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter x:Name="ContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          RecognizesAccessKey="True"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -237,21 +235,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
-                    <Grid>
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="3">
-                            <ContentPresenter x:Name="ContentPresenter"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              RecognizesAccessKey="True" />
-                        </Border>
-                    </Grid>
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="3">
+                        <ContentPresenter x:Name="ContentPresenter"
+                                            Content="{TemplateBinding Content}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                            Margin="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            RecognizesAccessKey="True" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -362,6 +359,7 @@
                             <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -417,21 +415,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Grid>
-                        <Border x:Name="Border"
+                    <Border x:Name="Border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="3">
-                            <ContentPresenter x:Name="ContentPresenter"
+                        <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               RecognizesAccessKey="True" />
-                        </Border>
-                    </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -452,6 +449,16 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="ModernHyperlinkTextBlock" TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}">
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"></Setter>
+        <Setter Property="TextDecorations" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ButtonBase}}, Path=(TextBlock.TextDecorations)}"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextDecorations" Value="Underline"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="ModernHyperlinkButton" TargetType="ButtonBase">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundThemeBrush}" />
@@ -467,27 +474,30 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
-                    <Grid>
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                >
-                            <TextBlock x:Name="MainContent"
-                                       Margin="{TemplateBinding Padding}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                       Text="{TemplateBinding Content}" 
-                                       TextTrimming="CharacterEllipsis">
-                            </TextBlock>
-                        </Border>
-                    </Grid>
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" >
+                            <ContentPresenter.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource ModernHyperlinkTextBlock}">
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="MainContent" Property="TextDecorations" Value="Underline"/>
+                            <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="MainContent" Property="TextDecorations" Value="Underline"/>
+                            <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -628,7 +638,7 @@
                             <ctrl:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
                                                   OpenZIndex="1"
                                                   Grid.RowSpan="2"></ctrl:FlyoutContainer>
-                            
+
                             <ctrl:AnimatedContentControl Content="{TemplateBinding Content}"
                                                          x:Name="MainContent"
                                                          Grid.Row="1"
@@ -653,7 +663,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="ModernWindowNoTitle" TargetType="Window">
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
@@ -673,7 +683,7 @@
                             <ctrl:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
                                                   OpenZIndex="1"
                                                   ></ctrl:FlyoutContainer>
-                            
+
                             <ctrl:AnimatedContentControl Content="{TemplateBinding Content}"
                                                          x:Name="MainContent"
                                                          ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:AnimatedContentControl>
@@ -2669,8 +2679,8 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <!--<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>-->
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <!--<Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>-->
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>

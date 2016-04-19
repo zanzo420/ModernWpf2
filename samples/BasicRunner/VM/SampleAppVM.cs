@@ -43,8 +43,7 @@ namespace BasicRunner.VM
             //        String = string.Format("Item # {0}", i)
             //    });
             //}
-            Accents = new List<Accent>(Accent.GetPredefinedAccents());
-
+            
             //Progress = new ProgressViewModel();
 
             //TreeItems = new ObservableCollection<HierarchyVM>();
@@ -54,7 +53,7 @@ namespace BasicRunner.VM
             //}
         }
 
-        public List<Accent> Accents { get; private set; }
+        public List<Accent> Accents { get; } = new List<Accent>(Accent.GetPredefinedAccents());
 
 
         private ICommand _testMessageCommand;
@@ -111,6 +110,10 @@ namespace BasicRunner.VM
             }
         }
 
+
+        public string StringValue { get; } = "This is a string from view model";
+
+        public int IntValue { get; } = 512;
 
         //public ObservableCollection<CultureInfoVM> Languages { get; private set; }
 
