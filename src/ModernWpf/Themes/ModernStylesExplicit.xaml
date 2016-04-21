@@ -612,17 +612,20 @@
     </Style>-->
 
     <!--window-->
-    <Style x:Key="ModernWindow" TargetType="Window">
+    <Style x:Key="ModernWindowBase" TargetType="Window">
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="modern:UIHooks.AutoDpiScale" Value="True"/>
+    </Style>
+
+    <Style x:Key="ModernWindow" TargetType="Window" BasedOn="{StaticResource ModernWindowBase}">
         <Setter Property="modern:Chrome.Chrome">
             <Setter.Value>
                 <modern:Chrome ActiveBorderBrush="{DynamicResource ModernAccent}"
                                InactiveBorderBrush="{DynamicResource ModernForeground4}"></modern:Chrome>
             </Setter.Value>
         </Setter>
-        <Setter Property="modern:UIHooks.AutoDpiScale" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
@@ -664,10 +667,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ModernWindowNoTitle" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
-        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+    <Style x:Key="ModernWindowNoTitle" TargetType="Window" BasedOn="{StaticResource ModernWindowBase}">
         <Setter Property="modern:Chrome.Chrome">
             <Setter.Value>
                 <modern:Chrome ActiveBorderBrush="{DynamicResource ModernAccent}"
