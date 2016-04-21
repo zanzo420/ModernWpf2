@@ -115,31 +115,19 @@
                     Margin="8" 
                     Background="{DynamicResource ModernBackground}" 
                     BorderBrush="{DynamicResource ModernAccent}" BorderThickness="1">
-            <TabItem Header="Flyout">
+            <TabItem Header="Edit Controls">
                 <modern:AnimatedContentControl>
-                    <Grid>
-                        <modern:FlyoutContainer x:Name="innerFlyoutBox"></modern:FlyoutContainer>
-
-                        <StackPanel HorizontalAlignment="Left">
-                            <RadioButton Content="Use outer" GroupName="flyGroup" x:Name="flyOuter" IsChecked="True"></RadioButton>
-                            <RadioButton Content="Use inner" GroupName="flyGroup" x:Name="flyInner"></RadioButton>
-
-                            <Button x:Name="btnMsgBox" Content="MessageBox replacements"
-                                Margin="8" Click="btnMsgBox_Click"></Button>
+                    <ScrollViewer>
+                        <StackPanel Margin="8" HorizontalAlignment="Left">
+                            <ComboBox>
+                                <ComboBoxItem Content="Item 1"></ComboBoxItem>
+                                <ComboBoxItem Content="Item 2"></ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox IsEnabled="False">
+                                <ComboBoxItem Content="Disabled" IsSelected="True"></ComboBoxItem>
+                            </ComboBox>
                         </StackPanel>
-                    </Grid>
-                </modern:AnimatedContentControl>
-            </TabItem>
-            <TabItem Header="Messages">
-                <modern:AnimatedContentControl>
-                    <Grid>
-                        <StackPanel>
-                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-file" Content="Open a file"></Button>
-                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-files" Content="Open multiple files"></Button>
-                            <Button Command="{Binding TestMessageCommand}" CommandParameter="save-file" Content="Save file"></Button>
-                            <Button Command="{Binding TestMessageCommand}" CommandParameter="choose-folder" Content="Choose folder"></Button>
-                        </StackPanel>
-                    </Grid>
+                    </ScrollViewer>
                 </modern:AnimatedContentControl>
             </TabItem>
             <TabItem Header="Buttons">
@@ -170,6 +158,33 @@
                             </Button>
                         </StackPanel>
                     </ScrollViewer>
+                </modern:AnimatedContentControl>
+            </TabItem>
+            <TabItem Header="Flyout">
+                <modern:AnimatedContentControl>
+                    <Grid>
+                        <modern:FlyoutContainer x:Name="innerFlyoutBox"></modern:FlyoutContainer>
+
+                        <StackPanel HorizontalAlignment="Left">
+                            <RadioButton Content="Use outer" GroupName="flyGroup" x:Name="flyOuter" IsChecked="True"></RadioButton>
+                            <RadioButton Content="Use inner" GroupName="flyGroup" x:Name="flyInner"></RadioButton>
+
+                            <Button x:Name="btnMsgBox" Content="MessageBox replacements"
+                                Margin="8" Click="btnMsgBox_Click"></Button>
+                        </StackPanel>
+                    </Grid>
+                </modern:AnimatedContentControl>
+            </TabItem>
+            <TabItem Header="Messages">
+                <modern:AnimatedContentControl>
+                    <Grid>
+                        <StackPanel>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-file" Content="Open a file"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="open-files" Content="Open multiple files"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="save-file" Content="Save file"></Button>
+                            <Button Command="{Binding TestMessageCommand}" CommandParameter="choose-folder" Content="Choose folder"></Button>
+                        </StackPanel>
+                    </Grid>
                 </modern:AnimatedContentControl>
             </TabItem>
         </TabControl>

@@ -1615,7 +1615,7 @@
     </Style>
 
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
