@@ -17,11 +17,11 @@ namespace ModernWpf.Controls
     //[TemplatePart(Name = PARTContent, Type = typeof(ContentPresenter))]
     public class AnimatedContentControl : ContentControl
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
-        static AnimatedContentControl()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimatedContentControl), new FrameworkPropertyMetadata(typeof(AnimatedContentControl)));
-        }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
+        //static AnimatedContentControl()
+        //{
+        //    DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimatedContentControl), new FrameworkPropertyMetadata(typeof(AnimatedContentControl)));
+        //}
 
         //const string PARTContent = "PART_Content";
 

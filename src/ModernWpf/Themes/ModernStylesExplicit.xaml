@@ -21,6 +21,18 @@
         <Setter Property="InactiveForeground" Value="{DynamicResource AccentForeground}"></Setter>
     </Style>
 
+
+    <Style x:Key="ModernFlyout" TargetType="modern:Flyout">
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+    </Style>
+
+
+    <Style x:Key="ModernFlyoutContainer" TargetType="modern:FlyoutContainer">
+        <Setter Property="Background" Value="{DynamicResource OverlayBackground}"/>
+    </Style>
+
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
 
@@ -638,14 +650,14 @@
 
                             <modern:TitleBar Style="{StaticResource ModernTitleBar}"></modern:TitleBar>
 
-                            <ctrl:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
+                            <modern:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
                                                   OpenZIndex="1"
-                                                  Grid.RowSpan="2"></ctrl:FlyoutContainer>
+                                                  Grid.RowSpan="2"></modern:FlyoutContainer>
 
-                            <ctrl:AnimatedContentControl Content="{TemplateBinding Content}"
+                            <modern:AnimatedContentControl Content="{TemplateBinding Content}"
                                                          x:Name="MainContent"
                                                          Grid.Row="1"
-                                                         ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:AnimatedContentControl>
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}"></modern:AnimatedContentControl>
 
                             <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" 
@@ -680,13 +692,13 @@
                     <AdornerDecorator>
                         <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
 
-                            <ctrl:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
+                            <modern:FlyoutContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
                                                   OpenZIndex="1"
-                                                  ></ctrl:FlyoutContainer>
+                                                  ></modern:FlyoutContainer>
 
-                            <ctrl:AnimatedContentControl Content="{TemplateBinding Content}"
+                            <modern:AnimatedContentControl Content="{TemplateBinding Content}"
                                                          x:Name="MainContent"
-                                                         ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:AnimatedContentControl>
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}"></modern:AnimatedContentControl>
 
                             <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" 

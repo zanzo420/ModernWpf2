@@ -223,4 +223,79 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style TargetType="ctrl:Flyout">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:Flyout">
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="ctrl:FlyoutContainer">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="#80000000"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:FlyoutContainer">
+                    <Border Background="{TemplateBinding Background}"
+                            KeyboardNavigation.TabNavigation="Cycle"
+                            KeyboardNavigation.ControlTabNavigation="Cycle"
+                            KeyboardNavigation.DirectionalNavigation="Cycle"
+                            Opacity="0"
+                            x:Name="PART_Overlay">
+                        <ContentPresenter x:Name="PART_Content" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WhateverStates">
+                                <VisualState x:Name="IsClosed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.25" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"></DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation To="0" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="IsOpen">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsOpen">
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsClosed">
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="HasFlyoutOpen" Value="True">
+                <Setter Property="IsHitTestVisible" Value="True"/>
+                <Setter Property="Panel.ZIndex" Value="{Binding RelativeSource={RelativeSource Self}, Path=OpenZIndex}"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
 </ResourceDictionary>
