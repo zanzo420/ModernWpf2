@@ -99,53 +99,7 @@ namespace ModernWpf.Messages
                 _callback(result);
             }
         }
-
-
-        /// <summary>
-        /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing a <see cref="ModernMessageBox" />
-        /// and invokes the callback.
-        /// </summary>
-        /// <param name="owner">The owner.</param>
-        public void HandleWithModern(Window owner)
-        {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
-
-            var d = owner.FindDispatcher();
-            if (d != null && !d.CheckAccess())
-            {
-                d.BeginInvoke(new Action<Window>(win =>
-                {
-                    HandleWithModern(win);
-                }), owner);
-                return;
-            }
-
-            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
-            DoCallback(res);
-        }
-
-        /// <summary>
-        /// Handles a basic <see cref="MessageBoxMessage" /> on a flyout container by showing a <see cref="ModernMessageBox" />
-        /// and invokes the callback.
-        /// </summary>
-        /// <param name="owner">The owner.</param>
-        public void HandleWithModern(FlyoutContainer owner)
-        {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
-
-            var d = owner.FindDispatcher();
-            if (d != null && !d.CheckAccess())
-            {
-                d.BeginInvoke(new Action<Window>(win =>
-                {
-                    HandleWithModern(win);
-                }), owner);
-                return;
-            }
-
-            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
-            DoCallback(res);
-        }
+        
 
         /// <summary>
         /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing built-in <see cref="MessageBox"/>

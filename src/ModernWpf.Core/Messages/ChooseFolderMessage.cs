@@ -110,7 +110,7 @@ namespace ModernWpf.Messages
                 diag.ShowNewFolderButton = true;
                 diag.SelectedPath = InitialFolder;
 
-                var winformOwner = owner == null ? null : new Wpf32Window(owner);
+                var winformOwner = owner == null ? null : new WpfWin32Window(owner);
                 if (diag.ShowDialog(winformOwner) == System.Windows.Forms.DialogResult.OK)
                 {
                     DoCallback(diag.SelectedPath);

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +74,17 @@
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
+    <Compile Include="Internal\HackyFolderBrowserDialog.cs" />
+    <Compile Include="Internal\RandomExtensions.cs" />
+    <Compile Include="Internal\WpfWin32Window.cs" />
+    <Compile Include="Messages\AppCloseMessage.cs" />
+    <Compile Include="Messages\AppClosingMessage.cs" />
+    <Compile Include="Messages\ChooseFileMessage.cs" />
+    <Compile Include="Messages\ChooseFolderMessage.cs" />
+    <Compile Include="Messages\MessageBase.cs" />
+    <Compile Include="Messages\MessageBoxMessage.cs" />
+    <Compile Include="Messages\OpenExplorerMessage.cs" />
+    <Compile Include="Messages\RefreshCommandsMessage.cs" />
     <Compile Include="UIHooks.Dpi.cs" />
     <Compile Include="EditorCommands.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -138,6 +150,13 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="UIHooks.cs" />
+    <Compile Include="ViewModels\AutoCleanupObservableCollection.cs" />
+    <Compile Include="ViewModels\AutoDisposeObservableCollection.cs" />
+    <Compile Include="ViewModels\ObservableBase.cs" />
+    <Compile Include="ViewModels\PagerViewModel.cs" />
+    <Compile Include="ViewModels\ProgressViewModel.cs" />
+    <Compile Include="ViewModels\SelectableViewModel.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="WindowCommands.cs" />
   </ItemGroup>
   <ItemGroup>

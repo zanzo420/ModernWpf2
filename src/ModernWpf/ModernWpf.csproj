@@ -60,6 +60,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ModernWpf.Core\Internal\RandomExtensions.cs">
+      <Link>Internal\RandomExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\ModernWpf.Core\Internal\RelayCommand.cs">
       <Link>Internal\RelayCommand.cs</Link>
     </Compile>
@@ -71,31 +74,14 @@
     </Compile>
     <Compile Include="GridViewSortParameter.cs" />
     <Compile Include="Internal\HSLColor.cs" />
-    <Compile Include="Internal\HackyFolderBrowserDialog.cs" />
-    <Compile Include="Internal\RandomExtensions.cs" />
     <Compile Include="Internal\ScrollViewerExtensions.cs" />
-    <Compile Include="Internal\WpfWin32Window.cs" />
     <Compile Include="ListViewUI.cs" />
     <Compile Include="MenuItemUI.cs" />
-    <Compile Include="Messages\AppCloseMessage.cs" />
-    <Compile Include="Messages\AppClosingMessage.cs" />
-    <Compile Include="Messages\ChooseFileMessage.cs" />
-    <Compile Include="Messages\ChooseFolderMessage.cs" />
-    <Compile Include="Messages\MessageBase.cs" />
-    <Compile Include="Messages\MessageBoxMessage.cs" />
-    <Compile Include="Messages\OpenExplorerMessage.cs" />
-    <Compile Include="Messages\RefreshCommandsMessage.cs" />
+    <Compile Include="MessageExtensions.cs" />
     <Compile Include="ScrollViewerUI.cs" />
     <Compile Include="TextBoxUI.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
-    <Compile Include="ViewModels\AutoCleanupObservableCollection.cs" />
-    <Compile Include="ViewModels\AutoDisposeObservableCollection.cs" />
-    <Compile Include="ViewModels\ObservableBase.cs" />
-    <Compile Include="ViewModels\PagerViewModel.cs" />
-    <Compile Include="ViewModels\ProgressViewModel.cs" />
-    <Compile Include="ViewModels\SelectableViewModel.cs" />
-    <Compile Include="ViewModels\StatusViewModel.cs" />
     <Page Include="Controls\ModernMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
