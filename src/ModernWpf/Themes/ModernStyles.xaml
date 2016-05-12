@@ -10,6 +10,7 @@
     <Style TargetType="modern:TitleBar" BasedOn="{StaticResource ModernTitleBar}"/>
     <Style TargetType="modern:Flyout" BasedOn="{StaticResource ModernFlyout}"/>
     <Style TargetType="modern:FlyoutContainer" BasedOn="{StaticResource ModernFlyoutContainer}"/>
+    <Style TargetType="modern:MessageBoxFlyout" BasedOn="{StaticResource ModernMessageBoxFlyout}"/>
 
     <Style TargetType="ItemsControl" BasedOn="{StaticResource ModernItemsControl}"/>
 

@@ -66,7 +66,6 @@
     <Compile Include="Accent.cs" />
     <Compile Include="Controls\AnimatedScrollViewer.cs" />
     <Compile Include="Controls\AppButton.cs" />
-    <Compile Include="Controls\MessageBoxFlyout.cs" />
     <Compile Include="Controls\ModernMessageBox.xaml.cs">
       <DependentUpon>ModernMessageBox.xaml</DependentUpon>
     </Compile>

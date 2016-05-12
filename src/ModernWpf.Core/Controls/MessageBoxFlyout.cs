@@ -69,7 +69,7 @@ namespace ModernWpf.Controls
         Button _btnCancel;
         Panel _btnPanel;
         MessageBoxResult _defResult;
-        MessageBoxResult _result;
+        public MessageBoxResult MessageBoxResult { get; protected set; }
         MessageBoxImage _icon;
         MessageBoxButton _button;
         string _title;
@@ -108,7 +108,7 @@ namespace ModernWpf.Controls
         {
             if (OnClosing(MessageBoxResult.Yes))
             {
-                _result = MessageBoxResult.Yes;
+                MessageBoxResult = MessageBoxResult.Yes;
                 DialogResult = true;
             }
         }
@@ -117,14 +117,14 @@ namespace ModernWpf.Controls
         {
             if (OnClosing(MessageBoxResult.No))
             {
-                _result = MessageBoxResult.No;
+                MessageBoxResult = MessageBoxResult.No;
                 DialogResult = false;
             }
         }
 
         void _btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            _result = MessageBoxResult.Cancel;
+            MessageBoxResult = MessageBoxResult.Cancel;
             DialogResult = false;
         }
 
@@ -132,7 +132,7 @@ namespace ModernWpf.Controls
         {
             if (OnClosing(MessageBoxResult.OK))
             {
-                _result = MessageBoxResult.OK;
+                MessageBoxResult = MessageBoxResult.OK;
                 DialogResult = true;
             }
         }
@@ -214,7 +214,7 @@ namespace ModernWpf.Controls
             _defResult = defaultResult;
             ApplyOptions();
             ShowDialogModal(owner.FindChildInVisualTree<FlyoutContainer>());
-            return _result;
+            return MessageBoxResult;
         }
 
         private void ApplyOptions()

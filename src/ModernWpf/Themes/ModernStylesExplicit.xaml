@@ -33,6 +33,13 @@
         <Setter Property="Background" Value="{DynamicResource OverlayBackground}"/>
     </Style>
 
+
+    <Style x:Key="ModernMessageBoxFlyout" TargetType="modern:MessageBoxFlyout">
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+    </Style>
+
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
 

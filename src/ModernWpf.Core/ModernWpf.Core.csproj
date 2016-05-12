@@ -61,6 +61,7 @@
     <Compile Include="Controls\AppIconImage.cs" />
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Controls\FlyoutContainer.cs" />
+    <Compile Include="Controls\MessageBoxFlyout.cs" />
     <Compile Include="Controls\TitleBar.cs" />
     <Compile Include="Converters\BoolNotConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
