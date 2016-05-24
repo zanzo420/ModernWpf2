@@ -83,6 +83,7 @@ namespace ModernWpf.ViewModels
             RaisePropertyChanged(() => this.TotalPages);
             RaisePropertyChanged(() => this.CanGoPrevPage);
             RaisePropertyChanged(() => this.CanGoNextPage);
+            RaisePropertyChanged(() => this.HasMoreThanOnePage);
 
             CommandManager.InvalidateRequerySuggested();
         }
@@ -181,6 +182,14 @@ namespace ModernWpf.ViewModels
                 );
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance has more than one page.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance has more than one page; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasMoreThanOnePage { get { return TotalPages > 0; } }
 
         /// <summary>
         /// Gets a value indicating whether previous page is allowed.
