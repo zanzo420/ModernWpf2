@@ -363,22 +363,22 @@ namespace ModernWpf.Controls
             DependencyProperty.Register("ShowIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(true));
 
 
-        /// <summary>
-        /// Gets or sets a value indicating whether to show large app icon.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> to show large app icon; otherwise, <c>false</c>.
-        /// </value>
-        public bool LargeIcon
-        {
-            get { return (bool)GetValue(LargeIconProperty); }
-            set { SetValue(LargeIconProperty, value); }
-        }
-        /// <summary>
-        /// The dependency property for <see cref="LargeIcon"/>.
-        /// </summary>
-        public static readonly DependencyProperty LargeIconProperty =
-            DependencyProperty.Register("LargeIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
+        ///// <summary>
+        ///// Gets or sets a value indicating whether to show large app icon.
+        ///// </summary>
+        ///// <value>
+        ///// <c>true</c> to show large app icon; otherwise, <c>false</c>.
+        ///// </value>
+        //public bool LargeIcon
+        //{
+        //    get { return (bool)GetValue(LargeIconProperty); }
+        //    set { SetValue(LargeIconProperty, value); }
+        //}
+        ///// <summary>
+        ///// The dependency property for <see cref="LargeIcon"/>.
+        ///// </summary>
+        //public static readonly DependencyProperty LargeIconProperty =
+        //    DependencyProperty.Register("LargeIcon", typeof(bool), typeof(TitleBar), new FrameworkPropertyMetadata(false));
 
 
         /// <summary>

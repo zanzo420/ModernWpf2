@@ -1,56 +1,58 @@
-﻿<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    xmlns:local="clr-namespace:ModernWpf"
-	xmlns:ctrl="clr-namespace:ModernWpf.Controls"
-    xmlns:conv="clr-namespace:ModernWpf.Converters"
-    xmlns:resx="clr-namespace:ModernWpf.Resources"
-    >
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conv="clr-namespace:ModernWpf.Converters"
+                    xmlns:ctrl="clr-namespace:ModernWpf.Controls"
+                    xmlns:local="clr-namespace:ModernWpf"
+                    xmlns:resx="clr-namespace:ModernWpf.Resources">
     <Style TargetType="{x:Type ctrl:BorderWindow}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:BorderWindow}">
                     <Canvas Background="#01000000">
-                        <Line x:Name="Line1" 
-                              RenderOptions.EdgeMode="Aliased" 
-                              StrokeThickness="1" 
-                              Stroke="{TemplateBinding BorderBrush}" 
-                              SnapsToDevicePixels="True">
+                        <Line x:Name="Line1"
+                              RenderOptions.EdgeMode="Aliased"
+                              SnapsToDevicePixels="True"
+                              Stroke="{TemplateBinding BorderBrush}"
+                              StrokeThickness="1">
                             <Line.Effect>
-                                <!--<DropShadowEffect ShadowDepth="1.5" 
-                                                  Direction="{Binding Side, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:EnumValueConverter.Instance}}" 
+                                <!--<DropShadowEffect ShadowDepth="1.5"
+                                                  Direction="{Binding Side, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:EnumValueConverter.Instance}}"
                                                   BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Color="{Binding Path=BorderBrush.Color, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Opacity="{Binding Path=GlowOpacity, RelativeSource={RelativeSource TemplatedParent}}"></DropShadowEffect>-->
-                                <DropShadowEffect ShadowDepth="1.5" 
-                                                  Direction="{Binding Side, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:EnumValueConverter.Instance}}" 
-                                                  BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Color="#111111"
-                                                  Opacity="{Binding Path=GlowOpacity, RelativeSource={RelativeSource TemplatedParent}}"></DropShadowEffect>
+                                <DropShadowEffect BlurRadius="{Binding PadSize,
+                                                                       RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Direction="{Binding Side,
+                                                                      RelativeSource={RelativeSource TemplatedParent},
+                                                                      Converter={x:Static conv:EnumValueConverter.Instance}}"
+                                                  Opacity="{Binding Path=GlowOpacity,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ShadowDepth="1.5"
+                                                  Color="#111111" />
                             </Line.Effect>
                         </Line>
                     </Canvas>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Side" Value="Left">
-                            <Setter TargetName="Line1" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="Line1" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
 
                         <Trigger Property="Side" Value="Top">
-                            <Setter TargetName="Line1" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="Line1" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
 
                         <Trigger Property="Side" Value="Right">
-                            <Setter TargetName="Line1" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="Line1" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
 
                         <Trigger Property="Side" Value="Bottom">
-                            <Setter TargetName="Line1" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="Line1" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Line1" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -59,19 +61,19 @@
     </Style>
 
     <Style x:Key="MarlettGlyph" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Marlett"/>
+        <Setter Property="FontFamily" Value="Marlett" />
     </Style>
-    
+
     <Style TargetType="{x:Type ctrl:TitleBar}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:TitleBar}">
                     <ControlTemplate.Resources>
                         <Style TargetType="Button">
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonBackground}"/>
-                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonForeground}"/>
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonBackground}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonForeground}" />
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                             <Setter Property="VerticalContentAlignment" Value="Center" />
                             <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -80,35 +82,35 @@
                             <Setter Property="Margin" Value="0 0 0 0" />
                             <Setter Property="Padding" Value="12 0" />
                             <Setter Property="UseLayoutRounding" Value="True" />
-                            <Setter Property="FontSize" Value="14"></Setter>
-                            <Setter Property="FontWeight" Value="Thin"></Setter>
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontWeight" Value="Thin" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border x:Name="ButtonBorder" 
+                                        <Border x:Name="ButtonBorder"
                                                 Background="{TemplateBinding Background}"
-                                                BorderThickness="{TemplateBinding BorderThickness}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                                Padding="{TemplateBinding Padding}">            
-                                            <ContentPresenter x:Name="ButtonContent" RecognizesAccessKey="False"
-                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter x:Name="ButtonContent"
                                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                            </ContentPresenter>
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                              RecognizesAccessKey="False"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="Focusable" Value="False" />
                             <Setter Property="IsTabStop" Value="False" />
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonHoverBackground}"/>
-                                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonHoverForeground}"/>
+                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonHoverBackground}" />
+                                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonHoverForeground}" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonPressedBackground}"/>
-                                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonPressedForeground}"/>
+                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonPressedBackground}" />
+                                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:TitleBar}}, Path=ButtonPressedForeground}" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="false">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -116,8 +118,10 @@
                             </Style.Triggers>
                         </Style>
 
-                        <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                            <!--always red-->
+                        <Style x:Key="CloseButton"
+                               BasedOn="{StaticResource {x:Type Button}}"
+                               TargetType="Button">
+                            <!--  always red  -->
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#e00000" />
@@ -131,82 +135,84 @@
                         </Style>
 
                     </ControlTemplate.Resources>
-                    <Border Background="#01000000"
+                    <Border local:Chrome.HitTestType="Caption"
+                            Background="#01000000"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            local:Chrome.HitTestType="Caption">
-                        <Grid UseLayoutRounding="True" x:Name="layout"
-                              Background="{TemplateBinding Background}">
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="layout"
+                              Background="{TemplateBinding Background}"
+                              UseLayoutRounding="True">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!--icon-->
-                            <ctrl:AppIconImage x:Name="PART_Icon" Margin="6 0 6 0"
-                                               LargeIcon="{TemplateBinding LargeIcon}"
-                                               RenderOptions.BitmapScalingMode="HighQuality"
-                                               local:Chrome.HitTestType="SystemMenu"></ctrl:AppIconImage>
+                            <!--  icon  -->
+                            <ctrl:AppIconImage x:Name="PART_Icon"
+                                               Margin="6 0 6 0"
+                                               local:Chrome.HitTestType="SystemMenu"
+                                               RenderOptions.BitmapScalingMode="HighQuality" />
 
-                            <!--custom content-->
+                            <!--  custom content  -->
                             <ContentPresenter Grid.Column="1"
-                                              Content="{TemplateBinding BeforeTitleContent}"
-                                              local:Chrome.HitTestType="Client"></ContentPresenter>
+                                              local:Chrome.HitTestType="Client"
+                                              Content="{TemplateBinding BeforeTitleContent}" />
 
-                            <!--title-->
-                            <TextBlock Grid.Column="2" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RootWindow.Title}"
+                            <!--  title  -->
+                            <TextBlock x:Name="PART_Title"
+                                       Grid.Column="2"
+                                       Margin="6 0"
                                        VerticalAlignment="Center"
-                                       TextTrimming="CharacterEllipsis"
-                                       x:Name="PART_Title"
-                                       FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"
-                                       FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}"
                                        FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}"
+                                       FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"
                                        FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"
-                                       Margin="6 0"></TextBlock>
+                                       FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}"
+                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                      Path=RootWindow.Title}"
+                                       TextTrimming="CharacterEllipsis" />
 
-                            <!--custom content-->
+                            <!--  custom content  -->
                             <ContentPresenter Grid.Column="3"
-                                              Content="{TemplateBinding AfterTitleContent}"
-                                              local:Chrome.HitTestType="Client"></ContentPresenter>
+                                              local:Chrome.HitTestType="Client"
+                                              Content="{TemplateBinding AfterTitleContent}" />
 
-                            <!--control boxes-->
-                            <StackPanel Orientation="Horizontal"
+                            <!--  control boxes  -->
+                            <StackPanel x:Name="PART_ControlBox"
                                         Grid.Column="4"
-                                        x:Name="PART_ControlBox"
                                         VerticalAlignment="Stretch"
-                                        local:Chrome.HitTestType="Client">
-                                <Button x:Name="PART_MinButton"
-                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}">
-                                    <TextBlock Text="0" Style="{StaticResource MarlettGlyph}"></TextBlock>
+                                        local:Chrome.HitTestType="Client"
+                                        Orientation="Horizontal">
+                                <Button x:Name="PART_MinButton" ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}">
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="0" />
                                 </Button>
-                                <Button x:Name="PART_MaxButton"
-                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}">
-                                    <TextBlock Text="1" Style="{StaticResource MarlettGlyph}"></TextBlock>
+                                <Button x:Name="PART_MaxButton" ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}">
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="1" />
                                 </Button>
-                                <Button x:Name="PART_RestoreButton"
-                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}">
-                                    <TextBlock Text="2" Style="{StaticResource MarlettGlyph}"></TextBlock>
+                                <Button x:Name="PART_RestoreButton" ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}">
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="2" />
                                 </Button>
                                 <Button x:Name="PART_CloseButton"
                                         Style="{StaticResource CloseButton}"
-                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}">
-                                    <TextBlock Text="r" Style="{StaticResource MarlettGlyph}"></TextBlock>
+                                        ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance},
+                                                          Path=[CmdClose],
+                                                          Mode=OneWay}">
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="r" />
                                 </Button>
                             </StackPanel>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ShowIcon" Value="False">
-                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowTitle" Value="False">
-                            <Setter TargetName="PART_Title" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_Title" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowControlBox" Value="False">
-                            <Setter TargetName="PART_ControlBox" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_ControlBox" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -214,28 +220,28 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsActive" Value="False">
-                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveBackground}"></Setter>
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveForeground}"></Setter>
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveBackground}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=InactiveForeground}" />
             </Trigger>
             <Trigger Property="IsActive" Value="True">
-                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveBackground}"></Setter>
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveForeground}"></Setter>
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveBackground}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActiveForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
 
     <Style TargetType="ctrl:Flyout">
-        <Setter Property="Background" Value="#ffffff"/>
+        <Setter Property="Background" Value="#ffffff" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:Flyout">
-                    <Border Background="{TemplateBinding Background}"
-                            Margin="{TemplateBinding Margin}"
-                            Padding="{TemplateBinding Padding}"
+                    <Border Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}">
-                        <ContentPresenter></ContentPresenter>
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -244,46 +250,48 @@
 
 
     <Style TargetType="ctrl:FlyoutContainer">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#80000000"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="#80000000" />
+        <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:FlyoutContainer">
-                    <Border Background="{TemplateBinding Background}"
-                            KeyboardNavigation.TabNavigation="Cycle"
+                    <Border x:Name="PART_Overlay"
+                            Background="{TemplateBinding Background}"
                             KeyboardNavigation.ControlTabNavigation="Cycle"
                             KeyboardNavigation.DirectionalNavigation="Cycle"
-                            Opacity="0"
-                            x:Name="PART_Overlay">
+                            KeyboardNavigation.TabNavigation="Cycle"
+                            Opacity="0">
                         <ContentPresenter x:Name="PART_Content" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="WhateverStates">
                                 <VisualState x:Name="IsClosed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.25" Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"></DiscreteObjectKeyFrame>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation To="0" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="IsOpen">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsOpen">
-                                    </VisualTransition>
-                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsClosed">
-                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsOpen" />
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsClosed" />
                                 </VisualStateGroup.Transitions>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
@@ -293,83 +301,92 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="HasFlyoutOpen" Value="True">
-                <Setter Property="IsHitTestVisible" Value="True"/>
-                <Setter Property="Panel.ZIndex" Value="{Binding RelativeSource={RelativeSource Self}, Path=OpenZIndex}"></Setter>
+                <Setter Property="IsHitTestVisible" Value="True" />
+                <Setter Property="Panel.ZIndex" Value="{Binding RelativeSource={RelativeSource Self}, Path=OpenZIndex}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
 
     <Style TargetType="ctrl:MessageBoxFlyout">
-        <Setter Property="Background" Value="#ffffff"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="DisableTarget" Value="False"/>
-        <Setter Property="DismissOnEscapeKey" Value="True"/>
-        <Setter Property="OverlayClickBehavior" Value="DragMove"/>
-        <Setter Property="Padding" Value="0 20"/>
+        <Setter Property="Background" Value="#ffffff" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="DisableTarget" Value="False" />
+        <Setter Property="DismissOnEscapeKey" Value="True" />
+        <Setter Property="OverlayClickBehavior" Value="DragMove" />
+        <Setter Property="Padding" Value="0 20" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:MessageBoxFlyout">
-                    <Border Background="{TemplateBinding Background}"
-                            Margin="{TemplateBinding Margin}"
-                            Padding="{TemplateBinding Padding}"
+                    <Border Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}">
-                        <Grid MinWidth="{TemplateBinding ContentMinWidth}" 
-                              MaxWidth="{TemplateBinding ContentMaxWidth}" 
+                            Padding="{TemplateBinding Padding}">
+                        <Grid MinWidth="{TemplateBinding ContentMinWidth}"
+                              MaxWidth="{TemplateBinding ContentMaxWidth}"
                               HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
 
                             <DockPanel SnapsToDevicePixels="True" UseLayoutRounding="True">
                                 <DockPanel.Resources>
                                     <Style TargetType="Image">
-                                        <Setter Property="Width" Value="32"></Setter>
-                                        <Setter Property="Height" Value="32"></Setter>
-                                        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"></Setter>
-                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                        <Setter Property="DockPanel.Dock" Value="Left"></Setter>
+                                        <Setter Property="Width" Value="32" />
+                                        <Setter Property="Height" Value="32" />
+                                        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="DockPanel.Dock" Value="Left" />
                                     </Style>
                                 </DockPanel.Resources>
 
-                                <!--icons from https://materialdesignicons.com/-->
-                                <Viewbox x:Name="PART_iconWarning" Width="32" Height="32">
+                                <!--  icons from https://materialdesignicons.com/  -->
+                                <Viewbox x:Name="PART_iconWarning"
+                                         Width="32"
+                                         Height="32">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" 
-                                              Fill="#EAA900" />
+                                        <Path Data="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" Fill="#EAA900" />
                                     </Canvas>
                                 </Viewbox>
-                                <Viewbox x:Name="PART_iconInfo" Width="32" Height="32">
+                                <Viewbox x:Name="PART_iconInfo"
+                                         Width="32"
+                                         Height="32">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" 
-                                              Fill="#1D42AD" />
+                                        <Path Data="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="#1D42AD" />
                                     </Canvas>
                                 </Viewbox>
-                                <Viewbox x:Name="PART_iconError" Width="32" Height="32">
+                                <Viewbox x:Name="PART_iconError"
+                                         Width="32"
+                                         Height="32">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" 
-                                              Fill="#D30C0C" />
+                                        <Path Data="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" Fill="#D30C0C" />
                                     </Canvas>
                                 </Viewbox>
-                                <Viewbox x:Name="PART_iconQuestion" Width="32" Height="32">
+                                <Viewbox x:Name="PART_iconQuestion"
+                                         Width="32"
+                                         Height="32">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" 
-                                              Fill="#1D42AD" />
+                                        <Path Data="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" Fill="#1D42AD" />
                                     </Canvas>
                                 </Viewbox>
 
-                                <TextBlock x:Name="PART_Title" TextTrimming="CharacterEllipsis" 
-                                           FontSize="{DynamicResource WindowTitleFontSize}" Margin="2 0"
+                                <TextBlock x:Name="PART_Title"
+                                           Margin="2 0"
+                                           VerticalAlignment="Center"
+                                           FontSize="{DynamicResource WindowTitleFontSize}"
                                            FontWeight="Light"
-                                           VerticalAlignment="Center"></TextBlock>
+                                           TextTrimming="CharacterEllipsis" />
                             </DockPanel>
 
                             <ContentPresenter Grid.Row="1" />
 
-                            <StackPanel x:Name="PART_btnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <StackPanel x:Name="PART_btnPanel"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
                                 <StackPanel.Resources>
                                     <!--<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                         <Setter Property="MinWidth" Value="80"></Setter>
@@ -377,10 +394,31 @@
                                     </Style>-->
                                 </StackPanel.Resources>
 
-                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="PART_btnOK" MinWidth="80" Margin="4 0 0 0"></Button>
-                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="PART_btnYes" MinWidth="80" Margin="4 0 0 0"></Button>
-                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="PART_btnNo" MinWidth="80" Margin="4 0 0 0"></Button>
-                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="PART_btnCancel" IsCancel="True" MinWidth="80" Margin="4 0 0 0"></Button>
+                                <Button x:Name="PART_btnOK"
+                                        MinWidth="80"
+                                        Margin="4 0 0 0"
+                                        Content="{Binding Source={x:Static resx:CommandTextBinder.Instance},
+                                                          Path=[CmdOK],
+                                                          Mode=OneWay}" />
+                                <Button x:Name="PART_btnYes"
+                                        MinWidth="80"
+                                        Margin="4 0 0 0"
+                                        Content="{Binding Source={x:Static resx:CommandTextBinder.Instance},
+                                                          Path=[CmdYes],
+                                                          Mode=OneWay}" />
+                                <Button x:Name="PART_btnNo"
+                                        MinWidth="80"
+                                        Margin="4 0 0 0"
+                                        Content="{Binding Source={x:Static resx:CommandTextBinder.Instance},
+                                                          Path=[CmdNo],
+                                                          Mode=OneWay}" />
+                                <Button x:Name="PART_btnCancel"
+                                        MinWidth="80"
+                                        Margin="4 0 0 0"
+                                        Content="{Binding Source={x:Static resx:CommandTextBinder.Instance},
+                                                          Path=[CmdCancel],
+                                                          Mode=OneWay}"
+                                        IsCancel="True" />
                             </StackPanel>
                         </Grid>
 
