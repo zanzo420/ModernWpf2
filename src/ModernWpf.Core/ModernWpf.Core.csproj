@@ -75,6 +75,7 @@
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
     <Compile Include="Internal\HackyFolderBrowserDialog.cs" />
+    <Compile Include="Internal\Native\SystemCommand.cs" />
     <Compile Include="Internal\RandomExtensions.cs" />
     <Compile Include="Internal\WpfWin32Window.cs" />
     <Compile Include="Messages\AppCloseMessage.cs" />

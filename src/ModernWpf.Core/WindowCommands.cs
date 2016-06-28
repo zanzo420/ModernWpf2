@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using ModernWpf.Native;
+using System;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace ModernWpf
 {
@@ -68,8 +71,14 @@ namespace ModernWpf
                 return _restoreCommand ?? (
                     _restoreCommand = new RelayCommand<Window>(window =>
                     {
-                        if (window != null) { window.WindowState = WindowState.Normal; }
-                    }, 
+                        //if (window != null) { window.WindowState = WindowState.Normal; }
+                        if (window != null)
+                        {
+                            // send win32 msg so it'll know whether to use maximized window or not
+                            var hwnd = new WindowInteropHelper(window).Handle;
+                            Native.Api.User32.SendMessage(hwnd, (uint)WindowMessage.WM_SYSCOMMAND, new System.IntPtr((int)SystemCommand.SC_RESTORE), IntPtr.Zero);
+                        }
+                    },
                     window => window != null &&
                             window.ResizeMode != ResizeMode.NoResize &&
                             window.ResizeMode != ResizeMode.CanMinimize &&
@@ -93,7 +102,7 @@ namespace ModernWpf
                     _minimizeCommand = new RelayCommand<Window>(window =>
                     {
                         if (window != null) { window.WindowState = WindowState.Minimized; }
-                    }, 
+                    },
                     window => window != null &&
                             window.ResizeMode != ResizeMode.NoResize)
                 );

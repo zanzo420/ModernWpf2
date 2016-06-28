@@ -75,5 +75,14 @@ namespace BasicRunner
 
             Theme.ApplyTheme(Theme.CurrentTheme.GetValueOrDefault(), accent, this.Resources);
         }
+
+        protected override async void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                await Task.Delay(1000);
+                WindowCommands.RestoreCommand.Execute(this);
+            }
+        }
     }
 }
