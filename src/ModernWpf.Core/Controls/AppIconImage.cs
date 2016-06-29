@@ -40,19 +40,15 @@ namespace ModernWpf.Controls
             if (value == null)
             {
                 var win = Window.GetWindow(d);
-                if (win == null || win.Icon == null)
+                if (win != null && win.Icon != null)
                 {
-                    //BindingOperations.ClearBinding(d, Image.SourceProperty);
-                    //aii.Source = aii.LargeIcon ? __appLargeIcon : __appSmallIcon;
-                    //return aii.LargeIcon ? __appLargeIcon : __appSmallIcon;
-                    return __appSmallIcon;
-                }
-                else
-                {
-                    return win.Icon;
+                    value = win.Icon;
                 }
             }
-            return value;
+            //BindingOperations.ClearBinding(d, Image.SourceProperty);
+            //aii.Source = aii.LargeIcon ? __appLargeIcon : __appSmallIcon;
+            //return aii.LargeIcon ? __appLargeIcon : __appSmallIcon;
+            return value ?? __appSmallIcon;
         }
 
         private static string GetExePath()
@@ -81,7 +77,7 @@ namespace ModernWpf.Controls
                 RelativeSource = new RelativeSource
                 {
                     Mode = RelativeSourceMode.FindAncestor,
-                    AncestorType = typeof(Window), 
+                    AncestorType = typeof(Window),
                 },
                 Mode = BindingMode.OneWay
             });
