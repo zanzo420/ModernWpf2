@@ -152,6 +152,8 @@
 
                             <!--  icon  -->
                             <ctrl:AppIconImage x:Name="PART_Icon"
+                                               Width="16"
+                                               Height="16"
                                                Margin="6 0 6 0"
                                                local:Chrome.HitTestType="SystemMenu"
                                                RenderOptions.BitmapScalingMode="HighQuality" />
