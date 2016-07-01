@@ -205,10 +205,13 @@ namespace ModernWpf
             {
                 ContentWindow.Closed -= ContentWindow_Closed;
                 ContentWindow.ContentRendered -= ContentWindow_ContentRendered;
-                var hSrc = HwndSource.FromHwnd(hWndContent);
-                if (hSrc != null)
+                if (hWndContent != IntPtr.Zero)
                 {
-                    hSrc.RemoveHook(WndProc);
+                    var hSrc = HwndSource.FromHwnd(hWndContent);
+                    if (hSrc != null)
+                    {
+                        hSrc.RemoveHook(WndProc);
+                    }
                 }
                 ContentWindow = null;
             }

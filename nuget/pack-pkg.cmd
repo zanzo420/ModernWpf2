@@ -6,7 +6,7 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" 
 )
 
 IF NOT DEFINED vcbat (
-	set error="No Compatible Visual Studio (2013/2015) found."
+	set error="No Compatible Visual Studio (2015) found."
 	goto error;
 )
 
