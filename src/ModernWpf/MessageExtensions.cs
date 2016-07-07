@@ -14,7 +14,9 @@ namespace ModernWpf
         /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing a <see cref="ModernMessageBox" />
         /// and invokes the callback.
         /// </summary>
+        /// <param name="message">The message.</param>
         /// <param name="owner">The owner.</param>
+        /// <exception cref="System.ArgumentNullException">owner</exception>
         public static void HandleWithModern(this MessageBoxMessage message, Window owner)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
@@ -37,7 +39,9 @@ namespace ModernWpf
         /// Handles a basic <see cref="MessageBoxMessage" /> on a flyout container by showing a <see cref="ModernMessageBox" />
         /// and invokes the callback.
         /// </summary>
+        /// <param name="message">The message.</param>
         /// <param name="owner">The owner.</param>
+        /// <exception cref="System.ArgumentNullException">owner</exception>
         public static void HandleWithModern(this MessageBoxMessage message, FlyoutContainer owner)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
