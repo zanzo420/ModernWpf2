@@ -2,6 +2,7 @@
 using ModernWpf.Native;
 using ModernWpf.Native.Api;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Data;
@@ -179,34 +180,54 @@ namespace ModernWpf.Controls
             base.OnClosed(e);
         }
 
-        internal void UpdatePosn(double left, double top, double width, double height)
+
+        internal void UpdatePosnWin32(double left, double top, double width, double height)
         {
-            //User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
-            //var scale = UIHooks.GetWindowDpiScale(_manager.ContentWindow);
-            //left /= scale;
-            //top /= scale;
-            //width /= scale;
-            //height /= scale;
-
-
-            this.Left = left;
-            this.Top = top;
-            this.Width = width;
-            this.Height = height;
-            var pad = 2 * PadSize;// * scale;
+            var pad = (2 * PadSize);
             switch (Side)
             {
                 case BorderSide.Left:
                 case BorderSide.Right:
-                    BorderLength = Math.Max(0, height - pad);
+                    User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top - 1, (int)width, (int)height,
+                        SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOZORDER);
+                    BorderLength = Math.Max(0, height - pad + 2);
                     break;
                 case BorderSide.Top:
                 case BorderSide.Bottom:
+                    User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height,
+                        SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOZORDER);
                     BorderLength = Math.Max(0, width - pad);
                     break;
             }
+        }
+
+
+        internal void UpdatePosnWpf(double left, double top, double width, double height)
+        {
+            var pad = (2 * PadSize);
+            switch (Side)
+            {
+                case BorderSide.Left:
+                case BorderSide.Right:
+                    this.Left = left;
+                    this.Top = top - 1;
+                    this.Width = width;
+                    this.Height = height;
+                    BorderLength = Math.Max(0, height - pad + 2);
+                    break;
+                case BorderSide.Top:
+                case BorderSide.Bottom:
+                    this.Left = left;
+                    this.Top = top;
+                    this.Width = width;
+                    this.Height = height;
+                    BorderLength = Math.Max(0, width - pad);
+                    break;
+            }
+
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
         }
+
         //internal IntPtr UpdatePosnExp(IntPtr blah, double left, double top, double width, double height)
         //{
         //    //User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height, SetWindowPosOptions.SWP_NOACTIVATE);
@@ -298,8 +319,14 @@ namespace ModernWpf.Controls
                     //case WindowMessage.WM_NCCALCSIZE:
                     //    handled = true;
                     //    break;
+                    //case WindowMessage.WM_MOUSEMOVE:
+                    //    var pt = (Point)lParam.ToPoint();
+                    //    Debug.WriteLine("WM point = " + pt);
+                    //    break;
                     case WindowMessage.WM_NCHITTEST:
-                        ChromeHitTest test = HandleHcHitTest(lParam, true);
+                        //pt = (Point)lParam.ToPoint();
+                        //Debug.WriteLine("NC point = " + PointFromScreen(pt));
+                        ChromeHitTest test = HandleHcHitTest(lParam);
                         // Don't actual report this window as NC anymore and just change cursor instead.
                         // This allows content window to properly get IsMouseOver=false at edges
                         if (Mouse.LeftButton != MouseButtonState.Pressed)
@@ -336,7 +363,7 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_LBUTTONDOWN:
                     case WindowMessage.WM_LBUTTONDBLCLK:
-                        var hitTest = HandleHcHitTest(lParam, false);
+                        var hitTest = _lastHitTest;
                         //Debug.WriteLine("Should send {0} to content window.", hitTest);
                         if (hitTest != ChromeHitTest.Client)
                         {
@@ -363,7 +390,7 @@ namespace ModernWpf.Controls
                         break;
                     case WindowMessage.WM_GETMINMAXINFO:
                         // overridden so max size = normal max + resize border (for when content window is max size without maximizing)
-                        
+
                         //var thick = 2 * (int)PadSize;
 
                         //MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
@@ -402,15 +429,16 @@ namespace ModernWpf.Controls
             }
             if (cs != Cursor) { Cursor = cs; }
         }
-
-        private ChromeHitTest HandleHcHitTest(IntPtr lParam, bool isPointNC)
+        ChromeHitTest _lastHitTest;
+        private ChromeHitTest HandleHcHitTest(IntPtr lParam)
         {
             ChromeHitTest res = ChromeHitTest.Border;
             if (_manager.ContentWindow.ResizeMode == ResizeMode.CanResizeWithGrip ||
                 _manager.ContentWindow.ResizeMode == ResizeMode.CanResize)
             {
                 var pt = (Point)lParam.ToPoint();
-                if (isPointNC) { pt = PointFromScreen(pt); }
+                pt = PointFromScreen(pt);
+                //Debug.WriteLine("NC pt = " + pt);
                 int diagSize = (int)(2 * PadSize * UIHooks.GetWindowDpiScale(_manager.ContentWindow));
 
                 switch (Side)
@@ -439,7 +467,7 @@ namespace ModernWpf.Controls
                 //Debug.WriteLine("Side {0}({1},{2}) at {3}, res = {4}", Side, Width, Height, pt, res);
             }
 
-            return res;
+            return _lastHitTest = res;
         }
     }
 }

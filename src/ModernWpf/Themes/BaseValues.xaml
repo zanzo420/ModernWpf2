@@ -12,7 +12,7 @@
 
     <Thickness x:Key="MenuBorderThickness">1</Thickness>
 
-    <!--modified from windows app-->
+    <!--  modified from windows app  -->
 
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
     <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
@@ -20,7 +20,7 @@
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
     <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
 
-    <!--margin and color alpha don't matter if using system shadow, only for custom shadow-->
+    <!--  margin and color alpha don't matter if using system shadow, only for custom shadow  -->
     <Thickness x:Key="PopUpShadowMargin">0,0,5,5</Thickness>
     <Color x:Key="PopupShadowColor">#71000000</Color>
 
@@ -51,7 +51,7 @@
     <Thickness x:Key="ComboBoxPadding">6 4</Thickness>
     <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
     <Thickness x:Key="ComboBoxPopupBorderThickness">1</Thickness>
-    
+
     <Thickness x:Key="ListBoxBorderThemeThickness">1</Thickness>
 
     <s:Double x:Key="SliderOutsideTickBarThemeHeight">6</s:Double>

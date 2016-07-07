@@ -3,74 +3,74 @@
                     xmlns:ctrl="clr-namespace:ModernWpf.Controls"
                     xmlns:modern="http://modernwpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWpf;component/Themes/ModernStylesExplicit.xaml"/>
+        <ResourceDictionary Source="/ModernWpf;component/Themes/ModernStylesExplicit.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 
-    <Style TargetType="modern:TitleBar" BasedOn="{StaticResource ModernTitleBar}"/>
-    <Style TargetType="modern:Flyout" BasedOn="{StaticResource ModernFlyout}"/>
-    <Style TargetType="modern:FlyoutContainer" BasedOn="{StaticResource ModernFlyoutContainer}"/>
-    <Style TargetType="modern:MessageBoxFlyout" BasedOn="{StaticResource ModernMessageBoxFlyout}"/>
+    <Style BasedOn="{StaticResource ModernTitleBar}" TargetType="modern:TitleBar" />
+    <Style BasedOn="{StaticResource ModernFlyout}" TargetType="modern:Flyout" />
+    <Style BasedOn="{StaticResource ModernFlyoutContainer}" TargetType="modern:FlyoutContainer" />
+    <Style BasedOn="{StaticResource ModernMessageBoxFlyout}" TargetType="modern:MessageBoxFlyout" />
 
-    <Style TargetType="ItemsControl" BasedOn="{StaticResource ModernItemsControl}"/>
+    <Style BasedOn="{StaticResource ModernItemsControl}" TargetType="ItemsControl" />
 
-    <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
+    <Style BasedOn="{StaticResource ModernTextBlock}" TargetType="TextBlock" />
 
-    <Style TargetType="Label" BasedOn="{StaticResource ModernLabel}"/>
+    <Style BasedOn="{StaticResource ModernLabel}" TargetType="Label" />
 
-    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}"/>
+    <Style BasedOn="{StaticResource ModernButton}" TargetType="Button" />
 
-    <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernToggleButton}"/>
+    <Style BasedOn="{StaticResource ModernToggleButton}" TargetType="ToggleButton" />
 
-    <Style TargetType="RadioButton" BasedOn="{StaticResource ModernRadioButton}"/>
+    <Style BasedOn="{StaticResource ModernRadioButton}" TargetType="RadioButton" />
 
-    <Style TargetType="RepeatButton" BasedOn="{StaticResource ModernRepeatButton}"/>
+    <Style BasedOn="{StaticResource ModernRepeatButton}" TargetType="RepeatButton" />
 
-    <Style TargetType="StatusBar" BasedOn="{StaticResource ModernStatusBar}"/>
+    <Style BasedOn="{StaticResource ModernStatusBar}" TargetType="StatusBar" />
 
-    <Style TargetType="StatusBarItem" BasedOn="{StaticResource ModernStatusBarItem}"/>
+    <Style BasedOn="{StaticResource ModernStatusBarItem}" TargetType="StatusBarItem" />
 
-    <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"/>
+    <Style BasedOn="{StaticResource ModernToolTip}" TargetType="ToolTip" />
 
-    <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"/>
+    <Style BasedOn="{StaticResource ModernCheckBox}" TargetType="CheckBox" />
 
-    <Style TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}"/>
+    <Style BasedOn="{StaticResource ModernTextBox}" TargetType="TextBox" />
 
-    <Style TargetType="RichTextBox" BasedOn="{StaticResource ModernRichTextBox}"/>
+    <Style BasedOn="{StaticResource ModernRichTextBox}" TargetType="RichTextBox" />
 
-    <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"/>
+    <Style BasedOn="{StaticResource ModernPasswordBox}" TargetType="PasswordBox" />
 
-    <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"/>
+    <Style BasedOn="{StaticResource ModernComboBox}" TargetType="ComboBox" />
 
-    <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
+    <Style BasedOn="{StaticResource ModernProgressBar}" TargetType="ProgressBar" />
 
-    <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
+    <Style BasedOn="{StaticResource ModernScrollBar}" TargetType="ScrollBar" />
 
-    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
-    <Style TargetType="ctrl:AnimatedScrollViewer" BasedOn="{StaticResource ModernAnimatedScrollViewer}"/>
+    <Style BasedOn="{StaticResource ModernScrollViewer}" TargetType="ScrollViewer" />
+    <Style BasedOn="{StaticResource ModernAnimatedScrollViewer}" TargetType="ctrl:AnimatedScrollViewer" />
 
-    <Style TargetType="Thumb" BasedOn="{StaticResource ModernThumb}"/>
-    <Style TargetType="Slider" BasedOn="{StaticResource ModernSlider}"/>
+    <Style BasedOn="{StaticResource ModernThumb}" TargetType="Thumb" />
+    <Style BasedOn="{StaticResource ModernSlider}" TargetType="Slider" />
 
-    <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}"/>
+    <Style BasedOn="{StaticResource ModernMenuItem}" TargetType="MenuItem" />
 
-    <Style TargetType="Separator" BasedOn="{StaticResource ModernSeparator}"/>
+    <Style BasedOn="{StaticResource ModernSeparator}" TargetType="Separator" />
 
-    <Style TargetType="Menu" BasedOn="{StaticResource ModernMenu}"/>
-    <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
+    <Style BasedOn="{StaticResource ModernMenu}" TargetType="Menu" />
+    <Style BasedOn="{StaticResource ModernContextMenu}" TargetType="ContextMenu" />
 
-    <Style TargetType="ListBox" BasedOn="{StaticResource ModernListBox}" />
+    <Style BasedOn="{StaticResource ModernListBox}" TargetType="ListBox" />
 
-    <Style TargetType="ListView" BasedOn="{StaticResource ModernListView}" />
-    <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource ModernGridViewColumnHeader}"/>
+    <Style BasedOn="{StaticResource ModernListView}" TargetType="ListView" />
+    <Style BasedOn="{StaticResource ModernGridViewColumnHeader}" TargetType="GridViewColumnHeader" />
 
-    <Style TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}" />
+    <Style BasedOn="{StaticResource ModernDataGrid}" TargetType="DataGrid" />
 
-    <Style TargetType="TreeView" BasedOn="{StaticResource ModernTreeView}"/>
+    <Style BasedOn="{StaticResource ModernTreeView}" TargetType="TreeView" />
 
-    <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
-    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource ModernDatePickerTextBox}" />
-    <Style TargetType="Calendar" BasedOn="{StaticResource ModernCalendar}" />
+    <Style BasedOn="{StaticResource ModernDatePicker}" TargetType="DatePicker" />
+    <Style BasedOn="{StaticResource ModernDatePickerTextBox}" TargetType="DatePickerTextBox" />
+    <Style BasedOn="{StaticResource ModernCalendar}" TargetType="Calendar" />
     <!--<Style TargetType="CalendarItem" BasedOn="{StaticResource ModernCalendarItem}" />
     <Style TargetType="CalendarDayButton" BasedOn="{StaticResource ModernCalendarDayButton}" />
     <Style TargetType="CalendarButton" BasedOn="{StaticResource ModernCalendarButton}" />-->

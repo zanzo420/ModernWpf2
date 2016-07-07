@@ -1,58 +1,57 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue" />
 
-    <SolidColorBrush x:Key="ModernAccentDark1" Color="#0078EE"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentDark2" Color="#0060BF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentDark3" Color="#004990"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentDark4" Color="#003161"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentDark1" Color="#0078EE" />
+    <SolidColorBrush x:Key="ModernAccentDark2" Color="#0060BF" />
+    <SolidColorBrush x:Key="ModernAccentDark3" Color="#004990" />
+    <SolidColorBrush x:Key="ModernAccentDark4" Color="#003161" />
 
-    <SolidColorBrush x:Key="ModernAccentLight1" Color="#4ca7ff"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentLight2" Color="#7bbeff"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentLight3" Color="#aad5fe"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentLight4" Color="#d9ecff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentLight1" Color="#4ca7ff" />
+    <SolidColorBrush x:Key="ModernAccentLight2" Color="#7bbeff" />
+    <SolidColorBrush x:Key="ModernAccentLight3" Color="#aad5fe" />
+    <SolidColorBrush x:Key="ModernAccentLight4" Color="#d9ecff" />
 
-    <SolidColorBrush x:Key="ModernAccentAlpha1" Color="#e51E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha2" Color="#cc1E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha3" Color="#b21E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha4" Color="#991E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha5" Color="#7f1E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha6" Color="#661E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha7" Color="#4c1E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha8" Color="#331E90FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccentAlpha9" Color="#191E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha1" Color="#e51E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha2" Color="#cc1E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha3" Color="#b21E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha4" Color="#991E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha5" Color="#7f1E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha6" Color="#661E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha7" Color="#4c1E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha8" Color="#331E90FF" />
+    <SolidColorBrush x:Key="ModernAccentAlpha9" Color="#191E90FF" />
 
-    <SolidColorBrush x:Key="ModernBackground" Color="#232323"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernBackground2" Color="#333333"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernBackground3" Color="#434343"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernBackground4" Color="#535353"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernBackground" Color="#232323" />
+    <SolidColorBrush x:Key="ModernBackground2" Color="#333333" />
+    <SolidColorBrush x:Key="ModernBackground3" Color="#434343" />
+    <SolidColorBrush x:Key="ModernBackground4" Color="#535353" />
 
-    <SolidColorBrush x:Key="ModernForeground" Color="#fcfcfc"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernForeground2" Color="#cecece"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernForeground3" Color="#9e9e9e"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernForeground4" Color="#666666"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernForeground5" Color="#505050"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernForeground" Color="#fcfcfc" />
+    <SolidColorBrush x:Key="ModernForeground2" Color="#cecece" />
+    <SolidColorBrush x:Key="ModernForeground3" Color="#9e9e9e" />
+    <SolidColorBrush x:Key="ModernForeground4" Color="#666666" />
+    <SolidColorBrush x:Key="ModernForeground5" Color="#505050" />
 
-    <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"></SolidColorBrush>
-    <SolidColorBrush x:Key="AccentForeground2" Color="#eeeeee"></SolidColorBrush>
+    <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="AccentForeground2" Color="#eeeeee" />
 
-    <SolidColorBrush x:Key="OverlayBackground" Color="#80ffffff"></SolidColorBrush>
+    <SolidColorBrush x:Key="OverlayBackground" Color="#80ffffff" />
 
-    <SolidColorBrush x:Key="ToolHoverBorder" Color="#E5C365"></SolidColorBrush>
-    <SolidColorBrush x:Key="ToolHoverBackground" Color="#FFFCF4"></SolidColorBrush>
-    <SolidColorBrush x:Key="ToolHoverForeground" Color="Black"></SolidColorBrush>
-    <SolidColorBrush x:Key="ToolActiveBorder" Color="#E5C365"></SolidColorBrush>
-    <SolidColorBrush x:Key="ToolActiveBackground" Color="#FFE8A6"></SolidColorBrush>
-    <SolidColorBrush x:Key="ToolActiveForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolHoverBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolHoverBackground" Color="#FFFCF4" />
+    <SolidColorBrush x:Key="ToolHoverForeground" Color="Black" />
+    <SolidColorBrush x:Key="ToolActiveBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolActiveBackground" Color="#FFE8A6" />
+    <SolidColorBrush x:Key="ToolActiveForeground" Color="Black" />
 
-    <SolidColorBrush x:Key="ActiveCaptionForeground" Color="#fefefe"></SolidColorBrush>
-    <SolidColorBrush x:Key="ActiveCaptionBackground" Color="Transparent"></SolidColorBrush>
-    <SolidColorBrush x:Key="InactiveCaptionForeground" Color="#6e6e6e"></SolidColorBrush>
-    <SolidColorBrush x:Key="InactiveCaptionBackground" Color="Transparent"></SolidColorBrush>
+    <SolidColorBrush x:Key="ActiveCaptionForeground" Color="#fefefe" />
+    <SolidColorBrush x:Key="ActiveCaptionBackground" Color="Transparent" />
+    <SolidColorBrush x:Key="InactiveCaptionForeground" Color="#6e6e6e" />
+    <SolidColorBrush x:Key="InactiveCaptionBackground" Color="Transparent" />
 
 
-    <!--simplified versions-->
+    <!--  simplified versions  -->
     <SolidColorBrush x:Key="TextBoxForeground" Color="#000000" />
     <SolidColorBrush x:Key="TextBoxBackground" Color="#DDFFFFFF" />
     <SolidColorBrush x:Key="TextBoxBorder" Color="#DDFFFFFF" />
@@ -75,9 +74,9 @@
     <SolidColorBrush x:Key="TextBoxButtonPressedBorder" Color="Transparent" />
     <SolidColorBrush x:Key="TextBoxButtonPressedForeground" Color="#FFFFFFFF" />
 
-    <!--these are from windows app themes, may be phased out-->
+    <!--  these are from windows app themes, may be phased out  -->
 
-    <!--appbar-->
+    <!--  appbar  -->
     <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="#E5000000" />
     <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="#E5000000" />
     <SolidColorBrush x:Key="AppBarItemBackgroundThemeBrush" Color="Transparent" />
@@ -86,8 +85,8 @@
     <SolidColorBrush x:Key="AppBarItemPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
     <SolidColorBrush x:Key="AppBarItemPointerOverForegroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="AppBarItemPressedForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--button-->
+
+    <!--  button  -->
     <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ButtonBorderThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent" />
@@ -98,16 +97,16 @@
     <SolidColorBrush x:Key="ButtonPointerOverForegroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--hyperlink-->
+
+    <!--  hyperlink  -->
     <SolidColorBrush x:Key="HyperlinkButtonBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="HyperlinkButtonBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="HyperlinkDisabledThemeBrush" Color="#66FFFFFF" />
     <SolidColorBrush x:Key="HyperlinkForegroundThemeBrush" Color="#FF9C72FF" />
     <SolidColorBrush x:Key="HyperlinkPointerOverForegroundThemeBrush" Color="#CC9C72FF" />
     <SolidColorBrush x:Key="HyperlinkPressedForegroundThemeBrush" Color="#999C72FF" />
-    
-    <!--repeat button-->
+
+    <!--  repeat button  -->
     <SolidColorBrush x:Key="RepeatButtonBorderThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="RepeatButtonDisabledBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="RepeatButtonDisabledBorderThemeBrush" Color="#66FFFFFF" />
@@ -118,7 +117,7 @@
     <SolidColorBrush x:Key="RepeatButtonPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="RepeatButtonPressedForegroundThemeBrush" Color="#FF000000" />
 
-    <!--toggle button-->
+    <!--  toggle button  -->
     <SolidColorBrush x:Key="ToggleButtonBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ToggleButtonBorderThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ToggleButtonCheckedBackgroundThemeBrush" Color="#FFFFFFFF" />
@@ -137,8 +136,8 @@
     <SolidColorBrush x:Key="ToggleButtonPointerOverBackgroundThemeBrush" Color="#21FFFFFF" />
     <SolidColorBrush x:Key="ToggleButtonPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ToggleButtonPressedForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--checkbox-->
+
+    <!--  checkbox  -->
     <SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="CheckBoxBorderThemeBrush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="CheckBoxContentDisabledForegroundThemeBrush" Color="#66FFFFFF" />
@@ -153,8 +152,8 @@
     <SolidColorBrush x:Key="CheckBoxPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="CheckBoxPressedBorderThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="CheckBoxPressedForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--radiobutton-->
+
+    <!--  radiobutton  -->
     <SolidColorBrush x:Key="RadioButtonBackgroundThemeBrush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="RadioButtonBorderThemeBrush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="RadioButtonContentDisabledForegroundThemeBrush" Color="#66FFFFFF" />
@@ -169,33 +168,33 @@
     <SolidColorBrush x:Key="RadioButtonPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="RadioButtonPressedBorderThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="RadioButtonPressedForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--combobox-->
+
+    <!--  combobox  -->
     <SolidColorBrush x:Key="ComboBoxArrowForegroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="ComboBoxPopupBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ComboBoxPopupBorderThemeBrush" Color="#FF212121" />
     <SolidColorBrush x:Key="ComboBoxPopupForegroundThemeBrush" Color="#FF000000" />
-    
-    <!--combobox item-->
+
+    <!--  combobox item  -->
     <SolidColorBrush x:Key="ComboBoxItemDisabledForegroundThemeBrush" Color="#66000000" />
     <SolidColorBrush x:Key="ComboBoxItemPointerOverBackgroundThemeBrush" Color="#21000000" />
     <SolidColorBrush x:Key="ComboBoxItemPointerOverForegroundThemeBrush" Color="#FF000000" />
-    <SolidColorBrush x:Key="ComboBoxItemPressedBackgroundThemeBrush" Color="#FFD3D3D3"/>
-    <SolidColorBrush x:Key="ComboBoxItemPressedForegroundThemeBrush" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ComboBoxItemPressedBackgroundThemeBrush" Color="#FFD3D3D3" />
+    <SolidColorBrush x:Key="ComboBoxItemPressedForegroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="#FF4617B4" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedDisabledBackgroundThemeBrush" Color="#8C000000" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedDisabledForegroundThemeBrush" Color="#99FFFFFF" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedForegroundThemeBrush" Color="White" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#FF5F37BE" />
-    
-    <!--listbox-->
+
+    <!--  listbox  -->
     <SolidColorBrush x:Key="ListBoxBackgroundThemeBrush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="ListBoxBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ListBoxDisabledForegroundThemeBrush" Color="#66FFFFFF" />
     <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ListBoxForegroundThemeBrush" Color="#FF000000" />
 
-    <!--listbox item-->
+    <!--  listbox item  -->
     <SolidColorBrush x:Key="ListBoxItemDisabledForegroundThemeBrush" Color="#66FFFFFF" />
     <SolidColorBrush x:Key="ListBoxItemPointerOverBackgroundThemeBrush" Color="#21000000" />
     <SolidColorBrush x:Key="ListBoxItemPointerOverForegroundThemeBrush" Color="#FF000000" />
@@ -207,7 +206,7 @@
     <SolidColorBrush x:Key="ListBoxItemSelectedForegroundThemeBrush" Color="White" />
     <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#FF5F37BE" />
 
-    <!--slider-->
+    <!--  slider  -->
     <SolidColorBrush x:Key="SliderBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="SliderDisabledBorderThemeBrush" Color="Transparent" />
 
@@ -232,8 +231,8 @@
     <SolidColorBrush x:Key="SliderTrackDisabledBackgroundThemeBrush" Color="#29FFFFFF" />
     <SolidColorBrush x:Key="SliderTrackPointerOverBackgroundThemeBrush" Color="#46FFFFFF" />
     <SolidColorBrush x:Key="SliderTrackPressedBackgroundThemeBrush" Color="#59FFFFFF" />
-    
-    <!--toggle switch-->
+
+    <!--  toggle switch  -->
     <SolidColorBrush x:Key="ToggleSwitchCurtainBackgroundThemeBrush" Color="#FF5729C1" />
     <SolidColorBrush x:Key="ToggleSwitchCurtainDisabledBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ToggleSwitchCurtainPointerOverBackgroundThemeBrush" Color="#FF6E46CA" />
@@ -263,7 +262,7 @@
     <SolidColorBrush x:Key="ToggleSwitchTrackPointerOverBackgroundThemeBrush" Color="#4AFFFFFF" />
     <SolidColorBrush x:Key="ToggleSwitchTrackPressedBackgroundThemeBrush" Color="#59FFFFFF" />
 
-    <!--progress bar-->
+    <!--  progress bar  -->
     <SolidColorBrush x:Key="ProgressBarBackgroundThemeBrush" Color="#59FFFFFF" />
     <SolidColorBrush x:Key="ProgressBarBorderThemeBrush" Color="Transparent" />
     <!--<SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="#FF5B2EC5" />-->
@@ -271,38 +270,38 @@
     <!--<SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="#FF8A57FF" />-->
     <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="Green" />
 
-    <!--tooltip-->
+    <!--  tooltip  -->
     <SolidColorBrush x:Key="ToolTipBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ToolTipBorderThemeBrush" Color="#FF808080" />
     <SolidColorBrush x:Key="ToolTipForegroundThemeBrush" Color="#FF666666" />
-    
-    <!--scroll-->
-    <SolidColorBrush x:Key="ScrollBarButtonForegroundThemeBrush" Color="#99000000"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPointerOverBackgroundThemeBrush" Color="#FFDADADA"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPointerOverBorderThemeBrush" Color="#FFDADADA"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPointerOverForegroundThemeBrush" Color="#FF000000"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPressedBackgroundThemeBrush" Color="#99000000"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPressedBorderThemeBrush" Color="#99000000"/>
-    <SolidColorBrush x:Key="ScrollBarButtonPressedForegroundThemeBrush" Color="#FFFFFFFF"/>
 
-    <SolidColorBrush x:Key="ScrollBarPanningBackgroundThemeBrush" Color="#FFCDCDCD"/>
-    <SolidColorBrush x:Key="ScrollBarPanningBorderThemeBrush" Color="#7D9A9A9A"/>
+    <!--  scroll  -->
+    <SolidColorBrush x:Key="ScrollBarButtonForegroundThemeBrush" Color="#99000000" />
+    <SolidColorBrush x:Key="ScrollBarButtonPointerOverBackgroundThemeBrush" Color="#FFDADADA" />
+    <SolidColorBrush x:Key="ScrollBarButtonPointerOverBorderThemeBrush" Color="#FFDADADA" />
+    <SolidColorBrush x:Key="ScrollBarButtonPointerOverForegroundThemeBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="ScrollBarButtonPressedBackgroundThemeBrush" Color="#99000000" />
+    <SolidColorBrush x:Key="ScrollBarButtonPressedBorderThemeBrush" Color="#99000000" />
+    <SolidColorBrush x:Key="ScrollBarButtonPressedForegroundThemeBrush" Color="#FFFFFFFF" />
 
-    <SolidColorBrush x:Key="ScrollBarThumbBackgroundThemeBrush" Color="#FFCDCDCD"/>
-    <SolidColorBrush x:Key="ScrollBarThumbBorderThemeBrush" Color="#3B555555"/>
-    <SolidColorBrush x:Key="ScrollBarThumbPointerOverBackgroundThemeBrush" Color="#FFDADADA"/>
-    <SolidColorBrush x:Key="ScrollBarThumbPointerOverBorderThemeBrush" Color="#6BB7B7B7"/>
-    <SolidColorBrush x:Key="ScrollBarThumbPressedBackgroundThemeBrush" Color="#99000000"/>
-    <SolidColorBrush x:Key="ScrollBarThumbPressedBorderThemeBrush" Color="#ED555555"/>
+    <SolidColorBrush x:Key="ScrollBarPanningBackgroundThemeBrush" Color="#FFCDCDCD" />
+    <SolidColorBrush x:Key="ScrollBarPanningBorderThemeBrush" Color="#7D9A9A9A" />
+
+    <SolidColorBrush x:Key="ScrollBarThumbBackgroundThemeBrush" Color="#FFCDCDCD" />
+    <SolidColorBrush x:Key="ScrollBarThumbBorderThemeBrush" Color="#3B555555" />
+    <SolidColorBrush x:Key="ScrollBarThumbPointerOverBackgroundThemeBrush" Color="#FFDADADA" />
+    <SolidColorBrush x:Key="ScrollBarThumbPointerOverBorderThemeBrush" Color="#6BB7B7B7" />
+    <SolidColorBrush x:Key="ScrollBarThumbPressedBackgroundThemeBrush" Color="#99000000" />
+    <SolidColorBrush x:Key="ScrollBarThumbPressedBorderThemeBrush" Color="#ED555555" />
 
     <SolidColorBrush x:Key="ScrollBarTrackBackgroundThemeBrush" Color="#59D5D5D5" />
     <SolidColorBrush x:Key="ScrollBarTrackBorderThemeBrush" Color="#59D5D5D5" />
 
-    <!--thumb-->
+    <!--  thumb  -->
     <SolidColorBrush x:Key="ThumbBackgroundThemeBrush" Color="#FFCDCDCD" />
     <SolidColorBrush x:Key="ThumbBorderThemeBrush" Color="#3B555555" />
-    <SolidColorBrush x:Key="ThumbPointerOverBackgroundThemeBrush" Color="#FFDADADA"/>
-    <SolidColorBrush x:Key="ThumbPointerOverBorderThemeBrush" Color="#6BB7B7B7"/>
+    <SolidColorBrush x:Key="ThumbPointerOverBackgroundThemeBrush" Color="#FFDADADA" />
+    <SolidColorBrush x:Key="ThumbPointerOverBorderThemeBrush" Color="#6BB7B7B7" />
     <SolidColorBrush x:Key="ThumbPressedBackgroundThemeBrush" Color="#99000000" />
-    <SolidColorBrush x:Key="ThumbPressedBorderThemeBrush" Color="#ED555555"/>
+    <SolidColorBrush x:Key="ThumbPressedBorderThemeBrush" Color="#ED555555" />
 </ResourceDictionary>

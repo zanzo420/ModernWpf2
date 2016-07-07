@@ -2266,6 +2266,36 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarDayButton">
                     <Grid>
+                        <Rectangle x:Name="TodayBackground"
+                                   Fill="{DynamicResource ModernAccent}"
+                                   Opacity="0" />
+                        <Rectangle x:Name="SelectedBackground"
+                                   Fill="{DynamicResource ModernBackground4}"
+                                   Opacity="0" />
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+                        <Rectangle x:Name="HighlightBackground"
+                                   Fill="{DynamicResource ModernBackground4}"
+                                   Opacity="0" />
+                        <ContentPresenter x:Name="NormalText"
+                                          Margin="6 1"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <Path x:Name="Blackout"
+                              Margin="3"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
+                              Fill="#FF000000"
+                              Opacity="0"
+                              RenderTransformOrigin="0.5,0.5"
+                              Stretch="Fill" />
+                        <Rectangle x:Name="DayButtonFocusVisual"
+                                   IsHitTestVisible="false"
+                                   Stroke="{DynamicResource ModernAccent}"
+                                   Visibility="Collapsed" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -2302,36 +2332,6 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="TodayBackground"
-                                   Fill="{DynamicResource ModernAccent}"
-                                   Opacity="0" />
-                        <Rectangle x:Name="SelectedBackground"
-                                   Fill="{DynamicResource ModernBackground4}"
-                                   Opacity="0" />
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" />
-                        <Rectangle x:Name="HighlightBackground"
-                                   Fill="{DynamicResource ModernBackground4}"
-                                   Opacity="0" />
-                        <ContentPresenter x:Name="NormalText"
-                                          Margin="6 1"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          TextElement.Foreground="{TemplateBinding Foreground}" />
-                        <Path x:Name="Blackout"
-                              Margin="3"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"
-                              Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
-                              Fill="#FF000000"
-                              Opacity="0"
-                              RenderTransformOrigin="0.5,0.5"
-                              Stretch="Fill" />
-                        <Rectangle x:Name="DayButtonFocusVisual"
-                                   IsHitTestVisible="false"
-                                   Stroke="{DynamicResource ModernAccent}"
-                                   Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsBlackedOut" Value="True">
@@ -2368,6 +2368,21 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarButton">
                     <Grid>
+                        <Rectangle x:Name="SelectedBackground"
+                                   Fill="{TemplateBinding Background}"
+                                   Opacity="0" />
+                        <Rectangle x:Name="Background"
+                                   Fill="{TemplateBinding Background}"
+                                   Opacity="0" />
+                        <ContentPresenter x:Name="NormalText"
+                                          Margin="1,0,1,1"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <Rectangle x:Name="CalendarButtonFocusVisual"
+                                   IsHitTestVisible="false"
+                                   Stroke="{DynamicResource ModernAccent}"
+                                   Visibility="Collapsed" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -2451,21 +2466,6 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="SelectedBackground"
-                                   Fill="{TemplateBinding Background}"
-                                   Opacity="0" />
-                        <Rectangle x:Name="Background"
-                                   Fill="{TemplateBinding Background}"
-                                   Opacity="0" />
-                        <ContentPresenter x:Name="NormalText"
-                                          Margin="1,0,1,1"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          TextElement.Foreground="{TemplateBinding Foreground}" />
-                        <Rectangle x:Name="CalendarButtonFocusVisual"
-                                   IsHitTestVisible="false"
-                                   Stroke="{DynamicResource ModernAccent}"
-                                   Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
@@ -2599,24 +2599,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="DatePickerTextBox">
                     <Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="WatermarkStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="Unwatermarked" />
-                                <VisualState Name="Watermarked">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0"
-                                                         Storyboard.TargetName="PART_Watermark"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1" />
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-
                         <Border x:Name="Border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -2639,6 +2621,22 @@
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Grid>
                         </Border>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="WatermarkStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Unwatermarked" />
+                                <VisualState Name="Watermarked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="PART_Watermark"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -3815,7 +3813,7 @@
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="UseLayoutRounding" Value="False"></Setter>
+        <Setter Property="UseLayoutRounding" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
@@ -3830,7 +3828,7 @@
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="UseLayoutRounding" Value="False"></Setter>
+        <Setter Property="UseLayoutRounding" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">

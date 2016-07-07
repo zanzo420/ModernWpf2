@@ -122,7 +122,6 @@ namespace ModernWpf
             if (User32.GetWindowRect(hWndContent, ref rcNative))
             {
                 Rect rcWpf = TranslateToWpf(ref rcNative);
-
                 //var scale = UIHooks.GetWindowDpiScale(ContentWindow);
 
                 var leftW = _left.PadSize;
@@ -130,22 +129,22 @@ namespace ModernWpf
                 var rightW = _right.PadSize;
                 var botH = _bottom.PadSize;
 
-                _left.UpdatePosn(
+                _left.UpdatePosnWpf(
                     rcWpf.Left - leftW,
                     rcWpf.Top - topH,
                     leftW,
                     rcWpf.Height + topH + botH);
-                _top.UpdatePosn(
+                _top.UpdatePosnWpf(
                     rcWpf.Left - leftW,
                     rcWpf.Top - topH,
                     rcWpf.Width + leftW + rightW,
                     topH);
-                _right.UpdatePosn(
+                _right.UpdatePosnWpf(
                     rcWpf.Right,
                     rcWpf.Top - topH,
                     rightW,
                     rcWpf.Height + topH + botH);
-                _bottom.UpdatePosn(
+                _bottom.UpdatePosnWpf(
                     rcWpf.Left - leftW,
                     rcWpf.Bottom,
                     rcWpf.Width + leftW + rightW,

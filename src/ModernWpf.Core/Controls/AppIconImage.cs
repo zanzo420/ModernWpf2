@@ -21,7 +21,7 @@ namespace ModernWpf.Controls
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static AppIconImage()
         {
-            StretchProperty.OverrideMetadata(typeof(AppIconImage), new FrameworkPropertyMetadata(Stretch.None));
+            StretchProperty.OverrideMetadata(typeof(AppIconImage), new FrameworkPropertyMetadata(Stretch.Uniform));
             SourceProperty.OverrideMetadata(typeof(AppIconImage), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(SourceChanged), new CoerceValueCallback(SourceCoerceCallback)));
 
             string exePath = GetExePath();
