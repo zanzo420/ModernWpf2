@@ -59,7 +59,7 @@ namespace ModernWpf.Controls
 
 
         /// <summary>
-        /// Gets or sets a value indicating whether the dialog closes on escape key.
+        /// Gets or sets a value indicating whether the flyout closes on escape key.
         /// </summary>
         /// <value>
         /// <c>true</c> to close on escape key; otherwise, <c>false</c>.
@@ -165,17 +165,22 @@ namespace ModernWpf.Controls
         }
 
         /// <summary>
-        /// Called when dialog has been shown and focus needs to happen.
+        /// Called when the flyout has been shown and focus needs to happen.
         /// </summary>
         protected virtual void OnFocus() { }
 
         /// <summary>
-        /// Called when dialog has been closed.
+        /// Called right before the flyout is closing.
+        /// </summary>
+        internal protected virtual void OnClosing() { }
+
+        /// <summary>
+        /// Called when the flyout has been closed.
         /// </summary>
         protected virtual void OnClosed() { }
 
         /// <summary>
-        /// Shows the dialog on a window. The window must have a <see cref="FlyoutContainer"/>
+        /// Shows the flyout on a window. The window must have a <see cref="FlyoutContainer"/>
         /// in its visual tree.
         /// </summary>
         /// <param name="window">The window.</param>
@@ -186,7 +191,7 @@ namespace ModernWpf.Controls
         }
 
         /// <summary>
-        /// Shows the dialog on a <see cref="FlyoutContainer"/>.
+        /// Shows the flyout on a <see cref="FlyoutContainer"/>.
         /// </summary>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentNullException">container</exception>
@@ -201,7 +206,7 @@ namespace ModernWpf.Controls
 
 
         /// <summary>
-        /// Shows the dialog on a window. The window must have a <see cref="FlyoutContainer"/>
+        /// Shows the flyout on a window. The window must have a <see cref="FlyoutContainer"/>
         /// in its visual tree.
         /// </summary>
         /// <param name="window">The window.</param>
@@ -213,7 +218,7 @@ namespace ModernWpf.Controls
 
 
         /// <summary>
-        /// Shows the dialog on a <see cref="FlyoutContainer"/>.
+        /// Shows the flyout on a <see cref="FlyoutContainer"/>.
         /// </summary>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentNullException">container</exception>

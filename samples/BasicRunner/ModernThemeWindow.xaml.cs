@@ -84,5 +84,17 @@ namespace BasicRunner
                 WindowCommands.RestoreCommand.Execute(this);
             }
         }
+
+        private void btnUserFlyout_Click(object sender, RoutedEventArgs e)
+        {
+            if (flyOuter.IsChecked.Value)
+            {
+                new SampleFlyout().ShowDialog(this);
+            }
+            else
+            {
+                new SampleFlyout().ShowDialog(innerFlyoutBox);
+            }
+        }
     }
 }

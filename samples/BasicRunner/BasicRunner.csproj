@@ -88,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SampleFlyout.xaml.cs">
+      <DependentUpon>SampleFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VM\SampleAppVM.cs" />
     <Page Include="ModernThemeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +132,10 @@
       <DependentUpon>LaunchWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SampleFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

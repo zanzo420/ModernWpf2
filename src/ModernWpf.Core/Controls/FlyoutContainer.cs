@@ -164,6 +164,7 @@ namespace ModernWpf.Controls
         {
             lock (_openLock)
             {
+                dialog.OnClosing();
                 dialog.Container = null;
                 _openDialogs.Remove(dialog);
                 ShowMostRecentDialogIfNecessary();

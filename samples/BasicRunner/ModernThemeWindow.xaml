@@ -171,6 +171,9 @@
 
                             <Button x:Name="btnMsgBox" Content="MessageBox replacements"
                                 Margin="8" Click="btnMsgBox_Click"></Button>
+
+                            <Button x:Name="btnUserFlyout" Content="Custom flyout user control"
+                                Margin="8" Click="btnUserFlyout_Click"></Button>
                         </StackPanel>
                     </Grid>
                 </modern:AnimatedContentControl>
