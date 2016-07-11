@@ -19,7 +19,7 @@ namespace ModernWpf.ViewModels
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
-        protected virtual void RaisePropertyChanged(string propertyName)
+        public virtual void RaisePropertyChanged(string propertyName)
         {
             var handle = PropertyChanged;
             if (handle != null) { handle(this, new PropertyChangedEventArgs(propertyName)); }
@@ -32,7 +32,7 @@ namespace ModernWpf.ViewModels
         /// <param name="propertyName">Name of the property using linq expression.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
-        protected virtual void RaisePropertyChanged<T>(Expression<Func<T>> propertyName)
+        public virtual void RaisePropertyChanged<T>(Expression<Func<T>> propertyName)
         {
             var handle = PropertyChanged;
             if (handle != null && propertyName != null)
