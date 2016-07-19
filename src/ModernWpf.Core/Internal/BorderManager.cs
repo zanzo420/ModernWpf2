@@ -206,11 +206,15 @@ namespace ModernWpf
                 ContentWindow.ContentRendered -= ContentWindow_ContentRendered;
                 if (hWndContent != IntPtr.Zero)
                 {
-                    var hSrc = HwndSource.FromHwnd(hWndContent);
-                    if (hSrc != null)
+                    try
                     {
-                        hSrc.RemoveHook(WndProc);
+                        var hSrc = HwndSource.FromHwnd(hWndContent);
+                        if (hSrc != null)
+                        {
+                            hSrc.RemoveHook(WndProc);
+                        }
                     }
+                    catch { }
                 }
                 ContentWindow = null;
             }
