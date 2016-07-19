@@ -1826,7 +1826,8 @@
                                   Fill="{DynamicResource ComboBoxArrowForegroundThemeBrush}"
                                   Stretch="Fill"
                                   StrokeThickness="0"
-                                  UseLayoutRounding="False" />
+                                  UseLayoutRounding="False"
+                                  IsHitTestVisible="False"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
