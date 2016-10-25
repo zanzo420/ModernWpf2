@@ -219,10 +219,10 @@ namespace ModernWpf
                 ContentWindow = null;
             }
 
-            _left.Close();
-            _top.Close();
-            _right.Close();
-            _bottom.Close();
+            _left?.Close();
+            _top?.Close();
+            _right?.Close();
+            _bottom?.Close();
         }
 
         private void ContentWindow_Closed(object sender, EventArgs e)
