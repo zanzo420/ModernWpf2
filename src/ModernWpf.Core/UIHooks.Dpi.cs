@@ -334,14 +334,17 @@ namespace ModernWpf
 
         static void RescaleForDpi(Window window)
         {
-            var child = VisualTreeHelper.GetChild(window, 0) as FrameworkElement;
-            if (child != null)
+            if (window != null)
             {
-                ScaleElement(child, GetWindowDpiScale(window), true);
-            }
+                var child = VisualTreeHelper.GetChild(window, 0) as FrameworkElement;
+                if (child != null)
+                {
+                    ScaleElement(child, GetWindowDpiScale(window), true);
+                }
 
-            var dpiArgs = new DpiChangeEventArgs(window, GetWindowDpi(window), GetWindowDpiScale(window));
-            window.RaiseEvent(dpiArgs);
+                var dpiArgs = new DpiChangeEventArgs(window, GetWindowDpi(window), GetWindowDpiScale(window));
+                window.RaiseEvent(dpiArgs);
+            }
         }
 
         private static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -349,26 +352,28 @@ namespace ModernWpf
             if (!handled && (WindowMessage)msg == WindowMessage.WM_DPICHANGED)
             {
                 var hSrc = HwndSource.FromHwnd(hwnd);
-                Window win = (Window)hSrc.RootVisual;
-
-                var curDpi = GetWindowDpi(win);
-
-                var newMonDpi = wParam.ToInt32() & 0xffff;
-                if (curDpi != newMonDpi)
+                var win = hSrc.RootVisual as Window;
+                if (win != null)
                 {
-                    SetWindowDpi(win, newMonDpi);
+                    var curDpi = GetWindowDpi(win);
 
-                    var wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
-                    var scale = newMonDpi / wpfDPI;
-                    SetWindowDpiScale(win, scale);
-                    // update window size as well
-                    RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
-                    User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
-                         SetWindowPosOptions.SWP_NOZORDER |
-                         SetWindowPosOptions.SWP_NOOWNERZORDER |
-                         SetWindowPosOptions.SWP_NOACTIVATE);
+                    var newMonDpi = wParam.ToInt32() & 0xffff;
+                    if (curDpi != newMonDpi)
+                    {
+                        SetWindowDpi(win, newMonDpi);
 
-                    RescaleForDpi(win);
+                        var wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
+                        var scale = newMonDpi / wpfDPI;
+                        SetWindowDpiScale(win, scale);
+                        // update window size as well
+                        RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                        User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
+                             SetWindowPosOptions.SWP_NOZORDER |
+                             SetWindowPosOptions.SWP_NOOWNERZORDER |
+                             SetWindowPosOptions.SWP_NOACTIVATE);
+
+                        RescaleForDpi(win);
+                    }
                 }
             }
             return IntPtr.Zero;
