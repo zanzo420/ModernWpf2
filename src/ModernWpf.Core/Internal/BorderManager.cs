@@ -338,20 +338,25 @@ namespace ModernWpf
                         var element = Mouse.DirectlyOver;
                         if (element != null)
                         {
-                            var delta = wParam.ToInt32() >> 16;
-                            var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
+                            try
                             {
-                                RoutedEvent = UIHooks.PreviewMouseHWheelEvent
-                            };
-                            element.RaiseEvent(arg);
-                            if (!arg.Handled)
-                            {
-                                arg.RoutedEvent = UIHooks.MouseHWheelEvent;
-                                arg.Handled = false;
+                                //var delta = wParam.ToInt32() >> 16;
+                                var delta = ((int)(wParam.ToInt64() & 0xffffffff)) >> 16;
+                                var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
+                                {
+                                    RoutedEvent = UIHooks.PreviewMouseHWheelEvent
+                                };
                                 element.RaiseEvent(arg);
+                                if (!arg.Handled)
+                                {
+                                    arg.RoutedEvent = UIHooks.MouseHWheelEvent;
+                                    arg.Handled = false;
+                                    element.RaiseEvent(arg);
 
-                                handled = arg.Handled;
+                                    handled = arg.Handled;
+                                }
                             }
+                            catch { }
                         }
                         break;
                 }
