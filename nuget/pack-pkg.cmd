@@ -1,12 +1,12 @@
 @echo off
 
 @echo compiling solution...
-if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" (
-	set vcbat="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" (
+	set vcbat="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
 )
 
 IF NOT DEFINED vcbat (
-	set error="No Compatible Visual Studio (2015) found."
+	set error="No Compatible Visual Studio (2017) found."
 	goto error;
 )
 

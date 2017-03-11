@@ -48,18 +48,18 @@ namespace ModernWpf.Controls
         /// </summary>
         public AnimatedScrollViewer()
         {
-            UIHooks.AddMouseHWheelHandler(this, HandleHWheel);
+            UIHooks.AddMouseHWheelHandler(this, HandleHorizWheel);
         }
 
-        private void HandleHWheel(object sender, MouseWheelEventArgs e)
+        private void HandleHorizWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e != null && !e.Handled)
+            if (e != null && !e.Handled && AnimateOnWheel)
             {
                 if (e.Delta < 0)
                 {
                     if (this.CanHScrollLeft())
                     {
-                        TargetHorizontalOffset = Math.Max(0, HorizontalOffset - largeStep);
+                        TargetHorizontalOffset = Math.Max(0, HorizontalOffset - e.Delta);
                         e.Handled = true;
                     }
                 }
@@ -67,7 +67,7 @@ namespace ModernWpf.Controls
                 {
                     if (this.CanHScrollRight())
                     {
-                        TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset + largeStep);
+                        TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset - e.Delta);
                         e.Handled = true;
                     }
                 }
@@ -104,35 +104,36 @@ namespace ModernWpf.Controls
             _aniVerticalScrollBar = GetTemplateChild(PART_FakeVBar) as ScrollBar;
             if (_aniVerticalScrollBar != null)
             {
+                _aniVerticalScrollBar.Value = TargetVerticalOffset;
                 _aniVerticalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniVScrollBar_ValueChanged);
             }
 
             _aniHorizontalScrollBar = GetTemplateChild(PART_FakeHBar) as ScrollBar;
             if (_aniHorizontalScrollBar != null)
             {
+                _aniHorizontalScrollBar.Value = TargetHorizontalOffset;
                 _aniHorizontalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniHScrollBar_ValueChanged);
             }
         }
-
-
+        
         /// <summary>
         /// Invoked when an unhandled <see cref="E:System.Windows.Input.Mouse.PreviewMouseWheel" /> attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
         /// <param name="e">The <see cref="T:System.Windows.Input.MouseWheelEventArgs" /> that contains the event data.</param>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            if (e != null && !e.Handled)
+            if (e != null && !e.Handled && AnimateOnWheel)
             {
                 if (e.Delta < 0)
                 {
                     if (this.CanVScrollDown())
                     {
-                        TargetVerticalOffset = Math.Min(ScrollableHeight, VerticalOffset + largeStep);
+                        TargetVerticalOffset = Math.Min(ScrollableHeight, VerticalOffset - e.Delta);
                         e.Handled = true;
                     }
                     else if (this.CanHScrollRight() && ScrollViewerUI.GetSimulateHWheel(this))
                     {
-                        TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset + largeStep);
+                        TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset - e.Delta);
                         e.Handled = true;
                     }
                 }
@@ -140,12 +141,12 @@ namespace ModernWpf.Controls
                 {
                     if (this.CanVScrollUp())
                     {
-                        TargetVerticalOffset = Math.Max(0, VerticalOffset - largeStep);
+                        TargetVerticalOffset = Math.Max(0, VerticalOffset - e.Delta);
                         e.Handled = true;
                     }
                     else if (this.CanHScrollLeft() && ScrollViewerUI.GetSimulateHWheel(this))
                     {
-                        TargetHorizontalOffset = Math.Max(0, HorizontalOffset - largeStep);
+                        TargetHorizontalOffset = Math.Max(0, HorizontalOffset - e.Delta);
                         e.Handled = true;
                     }
                 }
@@ -341,8 +342,22 @@ namespace ModernWpf.Controls
 
         #region TargetVerticalOffset (DependencyProperty)(double)
 
+
+
+        public bool AnimateOnWheel
+        {
+            get { return (bool)GetValue(AnimateOnWheelProperty); }
+            set { SetValue(AnimateOnWheelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AnimateOnWheel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AnimateOnWheelProperty =
+            DependencyProperty.Register("AnimateOnWheel", typeof(bool), typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(false));
+
+
+
         /// <summary>
-        /// This is the VerticalOffset that we'd like to animate to
+        /// This is the VerticalOffset that we'd like. Set this to animate.
         /// </summary>
         public double TargetVerticalOffset
         {
@@ -360,9 +375,12 @@ namespace ModernWpf.Controls
         {
             AnimatedScrollViewer thisScroller = (AnimatedScrollViewer)d;
 
-            if ((double)e.NewValue != thisScroller._aniVerticalScrollBar.Value)
+            if (thisScroller._aniVerticalScrollBar != null)
             {
-                thisScroller._aniVerticalScrollBar.Value = (double)e.NewValue;
+                if ((double)e.NewValue != thisScroller._aniVerticalScrollBar.Value)
+                {
+                    thisScroller._aniVerticalScrollBar.Value = (double)e.NewValue;
+                }
             }
             if (!thisScroller._isVOverride)
             {
@@ -375,7 +393,7 @@ namespace ModernWpf.Controls
         #region TargetHorizontalOffset (DependencyProperty) (double)
 
         /// <summary>
-        /// This is the HorizontalOffset that we'll be animating to
+        /// This is the HorizontalOffset that we'd like. Set this to animate.
         /// </summary>
         public double TargetHorizontalOffset
         {
@@ -393,9 +411,12 @@ namespace ModernWpf.Controls
         {
             AnimatedScrollViewer thisScroller = (AnimatedScrollViewer)d;
 
-            if ((double)e.NewValue != thisScroller._aniHorizontalScrollBar.Value)
+            if (thisScroller._aniHorizontalScrollBar != null)
             {
-                thisScroller._aniHorizontalScrollBar.Value = (double)e.NewValue;
+                if ((double)e.NewValue != thisScroller._aniHorizontalScrollBar.Value)
+                {
+                    thisScroller._aniHorizontalScrollBar.Value = (double)e.NewValue;
+                }
             }
 
             if (!thisScroller._isHOverride)
@@ -409,8 +430,9 @@ namespace ModernWpf.Controls
         #region HorizontalScrollOffset (DependencyProperty) (double)
 
         /// <summary>
-        /// This is the actual horizontal offset property we're going use as an animation helper
+        /// This is the intermediate horizontal offset property during animation. Do not set this from outside.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public double HorizontalScrollOffset
         {
             get { return (double)GetValue(HorizontalScrollOffsetProperty); }
@@ -419,6 +441,7 @@ namespace ModernWpf.Controls
         /// <summary>
         /// The dependency property for <see cref="HorizontalScrollOffset"/>.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly DependencyProperty HorizontalScrollOffsetProperty =
             DependencyProperty.Register("HorizontalScrollOffset", typeof(double), typeof(AnimatedScrollViewer),
             new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnHorizontalScrollOffsetChanged)));
@@ -434,8 +457,9 @@ namespace ModernWpf.Controls
         #region VerticalScrollOffset (DependencyProperty) (double)
 
         /// <summary>
-        /// This is the actual VerticalOffset we're going to use as an animation helper
+        /// This is the intermediate vertical offset property during animation. Do not set this from outside.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public double VerticalScrollOffset
         {
             get { return (double)GetValue(VerticalScrollOffsetProperty); }
@@ -444,6 +468,7 @@ namespace ModernWpf.Controls
         /// <summary>
         /// The dependency property for <see cref="VerticalScrollOffset"/>.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly DependencyProperty VerticalScrollOffsetProperty =
             DependencyProperty.Register("VerticalScrollOffset", typeof(double), typeof(AnimatedScrollViewer),
             new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnVerticalScrollOffsetChanged)));

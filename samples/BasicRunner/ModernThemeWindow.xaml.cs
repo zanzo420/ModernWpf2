@@ -32,6 +32,8 @@ namespace BasicRunner
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 RegisterMessages();
+
+                longList.ItemsSource = Enumerable.Range(1, 1000).Select(i => $"A not-so-long string item #{i} for scrolling test");
             }
         }
 

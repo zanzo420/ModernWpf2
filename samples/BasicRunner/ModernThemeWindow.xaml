@@ -190,6 +190,12 @@
                     </Grid>
                 </modern:AnimatedContentControl>
             </TabItem>
+            <TabItem Header="Scrolling">
+                <modern:AnimatedScrollViewer x:Name="scroller">
+                    <ItemsControl x:Name="longList">
+                    </ItemsControl>
+                </modern:AnimatedScrollViewer>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
