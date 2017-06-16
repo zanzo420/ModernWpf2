@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace BasicRunner
 {
@@ -97,6 +98,37 @@ namespace BasicRunner
             {
                 new SampleFlyout().ShowDialog(innerFlyoutBox);
             }
+        }
+
+        private void btnStall_Click(object sender, RoutedEventArgs e)
+        {
+            //await Task.Delay(100);
+            long nthPrime = FindPrimeNumber(1000000);
+        }
+        long FindPrimeNumber(int n)
+        {
+            int count = 0;
+            long a = 2;
+            while (count < n)
+            {
+                long b = 2;
+                int prime = 1;// to check if found a prime
+                while (b * b <= a)
+                {
+                    if (a % b == 0)
+                    {
+                        prime = 0;
+                        break;
+                    }
+                    b++;
+                }
+                if (prime > 0)
+                {
+                    count++;
+                }
+                a++;
+            }
+            return (--a);
         }
     }
 }

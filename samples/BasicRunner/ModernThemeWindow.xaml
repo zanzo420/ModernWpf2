@@ -37,9 +37,10 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="8">
+        <StackPanel Grid.Row="0" Margin="8" Orientation="Horizontal">
             <TextBlock Text="This window demonstrates using the ModernWpf lib."
                        TextWrapping="Wrap"></TextBlock>
+            <Button Content="Stall Test" x:Name="btnStall" Click="btnStall_Click"></Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1">

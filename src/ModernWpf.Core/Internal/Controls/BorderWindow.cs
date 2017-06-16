@@ -293,14 +293,14 @@ namespace ModernWpf.Controls
 
             User32.SetWindowLong(hwnd, WindowLong.GWL_STYLE, new IntPtr(ws));
 
-            //// make resize more performant?
-            //User32.SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
-            //    SetWindowPosOptions.SWP_NOOWNERZORDER |
-            //    SetWindowPosOptions.SWP_DRAWFRAME |
-            //    SetWindowPosOptions.SWP_NOACTIVATE |
-            //    SetWindowPosOptions.SWP_NOZORDER |
-            //    SetWindowPosOptions.SWP_NOMOVE |
-            //    SetWindowPosOptions.SWP_NOSIZE);
+            // this might makes window bg transparent (visible during hang)
+            User32.SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
+                SetWindowPosOptions.SWP_NOOWNERZORDER |
+                SetWindowPosOptions.SWP_DRAWFRAME |
+                SetWindowPosOptions.SWP_NOACTIVATE |
+                SetWindowPosOptions.SWP_NOZORDER |
+                SetWindowPosOptions.SWP_NOMOVE |
+                SetWindowPosOptions.SWP_NOSIZE);
         }
 
         // difference to translate between nc_msg & wm_msg
