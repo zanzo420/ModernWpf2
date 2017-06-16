@@ -79,6 +79,7 @@
     <Compile Include="MenuItemUI.cs" />
     <Compile Include="MessageExtensions.cs" />
     <Compile Include="ScrollViewerUI.cs" />
+    <Compile Include="ContentUI.cs" />
     <Compile Include="TextBoxUI.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Properties\VersionInfo.cs" />

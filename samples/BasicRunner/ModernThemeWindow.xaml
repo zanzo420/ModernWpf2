@@ -141,6 +141,10 @@
 
                             <Button Content="No Chrome Button" Style="{StaticResource ModernButtonNoChrome}"></Button>
 
+
+                            <Button Content="Hyperlink button with _access key (a)" Style="{StaticResource ModernHyperlinkButton}"></Button>
+                            <Button Content="Hyperlink button with _access key (a) disabled" modern:ContentUI.RecognizeAccessKey="False" Style="{StaticResource ModernHyperlinkButton}"></Button>
+                            
                             <Button Content="{Binding StringValue}" Style="{StaticResource ModernHyperlinkButton}"></Button>
 
 
