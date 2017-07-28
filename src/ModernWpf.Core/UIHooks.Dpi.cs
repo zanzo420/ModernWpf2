@@ -351,30 +351,34 @@ namespace ModernWpf
         {
             if (!handled && (WindowMessage)msg == WindowMessage.WM_DPICHANGED)
             {
-                var hSrc = HwndSource.FromHwnd(hwnd);
-                var win = hSrc.RootVisual as Window;
-                if (win != null)
+                try
                 {
-                    var curDpi = GetWindowDpi(win);
-
-                    var newMonDpi = wParam.ToInt32() & 0xffff;
-                    if (curDpi != newMonDpi)
+                    var hSrc = HwndSource.FromHwnd(hwnd);
+                    var win = hSrc.RootVisual as Window;
+                    if (win != null)
                     {
-                        SetWindowDpi(win, newMonDpi);
+                        var curDpi = GetWindowDpi(win);
 
-                        var wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
-                        var scale = newMonDpi / wpfDPI;
-                        SetWindowDpiScale(win, scale);
-                        // update window size as well
-                        RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
-                        User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
-                             SetWindowPosOptions.SWP_NOZORDER |
-                             SetWindowPosOptions.SWP_NOOWNERZORDER |
-                             SetWindowPosOptions.SWP_NOACTIVATE);
+                        var newMonDpi = wParam.ToInt32() & 0xffff;
+                        if (curDpi != newMonDpi)
+                        {
+                            SetWindowDpi(win, newMonDpi);
 
-                        RescaleForDpi(win);
+                            var wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
+                            var scale = newMonDpi / wpfDPI;
+                            SetWindowDpiScale(win, scale);
+                            // update window size as well
+                            RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                            User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
+                                 SetWindowPosOptions.SWP_NOZORDER |
+                                 SetWindowPosOptions.SWP_NOOWNERZORDER |
+                                 SetWindowPosOptions.SWP_NOACTIVATE);
+
+                            RescaleForDpi(win);
+                        }
                     }
                 }
+                catch { }
             }
             return IntPtr.Zero;
         }

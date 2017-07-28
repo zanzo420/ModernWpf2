@@ -68,11 +68,11 @@ namespace ModernWpf.Controls
             {
                 if (IsContentActive)
                 {
-                    GlowOpacity = .9;
+                    GlowOpacity = .5;
                 }
                 else
                 {
-                    GlowOpacity = .5;
+                    GlowOpacity = .2;
                 }
                 var test = BindingOperations.GetMultiBindingExpression(this, BorderBrushProperty);
                 if (test != null)
@@ -312,95 +312,99 @@ namespace ModernWpf.Controls
             IntPtr retVal = IntPtr.Zero;
             if (!handled)
             {
-                var wmsg = (WindowMessage)msg;
-                //Debug.WriteLine(wmsg);
-                switch (wmsg)
+                try
                 {
-                    //case WindowMessage.WM_NCCALCSIZE:
-                    //    handled = true;
-                    //    break;
-                    //case WindowMessage.WM_MOUSEMOVE:
-                    //    var pt = (Point)lParam.ToPoint();
-                    //    Debug.WriteLine("WM point = " + pt);
-                    //    break;
-                    case WindowMessage.WM_NCHITTEST:
-                        //pt = (Point)lParam.ToPoint();
-                        //Debug.WriteLine("NC point = " + PointFromScreen(pt));
-                        ChromeHitTest test = HandleHcHitTest(lParam);
-                        // Don't actual report this window as NC anymore and just change cursor instead.
-                        // This allows content window to properly get IsMouseOver=false at edges
-                        if (Mouse.LeftButton != MouseButtonState.Pressed)
-                        {
-                            ChangeCursor(test);
-                        }
+                    var wmsg = (WindowMessage)msg;
+                    //Debug.WriteLine(wmsg);
+                    switch (wmsg)
+                    {
+                        //case WindowMessage.WM_NCCALCSIZE:
+                        //    handled = true;
+                        //    break;
+                        //case WindowMessage.WM_MOUSEMOVE:
+                        //    var pt = (Point)lParam.ToPoint();
+                        //    Debug.WriteLine("WM point = " + pt);
+                        //    break;
+                        case WindowMessage.WM_NCHITTEST:
+                            //pt = (Point)lParam.ToPoint();
+                            //Debug.WriteLine("NC point = " + PointFromScreen(pt));
+                            ChromeHitTest test = HandleHcHitTest(lParam);
+                            // Don't actual report this window as NC anymore and just change cursor instead.
+                            // This allows content window to properly get IsMouseOver=false at edges
+                            if (Mouse.LeftButton != MouseButtonState.Pressed)
+                            {
+                                ChangeCursor(test);
+                            }
 
-                        //retVal = new IntPtr((int)test);
-                        //handled = true;
-                        break;
-                    //case WindowMessage.WM_NCRBUTTONDOWN:
-                    //case WindowMessage.WM_NCMBUTTONDOWN:
-                    //case WindowMessage.WM_NCRBUTTONDBLCLK:
-                    //case WindowMessage.WM_NCMBUTTONDBLCLK:
-                    //case WindowMessage.WM_RBUTTONDBLCLK:
-                    //case WindowMessage.WM_MBUTTONDBLCLK:
-                    //case WindowMessage.WM_LBUTTONDBLCLK:
-                    //    handled = true;
-                    //    User32.SetForegroundWindow(_manager.hWndContent);
-                    //    break;
-                    //case WindowMessage.WM_NCLBUTTONDOWN:
-                    //case WindowMessage.WM_NCLBUTTONDBLCLK:
-                    //    handled = true;
-                    //    // pass resizer msg to the content window instead
-                    //    User32.SetForegroundWindow(_manager.hWndContent);
-                    //    User32.SendMessage(_manager.hWndContent, (uint)msg, wParam, lParam);
-                    //    break;
-                    case WindowMessage.WM_RBUTTONDOWN:
-                    case WindowMessage.WM_MBUTTONDOWN:
-                    case WindowMessage.WM_RBUTTONDBLCLK:
-                    case WindowMessage.WM_MBUTTONDBLCLK:
-                        handled = true;
-                        User32.SetForegroundWindow(_manager.hWndContent);
-                        break;
-                    case WindowMessage.WM_LBUTTONDOWN:
-                    case WindowMessage.WM_LBUTTONDBLCLK:
-                        var hitTest = _lastHitTest;
-                        //Debug.WriteLine("Should send {0} to content window.", hitTest);
-                        if (hitTest != ChromeHitTest.Client)
-                        {
-                            User32.SetForegroundWindow(_manager.hWndContent);
-                            User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
-                            //User32.SendMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
+                            //retVal = new IntPtr((int)test);
+                            //handled = true;
+                            break;
+                        //case WindowMessage.WM_NCRBUTTONDOWN:
+                        //case WindowMessage.WM_NCMBUTTONDOWN:
+                        //case WindowMessage.WM_NCRBUTTONDBLCLK:
+                        //case WindowMessage.WM_NCMBUTTONDBLCLK:
+                        //case WindowMessage.WM_RBUTTONDBLCLK:
+                        //case WindowMessage.WM_MBUTTONDBLCLK:
+                        //case WindowMessage.WM_LBUTTONDBLCLK:
+                        //    handled = true;
+                        //    User32.SetForegroundWindow(_manager.hWndContent);
+                        //    break;
+                        //case WindowMessage.WM_NCLBUTTONDOWN:
+                        //case WindowMessage.WM_NCLBUTTONDBLCLK:
+                        //    handled = true;
+                        //    // pass resizer msg to the content window instead
+                        //    User32.SetForegroundWindow(_manager.hWndContent);
+                        //    User32.SendMessage(_manager.hWndContent, (uint)msg, wParam, lParam);
+                        //    break;
+                        case WindowMessage.WM_RBUTTONDOWN:
+                        case WindowMessage.WM_MBUTTONDOWN:
+                        case WindowMessage.WM_RBUTTONDBLCLK:
+                        case WindowMessage.WM_MBUTTONDBLCLK:
                             handled = true;
-                        }
-                        break;
-                    case WindowMessage.WM_MOUSEACTIVATE:
-                        //var lowword = 0xffff & lParam.ToInt32();
-                        //var hchit = (ChromeHitTest)lowword;
+                            User32.SetForegroundWindow(_manager.hWndContent);
+                            break;
+                        case WindowMessage.WM_LBUTTONDOWN:
+                        case WindowMessage.WM_LBUTTONDBLCLK:
+                            var hitTest = _lastHitTest;
+                            //Debug.WriteLine("Should send {0} to content window.", hitTest);
+                            if (hitTest != ChromeHitTest.Client)
+                            {
+                                User32.SetForegroundWindow(_manager.hWndContent);
+                                User32.PostMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
+                                //User32.SendMessage(_manager.hWndContent, (uint)(msg - NC_TO_WM_DIFF), new IntPtr((int)hitTest), IntPtr.Zero);
+                                handled = true;
+                            }
+                            break;
+                        case WindowMessage.WM_MOUSEACTIVATE:
+                            //var lowword = 0xffff & lParam.ToInt32();
+                            //var hchit = (ChromeHitTest)lowword;
 
-                        // in case of non-resizable window eat this msg
-                        //if (hchit == ChromeHitTest.Client)
-                        //{
-                        //    retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
-                        //}
-                        //else
-                        //{
-                        retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATE);
-                        //}
-                        handled = true;
-                        break;
-                    case WindowMessage.WM_GETMINMAXINFO:
-                        // overridden so max size = normal max + resize border (for when content window is max size without maximizing)
+                            // in case of non-resizable window eat this msg
+                            //if (hchit == ChromeHitTest.Client)
+                            //{
+                            //    retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATEANDEAT);
+                            //}
+                            //else
+                            //{
+                            retVal = new IntPtr((int)MouseActivate.MA_NOACTIVATE);
+                            //}
+                            handled = true;
+                            break;
+                        case WindowMessage.WM_GETMINMAXINFO:
+                            // overridden so max size = normal max + resize border (for when content window is max size without maximizing)
 
-                        //var thick = 2 * (int)PadSize;
+                            //var thick = 2 * (int)PadSize;
 
-                        //MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
-                        //var orig = para.ptMaxTrackSize;
-                        //orig.x += thick;
-                        //orig.y += thick;
-                        //para.ptMaxTrackSize = orig;
-                        //Marshal.StructureToPtr(para, lParam, true);
-                        break;
+                            //MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+                            //var orig = para.ptMaxTrackSize;
+                            //orig.x += thick;
+                            //orig.y += thick;
+                            //para.ptMaxTrackSize = orig;
+                            //Marshal.StructureToPtr(para, lParam, true);
+                            break;
+                    }
                 }
+                catch { }
             }
             return retVal;
         }

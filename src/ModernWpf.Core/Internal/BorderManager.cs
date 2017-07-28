@@ -273,93 +273,97 @@ namespace ModernWpf
             IntPtr retVal = IntPtr.Zero;
             if (!handled)
             {
-                var wmsg = (WindowMessage)msg;
-                //Debug.WriteLine(wmsg);
-                switch (wmsg)
+                try
                 {
-                    case WindowMessage.WM_NCCALCSIZE:
-                        HandleNcCalcSize(hwnd, wParam, lParam);
-                        handled = true;
-                        break;
-                    //case WindowMessage.WM_SIZING:
-                    //    UpdatePosn();
-                    //    break;
-                    //case WindowMessage.WM_WINDOWPOSCHANGING:
-                    case WindowMessage.WM_WINDOWPOSCHANGED:
-                        HandleWindowPosChanged(hwnd, lParam);
-                        break;
-                    case WindowMessage.WM_NCHITTEST:
-                        retVal = new IntPtr((int)HandleNcHitTest(lParam));
-                        handled = true;
-                        break;
-                    //case WindowMessage.WM_NCLBUTTONDOWN:
-                    //    if ((ChromeHitTest)wParam.ToInt32() == ChromeHitTest.SystemMenu)
-                    //    {
-                    //        // display sys menu
-                    //        User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
-                    //        //handled = true;
-                    //    }
-                    //    break;
-                    case WindowMessage.WM_NCRBUTTONDOWN:
-                        switch ((ChromeHitTest)wParam.ToInt32())
-                        {
-                            case ChromeHitTest.Caption:
-                            case ChromeHitTest.SystemMenu:
-                                // display sys menu
-                                User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
-                                //handled = true;
-                                break;
-                        }
-                        break;
-                    case WindowMessage.WM_NCUAHDRAWCAPTION:
-                    case WindowMessage.WM_NCUAHDRAWFRAME:
-                        // undocumented stuff for non-dwm themes that will sometimes draw old control buttons
-                        handled = true;
-                        break;
-                    case WindowMessage.WM_NCPAINT:
-                        // prevent non-dwm flicker
-                        handled = !Dwmapi.IsCompositionEnabled;
-                        break;
-                    case WindowMessage.WM_NCACTIVATE:
-                        // handled to prevent default non-client border from showing in classic mode
-                        // wParam False means draw inactive title bar (which we do nothing).
-                        retVal = HandleNcActivate(hwnd, msg, wParam, retVal);
-                        handled = true;
-                        break;
-                    case WindowMessage.WM_DWMCOMPOSITIONCHANGED:
-                        SetRegion(hwnd, 0, 0, true);
-                        break;
-                    case WindowMessage.WM_ERASEBKGND:
-                        // prevent more flickers?
-                        handled = true;
-                        break;
-                    case WindowMessage.WM_MOUSEHWHEEL:
-                        // do our own horizontal wheel event
-                        var element = Mouse.DirectlyOver;
-                        if (element != null)
-                        {
-                            try
+                    var wmsg = (WindowMessage)msg;
+                    //Debug.WriteLine(wmsg);
+                    switch (wmsg)
+                    {
+                        case WindowMessage.WM_NCCALCSIZE:
+                            HandleNcCalcSize(hwnd, wParam, lParam);
+                            handled = true;
+                            break;
+                        //case WindowMessage.WM_SIZING:
+                        //    UpdatePosn();
+                        //    break;
+                        //case WindowMessage.WM_WINDOWPOSCHANGING:
+                        case WindowMessage.WM_WINDOWPOSCHANGED:
+                            HandleWindowPosChanged(hwnd, lParam);
+                            break;
+                        case WindowMessage.WM_NCHITTEST:
+                            retVal = new IntPtr((int)HandleNcHitTest(lParam));
+                            handled = true;
+                            break;
+                        //case WindowMessage.WM_NCLBUTTONDOWN:
+                        //    if ((ChromeHitTest)wParam.ToInt32() == ChromeHitTest.SystemMenu)
+                        //    {
+                        //        // display sys menu
+                        //        User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
+                        //        //handled = true;
+                        //    }
+                        //    break;
+                        case WindowMessage.WM_NCRBUTTONDOWN:
+                            switch ((ChromeHitTest)wParam.ToInt32())
                             {
-                                //var delta = wParam.ToInt32() >> 16;
-                                var delta = ((int)(wParam.ToInt64() & 0xffffffff)) >> 16;
-                                var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
-                                {
-                                    RoutedEvent = UIHooks.PreviewMouseHWheelEvent
-                                };
-                                element.RaiseEvent(arg);
-                                if (!arg.Handled)
-                                {
-                                    arg.RoutedEvent = UIHooks.MouseHWheelEvent;
-                                    arg.Handled = false;
-                                    element.RaiseEvent(arg);
-
-                                    handled = arg.Handled;
-                                }
+                                case ChromeHitTest.Caption:
+                                case ChromeHitTest.SystemMenu:
+                                    // display sys menu
+                                    User32.PostMessage(hwnd, (uint)WindowMessage.WM_POPUPSYSTEMMENU, IntPtr.Zero, lParam);
+                                    //handled = true;
+                                    break;
                             }
-                            catch { }
-                        }
-                        break;
+                            break;
+                        case WindowMessage.WM_NCUAHDRAWCAPTION:
+                        case WindowMessage.WM_NCUAHDRAWFRAME:
+                            // undocumented stuff for non-dwm themes that will sometimes draw old control buttons
+                            handled = true;
+                            break;
+                        case WindowMessage.WM_NCPAINT:
+                            // prevent non-dwm flicker
+                            handled = !Dwmapi.IsCompositionEnabled;
+                            break;
+                        case WindowMessage.WM_NCACTIVATE:
+                            // handled to prevent default non-client border from showing in classic mode
+                            // wParam False means draw inactive title bar (which we do nothing).
+                            retVal = HandleNcActivate(hwnd, msg, wParam, retVal);
+                            handled = true;
+                            break;
+                        case WindowMessage.WM_DWMCOMPOSITIONCHANGED:
+                            SetRegion(hwnd, 0, 0, true);
+                            break;
+                        case WindowMessage.WM_ERASEBKGND:
+                            // prevent more flickers?
+                            handled = true;
+                            break;
+                        case WindowMessage.WM_MOUSEHWHEEL:
+                            // do our own horizontal wheel event
+                            var element = Mouse.DirectlyOver;
+                            if (element != null)
+                            {
+                                try
+                                {
+                                    //var delta = wParam.ToInt32() >> 16;
+                                    var delta = ((int)(wParam.ToInt64() & 0xffffffff)) >> 16;
+                                    var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
+                                    {
+                                        RoutedEvent = UIHooks.PreviewMouseHWheelEvent
+                                    };
+                                    element.RaiseEvent(arg);
+                                    if (!arg.Handled)
+                                    {
+                                        arg.RoutedEvent = UIHooks.MouseHWheelEvent;
+                                        arg.Handled = false;
+                                        element.RaiseEvent(arg);
+
+                                        handled = arg.Handled;
+                                    }
+                                }
+                                catch { }
+                            }
+                            break;
+                    }
                 }
+                catch { }
             }
             return retVal;
         }
