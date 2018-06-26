@@ -476,7 +476,7 @@ namespace ModernWpf
             try
             {
                 rectRgnIndirect = Gdi32.CreateRectRgnIndirect(ref winRC);
-                _hasClip = User32.SetWindowRgn(hwnd, rectRgnIndirect, User32.IsWindowVisible(hWnd));
+                _hasClip = User32.SetWindowRgn(hwnd, rectRgnIndirect, User32.IsWindowVisible(hwnd));
             }
             finally
             {
