@@ -13,13 +13,18 @@ namespace ModernWpf.Native.Api
             [DllImport("gdi32.dll", SetLastError = true)]
             public static extern IntPtr CreateRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
 
-            //[DllImport("gdi32.dll", SetLastError = true)]
-            //public static extern IntPtr CreateRectRgnIndirect([In] ref RECT rc);
+            [DllImport("gdi32.dll", SetLastError = true)]
+            public static extern IntPtr CreateRectRgnIndirect([In] ref RECT rc);
 
             [DllImport("gdi32.dll", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool DeleteObject(IntPtr hObject);
         }
+        public static IntPtr CreateRectRgnIndirect(ref RECT rc)
+        {
+            return NativeMethods.CreateRectRgnIndirect(ref rc);
+        }
+
 
         /// <summary>
         /// Creates a rectangular region.

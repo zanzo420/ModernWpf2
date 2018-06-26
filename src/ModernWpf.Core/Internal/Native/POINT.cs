@@ -40,7 +40,7 @@ namespace ModernWpf.Native
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "X = {0}, Y = {1}.", x, y);
+            return $"{x},{y}";
         }
 
         #region implicits

@@ -83,8 +83,8 @@ namespace BasicRunner
         {
             if (WindowState == WindowState.Minimized)
             {
-                await Task.Delay(1000);
-                WindowCommands.RestoreCommand.Execute(this);
+                //await Task.Delay(1000);
+                //WindowCommands.RestoreCommand.Execute(this);
             }
         }
 

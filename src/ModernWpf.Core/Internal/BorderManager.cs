@@ -75,7 +75,7 @@ namespace ModernWpf
             // Magic # for windows animation duration.
             // This is used to not show border before content window 
             // is fully restored from min/max states
-            _showTimer.Interval = TimeSpan.FromMilliseconds(250);
+            _showTimer.Interval = TimeSpan.FromMilliseconds(200);
             _showTimer.Tick += (s, e) =>
             {
                 ShowBorders();
@@ -252,7 +252,13 @@ namespace ModernWpf
             _right = new BorderWindow(this) { Side = BorderSide.Right };
             _bottom = new BorderWindow(this) { Side = BorderSide.Bottom };
 
-            SetRegion(hWndContent, 0, 0, true);
+            var wpl = default(WINDOWPLACEMENT);
+            wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+
+            if (User32.GetWindowPlacement(hWndContent, ref wpl))
+            {
+                UpdateClipRegion(hWndContent, wpl, ClipRegionChangeType.FromPropertyChange);
+            }
 
             var hSrc = HwndSource.FromHwnd(hWndContent);
             hSrc.AddHook(WndProc);
@@ -288,6 +294,7 @@ namespace ModernWpf
                         //    break;
                         //case WindowMessage.WM_WINDOWPOSCHANGING:
                         case WindowMessage.WM_WINDOWPOSCHANGED:
+                            //HandleWindowPosChangedOld(hwnd, lParam);
                             HandleWindowPosChanged(hwnd, lParam);
                             break;
                         case WindowMessage.WM_NCHITTEST:
@@ -421,14 +428,9 @@ namespace ModernWpf
                             {
                                 var workArea = lpmi.rcWork;
                                 User32.AdjustForAutoHideTaskbar(hMonitor, ref workArea);
-                                //Debug.WriteLine("NCCalc original = {0}x{1} @ {2}x{3}, new ={4}x{5} @ {6}x{7}",
-                                //para.rectProposed.Width, para.rectProposed.Height,
-                                //para.rectProposed.left, para.rectProposed.top,
-                                //workArea.Width, workArea.Height,
-                                //workArea.left, workArea.top);
+                                Debug.WriteLine($@"NCCalc original = {para.rectProposed}, new ={workArea}");
                                 para.rectProposed = workArea;
                                 Marshal.StructureToPtr(para, lParam, true);
-
                             }
                         }
                     }
@@ -436,43 +438,97 @@ namespace ModernWpf
             }
         }
 
-
         bool _inHiding = false;
-
-        private void HandleWindowPosChanged(IntPtr hwnd, IntPtr lParam)
+        ShowWindowOption _lastShowCmd;
+        enum ClipRegionChangeType
         {
-            var windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+            FromSize,
+            FromPosition,
+            FromPropertyChange
+        }
 
-            if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
+        private void UpdateClipRegion(IntPtr hWnd, WINDOWPLACEMENT placement, ClipRegionChangeType changeType)
+        {
+            if (placement.showCmd == ShowWindowOption.SW_MAXIMIZE)
             {
-                SetRegion(hwnd, windowpos.cx, windowpos.cy, false);
+                ClipMaximizedRegion(hWnd);
             }
-
-
-            if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_HIDEWINDOW))
+            else if (changeType != ClipRegionChangeType.FromSize &&
+                changeType != ClipRegionChangeType.FromPropertyChange &&
+                _lastShowCmd == placement.showCmd)
             {
-                // necessary to keep track on whether window is hidden
-                // since this msg is received again after being hidden.
-                _inHiding = true;
-            }
-            if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_SHOWWINDOW))
-            {
-                _inHiding = false;
-            }
-
-            if (_inHiding)
-            {
-                HideBorders();
+                // do nothing
             }
             else
             {
-                var wpl = default(WINDOWPLACEMENT);
-                wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+                ClearClipRegion(hWnd);
+            }
+            _lastShowCmd = placement.showCmd;
+        }
 
-                if (User32.GetWindowPlacement(hwnd, ref wpl))
+        bool _hasClip;
+
+        private void ClipMaximizedRegion(IntPtr hwnd)
+        {
+            RECT winRC = default(RECT);
+            User32.GetWindowRect(hwnd, ref winRC);
+            IntPtr rectRgnIndirect = IntPtr.Zero;
+            try
+            {
+                rectRgnIndirect = Gdi32.CreateRectRgnIndirect(ref winRC);
+                _hasClip = User32.SetWindowRgn(hwnd, rectRgnIndirect, User32.IsWindowVisible(hWnd));
+            }
+            finally
+            {
+                if (rectRgnIndirect != IntPtr.Zero) Gdi32.DeleteObject(rectRgnIndirect);
+            }
+        }
+        private void ClearClipRegion(IntPtr hwnd)
+        {
+            if (_hasClip)
+            {
+                var draw = User32.IsWindowVisible(hwnd);
+                Debug.WriteLine("Should clear region redraw=" + draw);
+                User32.SetWindowRgn(hwnd, IntPtr.Zero, draw);
+                _hasClip = false;
+            }
+        }
+
+        private void HandleWindowPosChanged(IntPtr hwnd, IntPtr lParam)
+        {
+            WINDOWPOS windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+            var wpl = default(WINDOWPLACEMENT);
+            wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+
+            if (User32.GetWindowPlacement(hwnd, ref wpl))
+            {
+                if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
                 {
-                    //Debug.WriteLine("Chrome {0} placement cmd {1}, flag {2}.", _id, wpl.showCmd, wpl.flags);
+                    UpdateClipRegion(hwnd, wpl, ClipRegionChangeType.FromSize);
+                }
+                else if ((windowpos.flags & SetWindowPosOptions.SWP_NOMOVE) != SetWindowPosOptions.SWP_NOMOVE)
+                {
+                    UpdateClipRegion(hwnd, wpl, ClipRegionChangeType.FromPosition);
+                }
 
+                if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_HIDEWINDOW))
+                {
+                    // necessary to keep track on whether window is hidden
+                    // since this msg is received again after being hidden.
+                    _inHiding = true;
+                }
+                if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_SHOWWINDOW))
+                {
+                    _inHiding = false;
+                }
+
+                if (_inHiding)
+                {
+                    HideBorders();
+                }
+                else
+                {
+                    CommandManager.InvalidateRequerySuggested();
                     switch (wpl.showCmd)
                     {
                         case ShowWindowOption.SW_SHOWNORMAL:
@@ -486,8 +542,58 @@ namespace ModernWpf
                             break;
                     }
                 }
+
             }
         }
+        //private void HandleWindowPosChangedOld(IntPtr hwnd, IntPtr lParam)
+        //{
+        //    var windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+
+        //    if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
+        //    {
+        //        SetRegion(hwnd, windowpos.cx, windowpos.cy, false);
+        //    }
+
+
+        //    if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_HIDEWINDOW))
+        //    {
+        //        // necessary to keep track on whether window is hidden
+        //        // since this msg is received again after being hidden.
+        //        _inHiding = true;
+        //    }
+        //    if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_SHOWWINDOW))
+        //    {
+        //        _inHiding = false;
+        //    }
+
+        //    if (_inHiding)
+        //    {
+        //        HideBorders();
+        //    }
+        //    else
+        //    {
+        //        var wpl = default(WINDOWPLACEMENT);
+        //        wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+
+        //        if (User32.GetWindowPlacement(hwnd, ref wpl))
+        //        {
+        //            //Debug.WriteLine("Chrome {0} placement cmd {1}, flag {2}.", _id, wpl.showCmd, wpl.flags);
+
+        //            switch (wpl.showCmd)
+        //            {
+        //                case ShowWindowOption.SW_SHOWNORMAL:
+        //                    //Debug.WriteLine("Should reposn shadow");
+        //                    UpdatePosn();
+        //                    break;
+        //                case ShowWindowOption.SW_MAXIMIZE:
+        //                case ShowWindowOption.SW_MINIMIZE:
+        //                case ShowWindowOption.SW_SHOWMINIMIZED:
+        //                    HideBorders();
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// translate screen pixels to wpf units for high-dpi scaling.

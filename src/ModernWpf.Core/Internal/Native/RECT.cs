@@ -53,7 +53,7 @@ namespace ModernWpf.Native
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "Left = {0}, Top = {1}, Width = {2}, Height = {3}.", left, top, Width, Height);
+            return $"{Width}x{Height} @ {left}x{top}";
         }
 
         #region implicits
