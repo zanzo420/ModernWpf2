@@ -470,8 +470,8 @@ namespace ModernWpf
 
         private void ClipMaximizedRegion(IntPtr hwnd)
         {
-            RECT winRC = default(RECT);
-            User32.GetWindowRect(hwnd, ref winRC);
+            RECT winRC = GetMaxClientRect(hwnd);
+            Debug.WriteLine("max win rect=" + winRC + ", visible=" + User32.IsWindowVisible(hwnd));
             IntPtr rectRgnIndirect = IntPtr.Zero;
             try
             {
@@ -483,6 +483,29 @@ namespace ModernWpf
                 if (rectRgnIndirect != IntPtr.Zero) Gdi32.DeleteObject(rectRgnIndirect);
             }
         }
+
+        private RECT GetMaxClientRect(IntPtr hWnd)
+        {
+            RECT winR = default(RECT);
+            User32.GetWindowRect(hWnd, ref winR);
+            RECT clientR = default(RECT);
+            User32.GetClientRect(hWnd, ref clientR);
+            POINT point = default(POINT);
+            User32.ClientToScreen(hWnd, ref point);
+            Debug.WriteLine("Original win=" + winR);
+            Debug.WriteLine("Original client=" + clientR);
+            Debug.WriteLine("Screen pt=" + point);
+
+            var dx = point.x - winR.left;
+            var dy = point.y - winR.top;
+            clientR.left += dx;
+            clientR.right += dx;
+            clientR.top += dy;
+            clientR.bottom += dy;
+            return clientR;
+
+        }
+
         private void ClearClipRegion(IntPtr hwnd)
         {
             if (_hasClip)

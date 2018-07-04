@@ -113,6 +113,14 @@ namespace ModernWpf.Native.Api
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool GetWindowRect(IntPtr hWnd, ref RECT rect);
 
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool GetClientRect(IntPtr hwnd, ref RECT lpRect);
+
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool ClientToScreen(IntPtr hWnd, ref POINT point);
+
             //[DllImport("user32.dll", SetLastError = true)]
             //public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         }
@@ -436,6 +444,14 @@ namespace ModernWpf.Native.Api
         public static bool GetWindowRect(IntPtr hWnd, ref RECT rect)
         {
             return NativeMethods.GetWindowRect(hWnd, ref rect);
+        }
+        public static bool GetClientRect(IntPtr hWnd, ref RECT rect)
+        {
+            return NativeMethods.GetClientRect(hWnd, ref rect);
+        }
+        public static bool ClientToScreen(IntPtr hWnd, ref POINT point)
+        {
+            return NativeMethods.ClientToScreen(hWnd, ref point);
         }
     }
 }
